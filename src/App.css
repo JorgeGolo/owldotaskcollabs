@@ -1,0 +1,109 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none; 
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+/* Estilos base para desktop */
+.cookies-grid-container {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(120px, 1fr));
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.grid-header, .grid-row {
+  display: contents;
+}
+
+.grid-cell {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+}
+
+.grid-header .grid-cell {
+  font-weight: 600;
+  background-color: #f3f4f6;
+}
+
+.grid-row:nth-child(even) .grid-cell {
+  background-color: #f9fafb;
+}
+
+/* Estilos para móvil */
+@media (max-width: 768px) {
+  .cookies-grid-container {
+    grid-template-columns: 1fr;
+    border: none;
+  }
+  
+  .grid-header {
+    display: none;
+  }
+  
+  .grid-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 1rem;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background-color: #f9fafb;
+  }
+  
+  .grid-cell {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border: none;
+    border-bottom: 1px solid #e5e7eb;
+    background-color: white !important;
+  }
+  
+  .grid-cell::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: #374151;
+  }
+  
+  .grid-cell:last-child {
+    border-bottom: none;
+  }
+}
