@@ -75,12 +75,12 @@ const Header = memo(() => {
             </div>
           </div>
           <img
-            src={user.photoURL || "/assets/images/logo-64x64.png"} // Usa photoURL o el avatar por defecto
+            src={user.photoURL || "/assets/images/logo-64x64.svg"} // Usa photoURL o el avatar por defecto
             alt="Foto de perfil"
             className="avatar cursor-pointer"
             onClick={() => router.push("/profile")}
             onError={(e) => {
-              e.target.src = "/assets/images/logo-64x64.png"; // Fallback por si la URL de la imagen es inválida
+              e.target.src = "/assets/images/logo-64x64.svg"; // Fallback por si la URL de la imagen es inválida
             }}
           />
         </div>

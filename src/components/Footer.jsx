@@ -30,7 +30,7 @@ const Footer = () => {
         ))} 
         </div>
         
-        <div className="flex justify-center text-sm">
+        <div className="flex justify-center text-ssm">
         <span className="mx-2 hover:text-white">© {new Date().getFullYear()} OwldoTask</span>
           <span>|</span>
           <Link href="/privacypolicy" className="mx-2 hover:text-white">
@@ -46,7 +46,7 @@ const Footer = () => {
           </Link>
           <span>|</span>
           <Link href="/about" className="mx-2 hover:text-white">
-            Info
+            About
           </Link>
         </div>
         {appVersion && <p className="text-ssm italic mb-2 text-gray-300">Version: {appVersion}</p>}
