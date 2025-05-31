@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import SwiperGallery from '../../components/SwiperGallery';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
+import { Link } from 'lucide-react';
 
 const about = () => {
   const [canonicalUrl, setCanonicalUrl] = useState("");
@@ -76,7 +77,11 @@ const about = () => {
               <ul>
                 <li>We are active on Reddit to create community and get good feedback</li>
                 <li>We post about new content on the platform on our social networks - links in the footer.</li>
-                <li>We hang out on Discord to chat with users and developers.</li>
+                <li>We hang out on Discord to chat with users and developers: 
+                  <Link href="https://discord.gg/ZkFUudxw" className="text-blue-500 hover:underline">
+                    Join us!
+                  </Link>
+                </li>
               </ul>
             </p>
 
