@@ -35,7 +35,6 @@ const Feathers = () => {
   const [localUser, setLocalUser] = useState(user);
   const [message, setMessage] = useState("");
 
-  const pointsNeededToclaim = 980; // Número de puntos necesarios para reclamar las plumas
   useEffect(() => {
     //setLocalUser(user);
     setLocalClientData(clientData);
@@ -48,7 +47,7 @@ const Feathers = () => {
 
   useEffect(() => {
     if (localClientData && localClientData.points !== undefined) {
-      const calculatedProgress = Math.min((localClientData.points / 1200) * 100, 100);
+      const calculatedProgress = Math.min((localClientData.points / localLevelData[localClientData.level - 1].feathers_needed_to_claim) * 100, 100);
       setProgress(calculatedProgress);
     } else {
       setProgress(0);
@@ -118,7 +117,8 @@ const Feathers = () => {
       
       console.log(`📡 Respuesta de la API (procesada):`, result);
       setMessage(`✅ ${result.message || "Feathers claimed successfully!"}`);
-  
+      await refreshClientData();
+
     } catch (error) {
       console.error("Error en claimFeathers:", error);
       setMessage(error.message || '❌ Error with the crypto payment.');
@@ -148,7 +148,7 @@ const Feathers = () => {
             <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
               <span className="text-yellow-500 inline-flex items-center mr-2">{featherIcon}</span> Feathers
             </h2>
-            <p>Feathers: {localClientData.points} / {pointsNeededToclaim}</p>
+            <p>Feathers: {localClientData.points} / {localLevelData[localClientData.level - 1].feathers_needed_to_claim}</p>
             <div className="w-full bg-gray-300 rounded-full h-2.5 mt-2">
               <div
                 className="bg-teal-600 h-2.5 rounded-full"
@@ -164,7 +164,7 @@ const Feathers = () => {
               onClick={claimFeathers}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-2
               disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
-              " disabled={!isReliablyOnline || localClientData.points < pointsNeededToclaim}
+              " disabled={!isReliablyOnline || localClientData.points < localLevelData[localClientData.level - 1].feathers_needed_to_claim}
               >
               Claim
             </button>
