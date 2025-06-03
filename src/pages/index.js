@@ -34,23 +34,21 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
     return (
       <div className="flex flex-col lg:flex-row">
         <Head>
-          <title>OwldoTask - Learn, Play, and Earn</title>
+          <title>Owldotask - Learn, Play, and Earn</title>
           {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-          <meta name="description" content="OwldoTask - Learn, Play, and Earn with our quizzes. Enjoy an editaciotal platfomr with a game-like experience." />
+          <meta name="description" content="Owldotask - Learn, Play, and Earn with our quizzes. Enjoy an editaciotal platfomr with a game-like experience." />
         </Head>
         <div className="p-4 max-w-5xl">
           <div className="mb-6 p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
             <h1 className="text-2xl font-bold  mb-6">
-              <span className="text-[#214396]">OwldoTask</span> – Learn, Play, and Earn
+              <span className="text-[#214396]">Owldotask</span> – Learn, Play, and Earn
             </h1>
 
           <p className="mb-4">
-            <span className="font-semibold">OwldoTask</span> is an educational platform designed for pure enjoyment.
-            Every quiz is a chance to test your knowledge, discover something new,
-            and collect <span className="italic">feathers</span> with a wide range of quiz categories.
+            <span className="font-semibold">Owldotask</span> is a platform designed to give users the opportunity to earn profits by doing small tasks.             Complete quizzes, play games, and earn feathers to claim your rewards
           </p>
-
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🗂️ Quiz categories on OwldoTask</h2>
+          
+          <h2 className="text-2xl font-semibold mt-8 mb-2">🗂️ Quiz categories on Owldotask</h2>
 
           <p>
             Each quiz isn’t just a chance to test your knowledge—it’s an invitation to challenge your assumptions, uncover hidden insights, and grow your understanding with every question you face.
@@ -58,7 +56,7 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
 
           <CategoryMap quizzes={quizzes} limit={9} />
 
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🧮 OwldoTask quiz stats</h2>
+          <h2 className="text-2xl font-semibold mt-8 mb-2">🧮 Owldotask quiz stats</h2>
           <p className="mb-4">
           Thanks to our innovative content creation system — powered by data storage tools, retrieval technologies, 
           and artificial intelligence — we continuously generate new content to keep the platform growing. And now, here are the numbers.
@@ -71,7 +69,7 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
           />
 
 
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🧩 OwldoTask games</h2>
+          <h2 className="text-2xl font-semibold mt-8 mb-2">🧩 Owldotask games</h2>
 
           <p>
             Games that offer a playful way to practice core skills, challenge your thinking, and earn feathers as proof that even a few minutes of fun can lead to meaningful learning progress.
@@ -102,19 +100,19 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
           <h2 className="text-2xl font-semibold mt-8 mb-2">🔒 We take your privacy seriously</h2>
           <p className="mb-4">
             We fully comply with data protection laws (including GDPR),
-            and we will never share your information without your consent. <span className="font-semibold">OwldoTask</span> is a safe and trusted space,
+            and we will never share your information without your consent. <span className="font-semibold">Owldotask</span> is a safe and trusted space,
             crafted to offer a fun and secure experience for users of all ages.
           </p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-2">📱 Follow us and stay updated</h2>
           <p className="mb-6">
             Want to be the first to know about new features, exclusive challenges, and giveaways?
-            Follow us on social media and join the <span className="font-semibold">OwldoTask</span> community.
+            Follow us on social media and join the <span className="font-semibold">Owldotask</span> community.
             Because learning is better together.
           </p>
 
           <p className="text-lg font-medium mt-8 text-center">
-            <span className="font-bold">OwldoTask</span> isn’t just a website. <br />
+            <span className="font-bold">Owldotask</span> isn’t just a website. <br />
             It’s your new way to learn, compete, enjoy, and grow. <br />
             <span className="italic">Explore, answer, play and earn.</span>
           </p>

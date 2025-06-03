@@ -10,6 +10,7 @@ import useOnlineStatus from "../../components/useOnlineStatus";
 
 import Breadcrumb from "../../components/BreadCrumb";
 
+import { FaSpinner } from "react-icons/fa";
 
 const Feathers = () => {
 
@@ -34,6 +35,9 @@ const Feathers = () => {
 
   const [localUser, setLocalUser] = useState(user);
   const [message, setMessage] = useState("");
+
+  const [claimAvailable, setclaimAvailable] = useState(true);
+  
 
   useEffect(() => {
     //setLocalUser(user);
@@ -72,10 +76,12 @@ const Feathers = () => {
 
   const claimFeathers = async () => {
 
-    if (!isReliablyOnline) {
+    if (!isReliablyOnline || !claimAvailable) {
       // Si no hay conexión, no se puede hacer la reclamación
       return;
     }
+
+    setclaimAvailable(false);
 
     try {
       const clientMail = localClientData.email;
@@ -84,6 +90,7 @@ const Feathers = () => {
       // Verificar que existe la wallet
       if (!clientWallet) {
         setMessage("❌ No wallet found. Please add a wallet first.");
+        setclaimAvailable(true);
         return;
       }
       
@@ -122,7 +129,11 @@ const Feathers = () => {
     } catch (error) {
       console.error("Error en claimFeathers:", error);
       setMessage(error.message || '❌ Error with the crypto payment.');
-    } 
+
+
+    } finally {
+      setclaimAvailable(true);
+    }
   };
 
   const breadcrumbSegments = [
@@ -164,9 +175,12 @@ const Feathers = () => {
               onClick={claimFeathers}
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-2
               disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
-              " disabled={!isReliablyOnline || localClientData.points < localLevelData[localClientData.level - 1].feathers_needed_to_claim}
+              " disabled={!claimAvailable || !isReliablyOnline || localClientData.points < localLevelData[localClientData.level - 1].feathers_needed_to_claim}
               >
               Claim
+              {!claimAvailable && (
+                <FaSpinner className="ml-2 inline animate-spin text-gray-600" />
+              )}
             </button>
           </div>
 
@@ -191,6 +205,9 @@ const Feathers = () => {
                   </p>
                   <p>
                     {10 + localClientData.level} <b>feathers</b> per game completed
+                  </p>
+                  <p>
+                    {localLevelData[localClientData.level - 1].feathers_needed_to_claim} <b>feathers</b> minimun to claim
                   </p>
                 </div>
 
