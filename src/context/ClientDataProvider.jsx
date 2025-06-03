@@ -96,7 +96,7 @@ export const ClientDataProvider = ({ children }) => {
   const checkCanEarnPoints = async (userId) => {
     try {
       if (!userId) {
-        console.log("❌ Error: No hay usuario autenticado");
+        //console.log("❌ Error: No hay usuario autenticado");
         setCanEarnPoints(false);
         return false;
       }
@@ -125,7 +125,7 @@ export const ClientDataProvider = ({ children }) => {
   const checkCanEarnPointsFromGames = async (userId) => {
     try {
       if (!userId) {
-        console.log("❌ Error: No hay usuario autenticado");
+        //console.log("❌ Error: No hay usuario autenticado");
         setCanEarnPointsFromGames(false);
         return false;
       }
@@ -202,7 +202,7 @@ export const ClientDataProvider = ({ children }) => {
           if (data) {
             localStorage.setItem('clientData', JSON.stringify(data));
             localStorage.setItem('clientDataVersion', CURRENT_APP_VERSION);
-            console.log(`💾 Datos del cliente guardados en localStorage (v${CURRENT_APP_VERSION})`);
+            //console.log(`💾 Datos del cliente guardados en localStorage (v${CURRENT_APP_VERSION})`);
           }
         } else {
           console.warn("⚠️ No se pudieron refrescar los datos del cliente.");
@@ -231,7 +231,7 @@ export const ClientDataProvider = ({ children }) => {
       try {
         const parsedLevels = JSON.parse(storedLevels);
         setGlobalLevels(parsedLevels);
-        console.log(`✅ Niveles globales cargados desde localStorage (App v${CURRENT_APP_VERSION}).`);
+        //console.log(`✅ Niveles globales cargados desde localStorage (App v${CURRENT_APP_VERSION}).`);
         return;
       } catch (error) {
         console.error("⚠️ Error al parsear los niveles globales desde localStorage:", error);
@@ -244,7 +244,7 @@ export const ClientDataProvider = ({ children }) => {
     }
 
     try {
-      console.log("🔍 Buscando datos de niveles en el backend...");
+      //console.log("🔍 Buscando datos de niveles en el backend...");
       const response = await fetch(`https://8txnxmkveg.us-east-1.awsapprunner.com/api/getGlobalLevels`);
       const data = await response.json();
       if (response.ok) {

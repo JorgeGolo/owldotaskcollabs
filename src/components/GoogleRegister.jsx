@@ -9,8 +9,14 @@ import useJwtToken from './useJwtToken'; // Importar el hook que creamos
 // CAMBIO: Importamos el plugin de Capacitor
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 
+import useOnlineStatus from "./useOnlineStatus";
+
+
 
 const GoogleRegister = ({ acceptedTerms }) => {
+  
+  const { isReliablyOnline } = useOnlineStatus(); // Estado de conectividad de la red
+
   const auth = getAuth(app);
   const router = useRouter();
 
@@ -21,7 +27,7 @@ const GoogleRegister = ({ acceptedTerms }) => {
     initializeToken();
   }, [initializeToken]);
 
-  const { setUser, setClientData } = useContext(AppClientContext); 
+  const { setUser, setClientData,  } = useContext(AppClientContext); 
 
   const handleGoogleAuth = async () => {
     if (!acceptedTerms) {
@@ -126,9 +132,11 @@ const GoogleRegister = ({ acceptedTerms }) => {
 
   return (
     <button
-      className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition"
+      className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition
+      disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
+      "
       onClick={handleGoogleAuth}
-      disabled={!acceptedTerms} // El botón debería estar deshabilitado si los términos no son aceptados
+      disabled={!isReliablyOnline } // El botón debería estar deshabilitado si los términos no son aceptados
     >
       Register
     </button>

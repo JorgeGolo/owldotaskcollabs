@@ -323,7 +323,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
               >
                 Free Retry 🆓
                 {!retryAvailable && (
-                  <FaSpinner className="inline animate-spin text-gray-600" />
+                  <FaSpinner className="ml-2 inline animate-spin text-gray-600" />
                 )}
               </button>
             </div>

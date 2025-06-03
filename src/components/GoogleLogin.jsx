@@ -43,12 +43,6 @@ const GoogleLogin = () => {
         return;
       }
 
-      // ----------------------------------------------------------------------
-      // ¡TODO LO SIGUIENTE SE MANTIENE PRÁCTICAMENTE IGUAL!
-      // La lógica de verificación con tu backend y carga de datos del cliente
-      // no cambia, ya que opera con el objeto 'user' de Firebase.
-      // ----------------------------------------------------------------------
-
       const response = await fetchWithToken(
         `https://8txnxmkveg.us-east-1.awsapprunner.com/api/registerCheck/${user.email}`,
         {
@@ -66,6 +60,7 @@ const GoogleLogin = () => {
           const clientResponse = await fetchWithToken(
             `https://8txnxmkveg.us-east-1.awsapprunner.com/api/getClientData?uid=${user.uid}`
           );
+
           const clientData = await clientResponse.json();
           if (clientResponse.ok) {
             setClientData(clientData);
@@ -73,15 +68,18 @@ const GoogleLogin = () => {
             console.warn("⚠️ No se pudieron cargar los datos del cliente.");
             setClientData(null);
           }
+
         } else {
           console.warn("⚠️ Usuario no registrado. Cancelando login...");
           await signOut(auth);
-          router.push("/signin");
+          //router.push("/signin");
+          router.push("/signin?message=not-registered");
         }
+        
       } else {
         console.error("❌ Error en la respuesta del servidor:", await response.text());
         await signOut(auth);
-        router.push("/signin");
+        //router.push("/signin");
       }
     } catch (error) {
       console.error("⚠️ Error al verificar el usuario antes del login:", error);
@@ -95,7 +93,7 @@ const GoogleLogin = () => {
       } catch (signOutError) {
         console.error("⚠️ Error al cerrar sesión:", signOutError);
       }
-      router.push("/signin");
+      //router.push("/signin");
     }
   };
 
