@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "757706039932",
+    "project_id": "feathers-f412b",
+    "storage_bucket": "feathers-f412b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757706039932:android:2d510dbf8c2dd792475ff9",
+        "android_client_info": {
+          "package_name": "com.owldotask.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "757706039932-lgik8rgirtdb7ec9teb95op13gsn76pf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4nd_wlltZ-LgRa5vnuwmKAQMA8_dKLAs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "757706039932-lgik8rgirtdb7ec9teb95op13gsn76pf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
