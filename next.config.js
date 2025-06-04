@@ -86,6 +86,18 @@ return routes.map(url => ({ url, revision: BUILD_DATE }));
         expiration: { maxEntries: 100, maxAgeSeconds: 86400 }
       }
     },
+        // **AÑADIR ESTA SECCIÓN PARA LAS PORTADAS DE LIBROS**
+    {
+      urlPattern: /\/assets\/bookcovers\/.*/, // **AJUSTADO: sin el dominio completo**
+      handler: 'CacheFirst', // O 'NetworkFirst' según tu preferencia
+      options: {
+        cacheName: 'bookcovers-cache',
+        expiration: {
+          maxEntries: 500, // Ajusta el número de entradas
+          maxAgeSeconds: 60 * 24 * 60 * 60, // Ejemplo: 60 días
+        },
+      },
+    },
   ],
   
 
