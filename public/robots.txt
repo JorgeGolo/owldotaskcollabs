@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /profile
+Disallow: /signin
+Allow: /
+
+Sitemap: https://owldotask.com/sitemap.xml

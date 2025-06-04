@@ -1,6 +1,6 @@
 {
   "name": "feathers",
-  "version": "1.0.3",
+  "version": "1.0.11",
   "private": true,
   "dependencies": {
     "@capacitor-community/admob": "^7.0.3",
@@ -47,7 +47,8 @@
     "build": "node scripts/generate-routes.js && next build",
     "start": "next start",
     "build:apk1": "rimraf out && aws s3 sync s3://frontend-migracion-aws ./out",
-    "build:apk2": "npx cap sync && cd android && ./gradlew assembleDebug && cd ..",
+    "build:apk2": "npx cap sync && cd android",
+    "build:apk3": "./gradlew assembleDebug && cd ..",
     "generate-routes": "node scripts/generate-routes.js"
   },
   "eslintConfig": {

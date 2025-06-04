@@ -1,0 +1,15 @@
+{
+  "appId": "com.owldotask.app",
+  "appName": "Owldotask",
+  "webDir": "out",
+  "version": "1.0.11",
+  "bundledWebRuntime": false,
+  "plugins": {
+    "FirebaseAuthentication": {
+      "skipNativeAuth": true,
+      "providers": ["google.com"], 
+      "webClientId": "757706039932-lgik8rgirtdb7ec9teb95op13gsn76pf.apps.googleusercontent.com",
+      "redirectUri": "com.owldotask.app://firebase" 
+    }
+  }
+}
