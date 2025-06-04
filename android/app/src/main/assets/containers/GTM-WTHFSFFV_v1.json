@@ -1,0 +1,76 @@
+{
+    "exportFormatVersion": 2,
+    "exportTime": "2025-05-28 08:51:24",
+    "containerVersion": {
+        "path": "accounts/6290402642/containers/221106262/versions/1",
+        "accountId": "6290402642",
+        "containerId": "221106262",
+        "containerVersionId": "1",
+        "name": "Empty Container",
+        "container": {
+            "path": "accounts/6290402642/containers/221106262",
+            "accountId": "6290402642",
+            "containerId": "221106262",
+            "name": "contenedor owldotask.com apk",
+            "publicId": "GTM-WTHFSFFV",
+            "usageContext": [
+                "ANDROID_SDK_5"
+            ],
+            "fingerprint": "1748373754550",
+            "tagManagerUrl": "https://tagmanager.google.com/#/container/accounts/6290402642/containers/221106262/workspaces?apiLink=container",
+            "features": {
+                "supportUserPermissions": true,
+                "supportEnvironments": true,
+                "supportWorkspaces": true,
+                "supportGtagConfigs": false,
+                "supportBuiltInVariables": true,
+                "supportClients": false,
+                "supportFolders": true,
+                "supportTags": true,
+                "supportTemplates": true,
+                "supportTriggers": true,
+                "supportVariables": true,
+                "supportVersions": true,
+                "supportZones": true,
+                "supportTransformations": false
+            },
+            "tagIds": [
+                "GTM-WTHFSFFV"
+            ]
+        },
+        "builtInVariable": [
+            {
+                "accountId": "6290402642",
+                "containerId": "221106262",
+                "type": "APP_ID",
+                "name": "App ID"
+            },
+            {
+                "accountId": "6290402642",
+                "containerId": "221106262",
+                "type": "APP_NAME",
+                "name": "App Name"
+            },
+            {
+                "accountId": "6290402642",
+                "containerId": "221106262",
+                "type": "APP_VERSION_CODE",
+                "name": "App Version Code"
+            },
+            {
+                "accountId": "6290402642",
+                "containerId": "221106262",
+                "type": "APP_VERSION_NAME",
+                "name": "App Version Name"
+            },
+            {
+                "accountId": "6290402642",
+                "containerId": "221106262",
+                "type": "EVENT_NAME",
+                "name": "Event Name"
+            }
+        ],
+        "fingerprint": "1748373754552",
+        "tagManagerUrl": "https://tagmanager.google.com/#/versions/accounts/6290402642/containers/221106262/versions/1?apiLink=version"
+    }
+}
