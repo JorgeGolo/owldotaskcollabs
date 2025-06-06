@@ -22,12 +22,12 @@ function useOnlineStatus() {
 
       //  Prueba inicial y periódica de conectividad
       testConnectivity();
-      const intervalId = setInterval(testConnectivity, 5000); //  Prueba cada 5 segundos
+      //const intervalId = setInterval(testConnectivity, 5000); //  Prueba cada 5 segundos
 
       return () => {
         window.removeEventListener('online', handleOnline);
         window.removeEventListener('offline', handleOffline);
-        clearInterval(intervalId);
+       // clearInterval(intervalId);
       };
     }
   }, []);
