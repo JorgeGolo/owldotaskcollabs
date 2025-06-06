@@ -176,7 +176,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
 
             await saveDataToApi("savePoints", { points: scoretotal });
             await saveDataToApi("saveQuestions", { questionsright: score });
-            await saveDataToApi("saveQuizztoday", { quizzestoday: 1 });
+            await saveDataToApi("saveQuizztoday", { quizzestoday: 1, score: scoretotal });
 
             console.log("✅ Resultados registrados correctamente");
     
