@@ -5,7 +5,6 @@ import "../styles/global.css";
 import { ClientDataProvider } from "../context/ClientDataProvider";
 import Layout from "../components/Layout";
 
-
 function MyApp({ Component, pageProps }) {
   const [newVersionAvailable, setNewVersionAvailable] = useState(false); // Estado para la nueva versión
 
