@@ -10,8 +10,17 @@ import TechGrid from '../components/TechGrid';
 import AdMobBanner1 from '../components/AdMobBanner1'; // Adjust path as needed
 import Link from 'next/link';
 
+
 const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) => {
 
+  const { showLevelUpPopup } = useContext(AppClientContext);
+
+  const handleManualLevelUp = () => {
+    // Llama a la función del contexto para mostrar el popup con un nivel específico
+    showLevelUpPopup(10); // Muestra el popup para el nivel 10
+  };
+
+  
   const { featherIcon } = useContext(AppClientContext);
 
   const [canonicalUrl, setCanonicalUrl] = useState("");
@@ -124,6 +133,11 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
        
           <div >
               {/*<AdMobBanner1 />*/}
+            <div>
+              <button onClick={handleManualLevelUp} className="hidden bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                Trigger Level Up Popup (Manually)
+              </button>
+            </div>
           </div>
           
         </div>
