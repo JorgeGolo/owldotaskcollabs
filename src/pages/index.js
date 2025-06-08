@@ -8,6 +8,7 @@ import { AppClientContext } from "../context/ClientDataProvider";
 import TechGrid from '../components/TechGrid';
 
 import AdMobBanner1 from '../components/AdMobBanner1'; // Adjust path as needed
+import Link from 'next/link';
 
 const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) => {
 
@@ -54,7 +55,11 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
             Each quiz isn’t just a chance to test your knowledge—it’s an invitation to challenge your assumptions, uncover hidden insights, and grow your understanding with every question you face.
           </p>
 
-          <CategoryMap quizzes={quizzes} limit={9} />
+          <CategoryMap quizzes={quizzes} limit={12} />
+
+           <Link href="/quizzes" className="text-blue-500 hover:underline">
+              See all quizzes and categories
+            </Link>
 
           <h2 className="text-2xl font-semibold mt-8 mb-2">🧮 Owldotask quiz stats</h2>
           <p className="mb-4">
