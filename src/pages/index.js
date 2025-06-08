@@ -133,11 +133,11 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
        
           <div >
               {/*<AdMobBanner1 />*/}
-    <div>
-      <button onClick={handleManualLevelUp} className="hidden bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
-        Trigger Level Up Popup (Manually)
-      </button>
-    </div>
+            <div>
+              <button onClick={handleManualLevelUp} className="hidden bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                Trigger Level Up Popup (Manually)
+              </button>
+            </div>
           </div>
           
         </div>
