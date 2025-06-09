@@ -50,21 +50,73 @@ The cookies used by Google include, among others: SID, HSID, SSID, SAPISID, APIS
           </div>
 
           {/* Filas de datos */}
-          <div className="grid-row bg-gray-50">
-            <div className="grid-cell" data-label="Cookie Name:">laravel_session</div>
-            <div className="grid-cell" data-label="Provider:">OwldoTask (Laravel)</div>
-            <div className="grid-cell" data-label="Purpose:">Session management for authenticated users</div>
-            <div className="grid-cell" data-label="Type:">Essential</div>
-            <div className="grid-cell" data-label="Expiry:">Session</div>
-          </div>
 
-          <div className="grid-row bg-gray-50">
-            <div className="grid-cell" data-label="Cookie Name:">XSRF-TOKEN</div>
-            <div className="grid-cell" data-label="Provider:">OwldoTask (Laravel)</div>
-            <div className="grid-cell" data-label="Purpose:">Security token to prevent CSRF attacks</div>
-            <div className="grid-cell" data-label="Type:">Essential</div>
-            <div className="grid-cell" data-label="Expiry:">Session</div>
-          </div>
+          <div class="grid-row bg-gray-50">
+    <div class="grid-cell" data-label="Cookie Name:">owldo_consent</div>
+    <div class="grid-cell" data-label="Provider:">owldotask.com</div>
+    <div class="grid-cell" data-label="Purpose:">To manage cookies</div>
+    <div class="grid-cell" data-label="Type:">Functionality</div>
+    <div class="grid-cell" data-label="Expiry:">1 year</div>
+  </div>
+
+          <div class="grid-row bg-gray-50">
+    <div class="grid-cell" data-label="Cookie Name:">_ga</div>
+    <div class="grid-cell" data-label="Provider:">Google Analytics</div>
+    <div class="grid-cell" data-label="Purpose:">Used to distinguish unique users</div>
+    <div class="grid-cell" data-label="Type:">Third-party / Consent required</div>
+    <div class="grid-cell" data-label="Expiry:">2 years</div>
+  </div>
+  <div class="grid-row bg-gray-50">
+    <div class="grid-cell" data-label="Cookie Name:">_ga_[ID]</div>
+    <div class="grid-cell" data-label="Provider:">Google Analytics</div>
+    <div class="grid-cell" data-label="Purpose:">Persists session state</div>
+    <div class="grid-cell" data-label="Type:">Third-party / Consent required</div>
+    <div class="grid-cell" data-label="Expiry:">2 years</div>
+  </div>
+  <div class="grid-row bg-gray-50">
+    <div class="grid-cell" data-label="Cookie Name:">_gid</div>
+    <div class="grid-cell" data-label="Provider:">Google Analytics</div>
+    <div class="grid-cell" data-label="Purpose:">Used to distinguish users</div>
+    <div class="grid-cell" data-label="Type:">Third-party / Consent required</div>
+    <div class="grid-cell" data-label="Expiry:">24 hours</div>
+  </div>
+  <div class="grid-row bg-gray-50">
+    <div class="grid-cell" data-label="Cookie Name:">_gat</div>
+    <div class="grid-cell" data-label="Provider:">Google Analytics</div>
+    <div class="grid-cell" data-label="Purpose:">Used to throttle request rate</div>
+    <div class="grid-cell" data-label="Type:">Third-party / Consent required</div>
+    <div class="grid-cell" data-label="Expiry:">1 minute</div>
+  </div>
+
+  <div class="grid-row bg-gray-50">
+    <div class="grid-cell" data-label="Cookie Name:">_dc_gtm_[ID]</div>
+    <div class="grid-cell" data-label="Provider:">Google Tag Manager</div>
+    <div class="grid-cell" data-label="Purpose:">Used to control script loading</div>
+    <div class="grid-cell" data-label="Type:">Third-party / Consent required</div>
+    <div class="grid-cell" data-label="Expiry:">1 minute</div>
+  </div>
+
+  <div class="grid-row bg-gray-50">
+    <div class="grid-cell" data-label="Cookie Name:">__gads, __gac_[ID]</div>
+    <div class="grid-cell" data-label="Provider:">Google AdMob</div>
+    <div class="grid-cell" data-label="Purpose:">Ad targeting and campaign measurement</div>
+    <div class="grid-cell" data-label="Type:">Third-party / Consent required</div>
+    <div class="grid-cell" data-label="Expiry:">Up to 13 months</div>
+  </div>
+  <div class="grid-row bg-gray-50">
+    <div class="grid-cell" data-label="Cookie Name:">IDE</div>
+    <div class="grid-cell" data-label="Provider:">Google AdMob (DoubleClick)</div>
+    <div class="grid-cell" data-label="Purpose:">Ad personalization and frequency capping</div>
+    <div class="grid-cell" data-label="Type:">Third-party / Consent required</div>
+    <div class="grid-cell" data-label="Expiry:">13 months</div>
+  </div>
+  <div class="grid-row bg-gray-50">
+    <div class="grid-cell" data-label="Cookie Name:">DSID, FLC, AID, TAID</div>
+    <div class="grid-cell" data-label="Provider:">Google AdMob</div>
+    <div class="grid-cell" data-label="Purpose:">Ad targeting and user identification</div>
+    <div class="grid-cell" data-label="Type:">Third-party / Consent required</div>
+    <div class="grid-cell" data-label="Expiry:">Up to 2 years</div>
+  </div>
 
           <div className="grid-row bg-gray-50">
             <div className="grid-cell" data-label="Cookie Name:">SID, HSID, SSID, SAPISID, APISID</div>
@@ -111,8 +163,8 @@ The cookies used by Google include, among others: SID, HSID, SSID, SAPISID, APIS
         </ul>
         <p className="text-gray-700 mb-6 leading-relaxed">Please note that by disabling certain cookies, you may not be able to use all the features of our website.</p>
         
-        <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">Ad-Blocker Detection</h2>
-        <p className="text-gray-700 mb-6 leading-relaxed">Our website uses technology to detect if you are using an ad-blocker. This detection is necessary to inform authenticated users about our advertising-supported business model. The ad-blocker detection does not collect personal information but identifies if ad-blocking software is being used.</p>
+        <h2 className="hidden text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">Ad-Blocker Detection</h2>
+        <p className="hidden text-gray-700 mb-6 leading-relaxed">Our website uses technology to detect if you are using an ad-blocker. This detection is necessary to inform authenticated users about our advertising-supported business model. The ad-blocker detection does not collect personal information but identifies if ad-blocking software is being used.</p>
         
         <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">Updates to This Cookie Policy</h2>
         <p className="text-gray-700 mb-6 leading-relaxed">We may update this Cookie Policy from time to time to reflect changes in technology, regulation, or our business practices. Any changes will be posted on this page and, where appropriate, notified to you by email or a prominent notice on our website.</p>
@@ -121,7 +173,7 @@ The cookies used by Google include, among others: SID, HSID, SSID, SAPISID, APIS
         <p className="text-gray-700 mb-3 leading-relaxed">If you have any questions about our use of cookies or this Cookie Policy, please contact us at:</p>
         <p className="text-gray-700 mb-6 leading-relaxed">Email: <strong>info@owldotask.com</strong></p>
         
-        <p className="text-gray-700 mb-6 italic">Last updated: [Current date]</p>
+        <p className="text-gray-700 mb-6 italic">Last updated: 09-06-2025</p>
     </div>
     );
 
