@@ -8,6 +8,25 @@ export default function Document() {
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#000000" />
 
+        {/* Google Tag Manager - Consent Mode Default (usando dataLayer.push) */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              dataLayer.push({
+                'consent': 'default', // Clave 'consent'
+                'ad_storage': 'denied',
+                'analytics_storage': 'denied',
+                'functionality_storage': 'granted',
+                'personalization_storage': 'denied',
+                'security_storage': 'granted',
+                'wait_for_update': 500 // Opcional: espera hasta 500ms para una actualización
+              });
+            `,
+          }}
+        />
+
+
         {/* Google Tag Manager */}
          <script
           dangerouslySetInnerHTML={{
