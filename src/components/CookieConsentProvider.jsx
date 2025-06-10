@@ -43,6 +43,72 @@ const setConsent = (value) => {
   window.dataLayer.push({ event: 'update_consent', ...consentValues });
 };
 
+// Elimina todas las cookies de consentimiento
+const clearAllCookies = () => {
+  // Lista de posibles nombres de cookies relacionadas con analytics, ads, etc.
+  const cookiesToClear = [
+    COOKIE_NAME,
+    '_ga', '_ga_*', '_gid', '_gat', '_gat_*',
+    '_fbp', '_fbc',
+    '__utma', '__utmb', '__utmc', '__utmt', '__utmz',
+    '_hjid', '_hjFirstSeen', '_hjIncludedInSessionSample',
+    'IDE', 'DSID', 'FLC', 'AID', 'TAID',
+    '_gcl_au', '_gcl_aw', '_gcl_dc'
+  ];
+
+  // Eliminar cookies del dominio actual
+  cookiesToClear.forEach(cookieName => {
+    // Para cookies con wildcards como _ga_*, necesitamos buscar todas las que coincidan
+    if (cookieName.includes('*')) {
+      const prefix = cookieName.replace('*', '');
+      const allCookies = document.cookie.split(';');
+      
+      allCookies.forEach(cookie => {
+        const [name] = cookie.trim().split('=');
+        if (name.startsWith(prefix)) {
+          // Eliminar con diferentes combinaciones de path y domain
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname};`;
+        }
+      });
+    } else {
+      // Eliminar cookie específica con diferentes combinaciones de path y domain
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname};`;
+    }
+  });
+
+  // Limpiar localStorage y sessionStorage relacionado con analytics
+  const storageKeysToRemove = [
+    '_ga', '_gid', '_gat', 'ga_sessionToken', 'ga_userId',
+    '_hjTLDTest', '_hjUserAttributesHash', '_hjCachedUserAttributes',
+    'fbp', 'fbc'
+  ];
+
+  storageKeysToRemove.forEach(key => {
+    try {
+      localStorage.removeItem(key);
+      sessionStorage.removeItem(key);
+    } catch (e) {
+      // Ignorar errores de acceso a storage
+    }
+  });
+
+  // Notificar a Google Analytics y otros servicios sobre la revocación
+  const revokedConsent = {
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    personalization_storage: 'denied',
+    security_storage: 'granted'
+  };
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: 'consent_revoked', ...revokedConsent });
+};
+
 // Inicializa valores por defecto si no hay consentimiento
 const initializeDefaultConsent = () => {
   const defaultConsent = {
@@ -102,6 +168,10 @@ export const CookieConsentProvider = () => {
   };
 
   const reject = () => {
+    // Primero eliminar todas las cookies existentes
+    clearAllCookies();
+    
+    // Luego establecer el estado como rechazado
     setConsent('rejected');
     setConfig({
       ad_storage: false,
@@ -132,7 +202,7 @@ export const CookieConsentProvider = () => {
         <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 z-50 shadow-md">
           <div className="max-w-4xl mx-auto flex flex-col gap-4">
             <p className="text-sm">
-              We use cookies to personalize content and analyze traffic. By clicking “Accept”, you consent to our use of cookies. Read our <a href="/cookies" className="underline">cookie policy</a>.
+              We use cookies to personalize content and analyze traffic. By clicking "Accept", you consent to our use of cookies. Read our <a href="/cookies" className="underline">cookie policy</a>.
             </p>
   
             {showConfig ? (
@@ -204,10 +274,10 @@ export const CookieConsentProvider = () => {
               </div>
             ) : (
               <div className="flex flex-wrap gap-2 justify-end">
-                <button onClick={accept} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-sm">
+                <button onClick={accept} className="px-4 py-2 bg-blue-600 hover:bg-blue-600 rounded text-sm">
                   Accept All
                 </button>
-                <button onClick={reject} className="px-4 py-2 bg-gray-600 hover:bg-gray-700 rounded text-sm">
+                <button onClick={reject} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-sm">
                   Reject All
                 </button>
 
@@ -237,6 +307,9 @@ export const CookieConsentProvider = () => {
 
 // Helpers externos
 export const acceptConsent = () => setConsent('accepted');
-export const rejectConsent = () => setConsent('rejected');
+export const rejectConsent = () => {
+  clearAllCookies();
+  setConsent('rejected');
+};
 export const getStoredConsent = () => getConsent();
-
+export const clearAllConsentCookies = () => clearAllCookies();
