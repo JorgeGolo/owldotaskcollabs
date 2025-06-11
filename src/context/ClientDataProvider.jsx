@@ -165,39 +165,39 @@ export const ClientDataProvider = ({ children }) => {
     } 
   };
     
-  const saveDataToApi = async (endpoint, data) => {
-    try {
-      const auth = getAuth();
-      const user = auth.currentUser;
-      if (!user) {
-        throw new Error("No hay usuario autenticado.");
-      }
-      
-      const clientMail = user.email;
-      const payload = { mail: clientMail, ...data };
-      
-      const response = await fetchWithToken(`https://8txnxmkveg.us-east-1.awsapprunner.com/api/${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      
-      const text = await response.text();
-      
-      try {
-        const result = JSON.parse(text);
-        if (!result.success) {
-          throw new Error(result.message || "Error desconocido en la API");
-        }
-        refreshClientData();
-        return result;
-      } catch (jsonError) {
-        throw new Error("La API devolvió HTML en lugar de JSON.");
-      }
-    } catch (error) {
-      throw error;
+const saveDataToApi = async (endpoint, data) => {
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+      throw new Error("No hay usuario autenticado.");
     }
-  };
+    
+    const clientMail = user.email;
+    const payload = { mail: clientMail, ...data };
+    
+    const response = await fetchWithToken(`https://8txnxmkveg.us-east-1.awsapprunner.com/api/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    
+    const text = await response.text();
+    
+    try {
+      const result = JSON.parse(text);
+      if (!result.success) {
+        throw new Error(result.message || "Error desconocido en la API");
+      }
+      // refreshClientData(); // <--- ¡¡¡ELIMINA ESTA LÍNEA!!!
+      return result; // Devuelve el resultado para que se pueda usar await
+    } catch (jsonError) {
+      throw new Error("La API devolvió HTML en lugar de JSON.");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 
   const refreshClientData = async () => {
     if (user && user.uid) {

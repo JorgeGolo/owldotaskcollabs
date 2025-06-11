@@ -14,7 +14,7 @@ import useJwtToken from './useJwtToken'; // Importar el hook que creamos
 import useAuthStatus from './useAuthStatus';
 import useOnlineStatus from './useOnlineStatus';
 
-const Test = ({ chapters, numberOfQuestions }) => {
+const Test = ({ chapters, numberOfQuestions  }) => {
 
   const { isReliablyOnline } = useOnlineStatus();
 
@@ -148,68 +148,104 @@ const Test = ({ chapters, numberOfQuestions }) => {
     });
   };
 
-  const handleNextQuestion = async () => {
-    if (questionCount >= numberOfQuestions - 1) {
-      setQuizFinished(true);
-      // Deshabilitamos el botón mientras se calculan los puntos
-      setRetryAvailable(false);
-    
-      try {
-        if (score > 0) {
-          if (canEarnPoints === true) {
-            if (score === numberOfQuestions) {
-              // quiero datos de usuario 3 - añado clientData para sumar el nivel
-              scoretotal = score + 4 + localClientData.level;
+const handleNextQuestion = async () => {
+  if (questionCount >= numberOfQuestions - 1) {
+    setQuizFinished(true);
+    setRetryAvailable(false);
+  
+    try {
+      if (score > 0 && canEarnPoints === true) {
+        
+        // 🔥 Paso 1: Prepara todas las operaciones de guardado que necesitas hacer.
+        const promisesToSave = [];
+        let scoretotal = score;
 
-              await saveDataToApi("saveQuizzdone", { quizzesdone: 1 });
-    
-              // 🔥 Mostrar primero el popup de "perfectScore"
-              await new Promise((resolve) => {
-                triggerGoal("perfectScore");
-                setTimeout(resolve, 1000); 
-              });
-            } else {
-              scoretotal = score;
-            }
-    
-            console.log("🔹 Enviando solicitud para registrar resultados...");
+        if (score === numberOfQuestions) {
+          scoretotal = score + 4 + (localClientData?.level || 0);
+          
+          // Añadimos la promesa de guardar el quiz perfecto
+          promisesToSave.push(saveDataToApi("saveQuizzdone", { quizzesdone: 1 }));
 
-            await saveDataToApi("savePoints", { points: scoretotal });
-            await saveDataToApi("saveQuestions", { questionsright: score });
-            await saveDataToApi("saveQuizztoday", { quizzestoday: 1, score: scoretotal });
-
-            console.log("✅ Resultados registrados correctamente");
-    
-            // 🔥 Asegurar que el popup de "completion" aparezca después del primero
-            await new Promise((resolve) => {
-              triggerGoal("completion");
-              setTimeout(resolve, 500);
-            });
-    
-            updatePoints(score);
-            scoretotal = 0;
-            await refreshClientData();
-          }
+          // Muestra el primer popup
+          triggerGoal("perfectScore");
+          // Espera un poco para que el usuario lo vea antes del siguiente.
+          await new Promise(resolve => setTimeout(resolve, 1000));
         }
         
-      } catch (error) {
-        console.error("❌ Error al registrar resultados:", error);
-      } finally {
-        // Habilitamos el botón una vez que todas las operaciones han terminado
-        setRetryAvailable(true);
-      }
-    } else {
-      setQuestionCount((prev) => prev + 1);
-      setChapter(getRandomChapter());
-    }
+        // Añade el resto de promesas a la lista
+        promisesToSave.push(saveDataToApi("savePoints", { points: scoretotal }));
+        promisesToSave.push(saveDataToApi("saveQuestions", { questionsright: score }));
+        promisesToSave.push(saveDataToApi("saveQuizztoday", { quizzestoday: 1, score: scoretotal }));
 
+        // 🚀 Paso 2: Ejecuta TODAS las promesas de guardado en paralelo.
+        // El código solo continuará cuando TODAS se hayan completado con éxito.
+        console.log("🔹 Enviando todas las solicitudes para registrar resultados...");
+        await Promise.all(promisesToSave);
+        console.log("✅ Todos los resultados han sido registrados correctamente en el servidor.");
+
+        // Muestra el popup de "juego completado"
+        triggerGoal("completion");
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // ✅ Paso 3: AHORA, y solo ahora, refresca los datos del cliente UNA SOLA VEZ.
+        // Esto traerá todos los datos actualizados (puntos, nivel, etc.) de una sola vez.
+        await refreshClientData();
+        
+      }
+    } catch (error) {
+      console.error("❌ Error al registrar resultados:", error);
+    } finally {
+      setRetryAvailable(true);
+    }
+  } else {
+    // ... (lógica para la siguiente pregunta)
+    setQuestionCount((prev) => prev + 1);
     setSelectedOption(null);
     setIsAnswered(false);
     setFeedback("");
     if (!quizFinished) {
       setChapter(getRandomChapter());
     }
-  };
+  }
+};
+        }
+        
+        // Añade el resto de promesas a la lista
+        promisesToSave.push(saveDataToApi("savePoints", { points: scoretotal }));
+        promisesToSave.push(saveDataToApi("saveQuestions", { questionsright: score }));
+        promisesToSave.push(saveDataToApi("saveQuizztoday", { quizzestoday: 1, score: scoretotal }));
+
+        // 🚀 Paso 2: Ejecuta TODAS las promesas de guardado en paralelo.
+        // El código solo continuará cuando TODAS se hayan completado con éxito.
+        console.log("🔹 Enviando todas las solicitudes para registrar resultados...");
+        await Promise.all(promisesToSave);
+        console.log("✅ Todos los resultados han sido registrados correctamente en el servidor.");
+
+        // Muestra el popup de "juego completado"
+        triggerGoal("completion");
+        await new Promise(resolve => setTimeout(resolve, 500));
+
+        // ✅ Paso 3: AHORA, y solo ahora, refresca los datos del cliente UNA SOLA VEZ.
+        // Esto traerá todos los datos actualizados (puntos, nivel, etc.) de una sola vez.
+        await refreshClientData();
+        
+      }
+    } catch (error) {
+      console.error("❌ Error al registrar resultados:", error);
+    } finally {
+      setRetryAvailable(true);
+    }
+  } else {
+    // ... (lógica para la siguiente pregunta)
+    setQuestionCount((prev) => prev + 1);
+    setSelectedOption(null);
+    setIsAnswered(false);
+    setFeedback("");
+    if (!quizFinished) {
+      setChapter(getRandomChapter());
+    }
+  }
+};
     
 
   useEffect(() => {
