@@ -9,6 +9,8 @@ import { Bebas_Neue } from "next/font/google";
 import useJwtToken from '../components/useJwtToken';
 import useOnlineStatus from '../components/useOnlineStatus';
 
+import LevelUpPopup from '../components/LevelUpPopup'; // Asegúrate de que la ruta sea correcta
+
 // ⚙️ Importa y configura la fuente
 const bebasNeue = Bebas_Neue({
   weight: '400',
@@ -36,6 +38,18 @@ export const ClientDataProvider = ({ children }) => {
   // 🆕 Usar APP_VERSION para versionado de datos
   const CURRENT_APP_VERSION = process.env.APP_VERSION || '1.0.0';
   
+  // --- Estados y funciones para el LevelUpPopup ---
+  const [isLevelUpPopupOpen, setIsLevelUpPopupOpen] = useState(false);
+  const [levelUpDisplayedLevel, setLevelUpDisplayedLevel] = useState(0);
+
+  const showLevelUpPopup = useCallback((level) => {
+    setLevelUpDisplayedLevel(level);
+    setIsLevelUpPopupOpen(true);
+  }, []);
+
+  const hideLevelUpPopup = useCallback(() => {
+    setIsLevelUpPopupOpen(false);
+  }, []);
   const socialIcons = useMemo(() => [
     { icon: <FaFacebook size={20} />, link: "https://facebook.com" },
     { icon: <FaTwitter size={20} />, link: "https://twitter.com" },
@@ -151,39 +165,39 @@ export const ClientDataProvider = ({ children }) => {
     } 
   };
     
-  const saveDataToApi = async (endpoint, data) => {
-    try {
-      const auth = getAuth();
-      const user = auth.currentUser;
-      if (!user) {
-        throw new Error("No hay usuario autenticado.");
-      }
-      
-      const clientMail = user.email;
-      const payload = { mail: clientMail, ...data };
-      
-      const response = await fetchWithToken(`https://8txnxmkveg.us-east-1.awsapprunner.com/api/${endpoint}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      
-      const text = await response.text();
-      
-      try {
-        const result = JSON.parse(text);
-        if (!result.success) {
-          throw new Error(result.message || "Error desconocido en la API");
-        }
-        refreshClientData();
-        return result;
-      } catch (jsonError) {
-        throw new Error("La API devolvió HTML en lugar de JSON.");
-      }
-    } catch (error) {
-      throw error;
+const saveDataToApi = async (endpoint, data) => {
+  try {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (!user) {
+      throw new Error("No hay usuario autenticado.");
     }
-  };
+    
+    const clientMail = user.email;
+    const payload = { mail: clientMail, ...data };
+    
+    const response = await fetchWithToken(`https://8txnxmkveg.us-east-1.awsapprunner.com/api/${endpoint}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+    
+    const text = await response.text();
+    
+    try {
+      const result = JSON.parse(text);
+      if (!result.success) {
+        throw new Error(result.message || "Error desconocido en la API");
+      }
+      // refreshClientData(); // <--- ¡¡¡ELIMINA ESTA LÍNEA!!!
+      return result; // Devuelve el resultado para que se pueda usar await
+    } catch (jsonError) {
+      throw new Error("La API devolvió HTML en lugar de JSON.");
+    }
+  } catch (error) {
+    throw error;
+  }
+};
 
   const refreshClientData = async () => {
     if (user && user.uid) {
@@ -193,6 +207,10 @@ export const ClientDataProvider = ({ children }) => {
       }
 
       try {
+
+                // Capture the current level *before* fetching new data
+        const levelBeforeRefresh = clientData ? clientData.level : 0;
+
         const response = await fetchWithToken(`https://8txnxmkveg.us-east-1.awsapprunner.com/api/getClientData?uid=${user.uid}`);
         if (response.ok) {
           const data = await response.json();
@@ -203,6 +221,15 @@ export const ClientDataProvider = ({ children }) => {
             localStorage.setItem('clientData', JSON.stringify(data));
             localStorage.setItem('clientDataVersion', CURRENT_APP_VERSION);
             //console.log(`💾 Datos del cliente guardados en localStorage (v${CURRENT_APP_VERSION})`);
+
+            const levelAfterRefresh = data.level || 0;
+            if (levelAfterRefresh !== levelBeforeRefresh) {
+              console.log("🎉 Level up! New level:", levelAfterRefresh);
+                            showLevelUpPopup(levelAfterRefresh); // Trigger the popup!
+
+            } else {
+              console.log("🔹 No level change. Current level:", levelAfterRefresh);
+            }
           }
         } else {
           console.warn("⚠️ No se pudieron refrescar los datos del cliente.");
@@ -460,9 +487,17 @@ export const ClientDataProvider = ({ children }) => {
         getOfflineMessage,
         clearAppCache, // 🆕 Para debugging
         appVersion: CURRENT_APP_VERSION, // 🆕 Exponer la versión
+        // Exponemos las funciones para el popup
+        showLevelUpPopup,
+        hideLevelUpPopup,
       }}
     >
       {children}
+      <LevelUpPopup
+        isOpen={isLevelUpPopupOpen}
+        onClose={hideLevelUpPopup} // Utiliza hideLevelUpPopup aquí
+        newLevel={levelUpDisplayedLevel}
+      />
     </AppClientContext.Provider>
   );
 };

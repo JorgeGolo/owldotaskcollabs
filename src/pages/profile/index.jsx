@@ -58,37 +58,50 @@ const Profile = () => {
     initializeToken();
   }, [initializeToken]);
 
-  const handleSavePaypal = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage('');
+const handleSavePaypal = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setMessage('');
 
-    try {
-      const result = await saveDataToApi('savePaypal', { paypal });
-      setMessage('✅ PayPal saved.');
-      setLocalClientData({ ...localClientData, paypal: result.client.paypal });
-    } catch (error) {
-      setMessage(error.message || '❌ Error updating PayPal.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    // 1. Guarda el dato en el servidor.
+    await saveDataToApi('savePaypal', { paypal });
+    
+    // 2. Refresca el estado global de la aplicación.
+    await refreshClientData(); 
+    
+    setMessage('✅ PayPal saved.');
+    // 3. Ya no necesitas la línea setLocalClientData. El useEffect se encargará de actualizar el estado local
+    // cuando el clientData global del contexto cambie.
+
+  } catch (error) {
+    setMessage(error.message || '❌ Error updating PayPal.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleSaveWallet = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage('');
+  e.preventDefault();
+  setLoading(true);
+  setMessage('');
 
-    try {
-      const result = await saveDataToApi('saveWallet', { wallet });
-      setMessage('✅ Wallet saved.');
-      setLocalClientData({ ...localClientData, wallet: result.client.wallet });
-    } catch (error) {
-      setMessage(error.message || '❌ Error updating Wallet.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  try {
+    // 1. Guarda el dato en el servidor.
+    await saveDataToApi('saveWallet', { wallet });
+
+    // 2. Refresca el estado global de la aplicación.
+    await refreshClientData();
+
+    setMessage('✅ Wallet saved.');
+    // 3. Ya no necesitas la línea setLocalClientData.
+
+  } catch (error) {
+    setMessage(error.message || '❌ Error updating Wallet.');
+  } finally {
+    setLoading(false);
+  }
+};
 
   const handleReauthenticate = async () => {
     setReauthError('');
