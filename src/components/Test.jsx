@@ -208,44 +208,6 @@ const handleNextQuestion = async () => {
     }
   }
 };
-        }
-        
-        // Añade el resto de promesas a la lista
-        promisesToSave.push(saveDataToApi("savePoints", { points: scoretotal }));
-        promisesToSave.push(saveDataToApi("saveQuestions", { questionsright: score }));
-        promisesToSave.push(saveDataToApi("saveQuizztoday", { quizzestoday: 1, score: scoretotal }));
-
-        // 🚀 Paso 2: Ejecuta TODAS las promesas de guardado en paralelo.
-        // El código solo continuará cuando TODAS se hayan completado con éxito.
-        console.log("🔹 Enviando todas las solicitudes para registrar resultados...");
-        await Promise.all(promisesToSave);
-        console.log("✅ Todos los resultados han sido registrados correctamente en el servidor.");
-
-        // Muestra el popup de "juego completado"
-        triggerGoal("completion");
-        await new Promise(resolve => setTimeout(resolve, 500));
-
-        // ✅ Paso 3: AHORA, y solo ahora, refresca los datos del cliente UNA SOLA VEZ.
-        // Esto traerá todos los datos actualizados (puntos, nivel, etc.) de una sola vez.
-        await refreshClientData();
-        
-      }
-    } catch (error) {
-      console.error("❌ Error al registrar resultados:", error);
-    } finally {
-      setRetryAvailable(true);
-    }
-  } else {
-    // ... (lógica para la siguiente pregunta)
-    setQuestionCount((prev) => prev + 1);
-    setSelectedOption(null);
-    setIsAnswered(false);
-    setFeedback("");
-    if (!quizFinished) {
-      setChapter(getRandomChapter());
-    }
-  }
-};
     
 
   useEffect(() => {
