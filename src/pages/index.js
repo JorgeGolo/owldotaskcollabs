@@ -8,9 +8,19 @@ import { AppClientContext } from "../context/ClientDataProvider";
 import TechGrid from '../components/TechGrid';
 
 import AdMobBanner1 from '../components/AdMobBanner1'; // Adjust path as needed
+import Link from 'next/link';
+
 
 const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) => {
 
+  const { showLevelUpPopup } = useContext(AppClientContext);
+
+  const handleManualLevelUp = () => {
+    // Llama a la función del contexto para mostrar el popup con un nivel específico
+    showLevelUpPopup(10); // Muestra el popup para el nivel 10
+  };
+
+  
   const { featherIcon } = useContext(AppClientContext);
 
   const [canonicalUrl, setCanonicalUrl] = useState("");
@@ -54,7 +64,11 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
             Each quiz isn’t just a chance to test your knowledge—it’s an invitation to challenge your assumptions, uncover hidden insights, and grow your understanding with every question you face.
           </p>
 
-          <CategoryMap quizzes={quizzes} limit={9} />
+          <CategoryMap quizzes={quizzes} limit={12} />
+
+           <Link href="/quizzes" className="text-blue-500 hover:underline">
+              See all quizzes and categories
+            </Link>
 
           <h2 className="text-2xl font-semibold mt-8 mb-2">🧮 Owldotask quiz stats</h2>
           <p className="mb-4">
@@ -119,6 +133,11 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
        
           <div >
               {/*<AdMobBanner1 />*/}
+            <div>
+              <button onClick={handleManualLevelUp} className="hidden bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
+                Trigger Level Up Popup (Manually)
+              </button>
+            </div>
           </div>
           
         </div>
