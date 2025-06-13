@@ -1,8 +1,8 @@
-import { Html, Head, Main, NextScript } from 'next/document';
+import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="es">
+    <Html lang="en" suppressHydrationWarning>
       <Head>
         {/* Meta tags esenciales */}
         <meta charSet="utf-8" />
@@ -26,9 +26,8 @@ export default function Document() {
           }}
         />
 
-
         {/* Google Tag Manager */}
-         <script
+        <script
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -49,24 +48,26 @@ export default function Document() {
 
         {/* Favicons y manifiesto */}
         <link rel="icon" href="/favicon.ico" />
-        <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/favicon-96x96.png"
+          sizes="96x96"
+        />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="shortcut icon" href="/favicon.ico" />
         {/*<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />*/}
         {/*<link rel="manifest" href="/site.webmanifest" />*/}
         <link rel="manifest" href="/manifest.json" />
-       
-
       </Head>
       <body>
-
         {/* Google Tag Manager (noscript)*/}
         <noscript>
-        <iframe
+          <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-K3N55PGV"
             height="0"
             width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
+            style={{ display: "none", visibility: "hidden" }}
           ></iframe>
         </noscript>
         {/* End Google Tag Manager (noscript) */}
