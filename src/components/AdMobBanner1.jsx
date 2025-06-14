@@ -1,51 +1,75 @@
 import React, { useEffect, useState } from 'react';
-import { AdMob } from '@capacitor-community/admob'; // Adjust based on the actual plugin import
+import { AdMob } from '@capacitor-community/admob';
 
 const AdMobBanner1 = () => {
   const [adLoaded, setAdLoaded] = useState(false);
+  const [adError, setAdError] = useState(null); // Para almacenar errores
 
   useEffect(() => {
     const initializeAdMob = async () => {
       try {
-        // Initialize AdMob (usually done once at app start, but good to ensure here)
+        // Inicializa AdMob
         await AdMob.initialize({
-          requestTrackingAuthorization: true, // For iOS 14+
-          testingDevices: [], // Add your test device IDs here for debugging
-          initializeForTesting: false, // Set to true for development/testing
+          requestTrackingAuthorization: true,
+          testingDevices: [],
+          initializeForTesting: true, // <-- AHORA EN TRUE para depuración
         });
 
-        // Prepare and show the banner ad
-        await AdMob.showBanner({
-          adId: 'ca-app-pub-7055753745584437/3645442365', // Replace with your actual banner ad unit ID
-          position: AdMob.AD_POSITION.BOTTOM_CENTER, // Or TOP_CENTER, etc.
-          // Optional: size: AdMob.AD_SIZE.BANNER, // Or other sizes like FULL_BANNER, LARGE_BANNER, etc.
-          //margin: 0,           is // set a margin from the bottom
+        // *** Añade Event Listeners aquí para ver lo que sucede ***
+        AdMob.addListener('onAdLoaded', (rewardItem) => {
+          console.log('AdMob: Anuncio cargado correctamente!', rewardItem);
+          setAdLoaded(true);
+          setAdError(null); // Limpia cualquier error anterior
         });
-        setAdLoaded(true);
+
+        AdMob.addListener('onAdFailedToLoad', (error) => {
+          console.error('AdMob: Falló la carga del anuncio!', error);
+          setAdLoaded(false);
+          setAdError(error); // Guarda el error para mostrarlo si es necesario
+        });
+
+        AdMob.addListener('onAdFailedToShow', (error) => {
+          console.error('AdMob: Falló al mostrar el anuncio!', error);
+          setAdLoaded(false);
+          setAdError(error);
+        });
+
+        console.log('AdMob: Intentando mostrar el banner...');
+        // Prepara y muestra el banner ad
+        await AdMob.showBanner({
+          adId: 'ca-app-pub-7055753745584437/3645442365', // Tu ID de anuncio real
+          position: AdMob.AD_POSITION.BOTTOM_CENTER,
+        });
+
+        // NOTA: setAdLoaded(true) se hará dentro del listener 'onAdLoaded'
 
       } catch (error) {
-        console.error('Error initializing or showing AdMob banner:', error);
+        console.error('AdMob: Error en la inicialización o al intentar mostrar el banner (nivel de try-catch):', error);
+        setAdError(error);
       }
     };
 
-    if (window.Capacitor) { // Ensure Capacitor is available (i.e., running on a native platform)
+    if (window.Capacitor) { // Asegura que Capacitor esté disponible (i.e., ejecutándose en una plataforma nativa)
       initializeAdMob();
+    } else {
+      console.warn('AdMob: Capacitor no está disponible. ¿Ejecutando en navegador web?');
     }
 
     return () => {
-      // Clean up: hide and remove the banner when the component unmounts
+      // Limpieza: ocultar y eliminar el banner cuando el componente se desmonte
       if (window.Capacitor && adLoaded) {
         AdMob.hideBanner();
-        // You might want to also remove the banner if it's no longer needed
-        // AdMob.removeBanner();
+        AdMob.removeAllListeners(); // Importante para evitar fugas de memoria
       }
     };
-  }, [adLoaded]);
+  }, []); // El array de dependencias vacío asegura que se ejecute solo una vez al montar
 
   return (
     <div style={{ textAlign: 'center', marginTop: '20px' }}>
-      {/* You can add a placeholder or loading indicator here */}
-      {adLoaded ? <p>Ad Banner (Native)</p> : <p>Loading Ad...</p>}
+      {adLoaded ? <p>Ad Banner (Nativo) - ¡Cargado!</p> : <p>Cargando Anuncio...</p>}
+      {adError && (
+        <p style={{ color: 'red' }}>Error del Anuncio: {adError.message || JSON.stringify(adError)}</p>
+      )}
     </div>
   );
 };
