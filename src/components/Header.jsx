@@ -6,6 +6,7 @@ import { FaFeather, FaSpinner } from "react-icons/fa";
 import PointsDisplay from "../components/PointsDisplay";
 import useOnlineStatus from "../components/useOnlineStatus"; // Asumo que ya tienes este hook
 import useAuthStatus from "../components/useAuthStatus"; // ¡Importa el nuevo hook!
+import ThemeToggleButton from "./ThemeToggleButton";
 
 const Header = memo(() => {
   const { user, clientData, bebasNeueClass } = useContext(AppClientContext);
@@ -22,7 +23,8 @@ const Header = memo(() => {
   // 2. Si el usuario está logueado, necesitamos también clientData.
   // 3. Si no está logueado, no necesitamos clientData.
   useEffect(() => {
-    if (isLoggedIn !== null) { // Solo proceder si el estado de autenticación ya se ha verificado
+    if (isLoggedIn !== null) {
+      // Solo proceder si el estado de autenticación ya se ha verificado
       if (isLoggedIn) {
         // Si está logueado, esperamos que clientData esté cargado
         if (clientData !== null && clientData !== undefined) {
@@ -42,7 +44,8 @@ const Header = memo(() => {
 
     // Un pequeño retardo inicial para asegurar que la UI no parpadee si la carga es muy rápida
     const timer = setTimeout(() => {
-      if (isUiLoading) { // Solo si aún está en cargando después de 500ms
+      if (isUiLoading) {
+        // Solo si aún está en cargando después de 500ms
         setIsUiLoading(false);
       }
     }, 500);
@@ -68,7 +71,10 @@ const Header = memo(() => {
     else if (isLoggedIn && user && clientData?.id) {
       return (
         <div className="flex items-center space-x-2 cursor-pointer h-10">
-          <div className="flex items-center" onClick={() => router.push("/feathers")}>
+          <div
+            className="flex items-center"
+            onClick={() => router.push("/feathers")}
+          >
             <PointsDisplay />
             <div className="avatar bg-yellow-500 rounded-full flex items-center justify-center shadow-lg p-2">
               <FaFeather className="text-white" />
@@ -91,20 +97,20 @@ const Header = memo(() => {
     else {
       return (
         <div className="md:block space-x-2 h-10">
+          {!isReliablyOnline && (
+            <span className="text-gray italic bold">Offline</span>
+          )}
 
-            {!isReliablyOnline && (
-                <span className="text-gray italic bold">Offline</span>
-              )}
-
-              <GoogleLogin />
-              <button
-                className="inline-block bg-white text-black p-2 rounded hover:bg-gray-600 transition
+          <GoogleLogin />
+          <button
+            className="inline-block bg-white text-black p-2 rounded hover:bg-gray-600 transition
                   disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
-                  " disabled={!isReliablyOnline ? true : false}
-                onClick={() => router.push("/signin")}
-              >
-                Sign in
-              </button>
+                  "
+            disabled={!isReliablyOnline ? true : false}
+            onClick={() => router.push("/signin")}
+          >
+            Sign in
+          </button>
         </div>
       );
     }
@@ -112,7 +118,10 @@ const Header = memo(() => {
 
   return (
     <header className="header-container">
-      <div id="header" className="bg-primary text-white p-2 w-full flex flex-wrap justify-between items-center">
+      <div
+        id="header"
+        className="bg-primary text-white p-2 w-full flex flex-wrap items-center"
+      >
         {/* Logo */}
         <div
           id="logoheader"
@@ -129,11 +138,12 @@ const Header = memo(() => {
             Owl<span className="text-secondary">do</span>Task
           </span>
         </div>
-
+        <div className="flex-1"></div>
         {/* Sección de autenticación */}
         <div id="loginheader" className="flex items-center">
           {renderAuthSection()}
         </div>
+        <ThemeToggleButton />
       </div>
     </header>
   );

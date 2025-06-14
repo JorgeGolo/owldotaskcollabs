@@ -18,7 +18,7 @@ const Layout = ({ children }) => {
       <div className="flex flex-col md:flex-row flex-1">
         <Sidebar />
         <main className="flex-1 flex flex-col items-center">
-        <ScrollToTop />
+          <ScrollToTop />
           {children}
         </main>
       </div>
