@@ -31,19 +31,32 @@ const games = () => {
             <Breadcrumb segments={breadcrumbSegments} />
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 <Link href="/games/alphabetsoup"
-                    className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition"
+                    className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition
+                    dark:bg-dark-4 "
                     onClick={() => handleGameClickAndTrack('Alphabet Soup', '/games/alphabetsoup')} // Llama a la nueva función
                 >
                     Alphabet Soup
                 </Link>
                 {/* Repite este patrón para los otros enlaces si quieres rastrearlos también */}
-                <Link href="/games/alphabetsoup" className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition">
+                <Link href="/games/alphabetsoup"
+                    className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition
+                    dark:bg-dark-4 "
+                    onClick={() => handleGameClickAndTrack('Alphabet Soup', '/games/alphabetsoup')} // Llama a la nueva función
+                >
                     Alphabet Soup
                 </Link>
-                <Link href="/games/alphabetsoup" className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition">
+                <Link href="/games/alphabetsoup"
+                    className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition
+                    dark:bg-dark-4 "
+                    onClick={() => handleGameClickAndTrack('Alphabet Soup', '/games/alphabetsoup')} // Llama a la nueva función
+                >                    
                     Alphabet Soup
                 </Link>
-                <Link href="/games/alphabetsoup" className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition">
+                <Link href="/games/alphabetsoup"
+                    className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition
+                    dark:bg-dark-4 "
+                    onClick={() => handleGameClickAndTrack('Alphabet Soup', '/games/alphabetsoup')} // Llama a la nueva función
+                >
                     Alphabet Soup
                 </Link>
             </div>
