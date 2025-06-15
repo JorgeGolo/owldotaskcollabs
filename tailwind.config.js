@@ -9,22 +9,23 @@ export default {
   theme: {
     extend: {
      colors: {
-        primary: '#1E2A47',  // Fondo principal (cabecera, logo)
-        secondary: '#FF8C00',  // Color complementario (detalles secundarios, acentos)
-        accent: '#F4A261',  // Un tono más suave para complementar (puede ser usado para hover, botones, etc.)
-        neutral: '#D3D3D3',  // Color neutro para textos o fondos secundarios
-        dark: '#2C3E50',  // Un tono más oscuro para contornos o sombreado
-        light: '#F0F0F0',  // Color claro para fondos secundarios o texto de contraste
-        muted: '#B0BEC5',  // Color de menor énfasis para textos menos importantes
-        graycustom: '#444444', // Nuevo color personalizado
+        primary: '#1E2A47',  
+        secondary: '#FF8C00',  
+        accent: '#F4A261',  
+        neutral: '#D3D3D3',  
+        dark: '#2C3E50',  
+        light: '#F0F0F0',  
+        muted: '#B0BEC5',  
+        graycustom: '#444444', 
+        // light colourss
         'light-1': '#f4f4f4',
-        // dark mode
+        'light-blue': '#b3d0ff', 
+        // dark colours
         'dark-1': '#0f172a', 
         'dark-2': '#1f2937', 
         'dark-3': '#6e6e6e', 
         'dark-4': '#4b5563', 
         'dark-5': '#4b5563', 
-        'light-blue': '#b3d0ff', // Color azul claro para el fondo
       },
      
       fontFamily: {
