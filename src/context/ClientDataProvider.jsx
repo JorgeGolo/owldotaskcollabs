@@ -301,53 +301,58 @@ const saveDataToApi = async (endpoint, data) => {
   }, [CURRENT_APP_VERSION]);
 
   // 🆕 Función mejorada para cargar categorías de iconos con versionado
-  const loadIconCategories = useCallback(async () => {
-    const storedIconCategories = localStorage.getItem('iconCategories');
-    const storedVersion = localStorage.getItem('iconCategoriesVersion');
-    
-    if (storedIconCategories && storedVersion === CURRENT_APP_VERSION) {
-      try {
-        const parsedCategories = JSON.parse(storedIconCategories);
-        setIconCategories(parsedCategories);
-        //console.log(`✅ Categorías de iconos cargadas desde localStorage (App v${CURRENT_APP_VERSION}).`);
-        return;
-      } catch (error) {
-        console.warn("⚠️ Error parsing icon categories from localStorage:", error);
-        localStorage.removeItem('iconCategories');
-        localStorage.removeItem('iconCategoriesVersion');
-      }
-    } else if (storedVersion && storedVersion !== CURRENT_APP_VERSION) {
-      //console.log(`🔄 Versión de iconos obsoleta (${storedVersion} → ${CURRENT_APP_VERSION}). Actualizando desde API...`);
-    }
-
+ const loadIconCategories = useCallback(async () => {
+  const storedIconCategories = localStorage.getItem('iconCategories');
+  const storedVersion = localStorage.getItem('iconCategoriesVersion');
+       
+  if (storedIconCategories && storedVersion === CURRENT_APP_VERSION) {
     try {
-      //console.log("🔍 Fetching icon categories from the backend...");
-      const response = await fetch(`https://8txnxmkveg.us-east-1.awsapprunner.com/api/getCategoryIcons`);
-      const data = await response.json();
-      if (response.ok) {
-        if (data && Array.isArray(data) && data.length > 0) {
-          setIconCategories(data);
-          localStorage.setItem('iconCategories', JSON.stringify(data));
-          localStorage.setItem('iconCategoriesVersion', CURRENT_APP_VERSION);
-          //console.log(`💾 Categorías de iconos guardadas en localStorage (App v${CURRENT_APP_VERSION}).`);
-        } else {
-          setIconCategories([]);
-          localStorage.removeItem('iconCategories');
-          localStorage.removeItem('iconCategoriesVersion');
-        }
-      } else {
-        console.warn("⚠️ No icon categories found.");
-        setIconCategories([]);
-        localStorage.removeItem('iconCategories');
-        localStorage.removeItem('iconCategoriesVersion');
-      }
+      const parsedCategories = JSON.parse(storedIconCategories);
+      setIconCategories(parsedCategories);
+      //console.log(`✅ Categorías de iconos cargadas desde localStorage (App v${CURRENT_APP_VERSION}).`);
+      return;
     } catch (error) {
-      console.error("❌ Error fetching icon categories:", error);
+      console.warn("⚠️ Error parsing icon categories from localStorage:", error);
+      localStorage.removeItem('iconCategories');
+      localStorage.removeItem('iconCategoriesVersion');
+    }
+  } else if (storedVersion && storedVersion !== CURRENT_APP_VERSION) {
+    //console.log(`🔄 Versión de iconos obsoleta (${storedVersion} → ${CURRENT_APP_VERSION}). Actualizando desde API...`);
+  }
+
+  try {
+    //console.log("🔍 Fetching icon categories from the backend...");
+    const response = await fetch(`https://8txnxmkveg.us-east-1.awsapprunner.com/api/getCategoryIcons`);
+    
+    // Verificar si la respuesta es exitosa
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    
+    if (data && Array.isArray(data) && data.length > 0) {
+      setIconCategories(data);
+      localStorage.setItem('iconCategories', JSON.stringify(data));
+      localStorage.setItem('iconCategoriesVersion', CURRENT_APP_VERSION);
+      //console.log(`💾 Categorías de iconos guardadas en localStorage (App v${CURRENT_APP_VERSION}).`);
+    } else {
+      console.warn("⚠️ No icon categories found.");
       setIconCategories([]);
       localStorage.removeItem('iconCategories');
       localStorage.removeItem('iconCategoriesVersion');
     }
-  }, [CURRENT_APP_VERSION]);
+  } catch (error) {
+    // Manejo silencioso del error - registra pero no muestra overlay
+    console.error("❌ Error fetching icon categories:", error);
+    setIconCategories([]);
+    localStorage.removeItem('iconCategories');
+    localStorage.removeItem('iconCategoriesVersion');
+    
+    // Opcional: establecer un estado de error para mostrar UI alternativa
+    // setHasConnectionError(true);
+  }
+}, [CURRENT_APP_VERSION]);
 
   useEffect(() => {
     loadGlobalLevels();

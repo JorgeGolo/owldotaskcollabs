@@ -46,12 +46,12 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
         <Head>
           <title>Owldotask - Learn, Play, and Earn</title>
           {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-          <meta name="description" content="Owldotask - Learn, Play, and Earn with our quizzes. Enjoy an editaciotal platfomr with a game-like experience." />
+          <meta name="description" content="Owldotask - Learn, Play, and Earn with our games and quizzes. Enjoy a platform with a game-like experiencem, and even gain rewards. Play to earn!" />
         </Head>
         <div className="p-4 max-w-5xl">
-          <div className="mb-6 p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+          <div className="mb-6 p-4 md:p-6 bg-white dark:bg-dark-2 rounded-lg shadow hover:shadow-lg transition">
             <h1 className="text-2xl font-bold  mb-6">
-              <span className="text-[#214396]">Owldotask</span> – Learn, Play, and Earn
+              <span className="text-[#214396] dark:text-light-blue">Owldotask</span> – Learn, Play, and Earn
             </h1>
 
           <p className="mb-4">
@@ -66,7 +66,7 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
 
           <CategoryMap quizzes={quizzes} limit={12} />
 
-           <Link href="/quizzes" className="text-blue-500 hover:underline">
+           <Link href="/quizzes" className="text-blue-500 hover:underline dark:text-light-blue">
               See all quizzes and categories
             </Link>
 

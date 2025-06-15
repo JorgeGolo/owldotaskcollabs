@@ -19,7 +19,7 @@ const TechGrid = () => {
   return (
     <motion.div
       ref={ref}
-      className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-6 mt-6 justify-items-center py-4"
+      className="p-2 rounded dark:bg-light-1 grid grid-cols-4 sm:grid-cols-4 md:grid-cols-8 gap-4 mt-6 justify-items-center"
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.8, ease: "easeOut" }}
@@ -27,7 +27,7 @@ const TechGrid = () => {
       {technologies.map((tech) => (
         <div
           key={tech.name}
-          className="flex flex-col items-center hover:scale-110 transition-transform"
+          className=" flex flex-col items-center hover:scale-110 transition-transform"
         >
           <img
             src={`/assets/iconstec/${tech.src}`}
