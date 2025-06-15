@@ -60,7 +60,7 @@ export default function Document() {
         {/*<link rel="manifest" href="/site.webmanifest" />*/}
         <link rel="manifest" href="/manifest.json" />
       </Head>
-      <body>
+      <body className="bg-light-1 dark:bg-dark-1">
         {/* Google Tag Manager (noscript)*/}
         <noscript>
           <iframe

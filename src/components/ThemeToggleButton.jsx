@@ -9,10 +9,10 @@ const ThemeToggleButton = () => {
   return (
     <button
       onClick={handleToggleTheme}
-      className="flex items-center justify-center w-10 h-10 rounded-md bg-gray-200 dark:bg-gray-800 transition-colors duration-300 ml-2"
+      className="flex items-center justify-center w-10 h-10 rounded-md bg-gray-200 dark:bg-dark-4 transition-colors duration-300 ml-2"
       aria-label="Toggle theme"
     >
-      {theme === "light" ? <FaSun /> : <FaMoon />}
+      {theme === "light" ? <FaMoon className="text-dark-1" /> : <FaSun />}
     </button>
   );
 };

@@ -120,7 +120,8 @@ const Header = memo(() => {
     <header className="header-container">
       <div
         id="header"
-        className="bg-primary text-white p-2 w-full flex flex-wrap items-center"
+        className="dark:bg-dark-1 text-white p-2 w-full flex flex-wrap items-center
+        "
       >
         {/* Logo */}
         <div

@@ -21,7 +21,7 @@ const menuItems = [
 
 const Sidebar = memo(() => {
   return (
-    <div id="leftcolumn" className="pb-0 w-full p-4 md:w-sidewidth md:border-r h-auto max-h-fit overflow-y-auto">
+    <div id="leftcolumn" className="pb-0 w-full p-4 md:w-sidewidth h-auto max-h-fit overflow-y-auto">
       <ul className="flex flex-row md:flex-col md:ml-4 overflow-x-auto whitespace-nowrap">
         {menuItems.map((item, index) => (
           <li key={index} className="md:mb-2 inline-block md:inline">
