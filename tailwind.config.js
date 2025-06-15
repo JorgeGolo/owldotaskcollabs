@@ -17,7 +17,7 @@ export default {
         light: '#F0F0F0',  
         muted: '#B0BEC5',  
         graycustom: '#444444', 
-        // light colourss
+        // light colours
         'light-1': '#f4f4f4',
         'light-blue': '#b3d0ff', 
         // dark colours
