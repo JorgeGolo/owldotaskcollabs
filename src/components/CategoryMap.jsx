@@ -41,11 +41,15 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
     >
       <Link
         href={`/quizzes/${encodeURIComponent(category)}`}
-        className="p-2 md:p-4 bg-blue-50 text-gray text-center rounded-lg shadow hover:bg-yellow-100 transition flex flex-col items-center"
+        className="p-2 md:p-4 bg-blue-50 text-gray text-center rounded-lg shadow hover:bg-yellow-100 transition flex flex-col items-center
+        dark:bg-strong-blue dark:hover:bg-[#ef7e44]
+        "
       >
         {IconComponent && <IconComponent size={32} color={iconcolor} />}
         <span className="mt-2 text-ssm md:text-sm font-semibold">{categoryName}</span>
-        <div className="mt-1 text-[11px] text-gray-600">
+        <div className="mt-1 text-[11px] text-gray-600
+        dark:text-white
+        ">
           <p>{quizCount} quizzes</p>
           <p>{questionCount} questions</p>
         </div>

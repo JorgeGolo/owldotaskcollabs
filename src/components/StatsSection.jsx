@@ -9,8 +9,6 @@ const StatsSection = ({ feathersCount, quizzesCount, questionsCount }) => {
 
   ];
 
-
-
   
   return (
 
