@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import { React, memo } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-=======
 import { React, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
->>>>>>> main
 ///import { Link } from "react-router-dom";
 import Link from 'next/link';
 
@@ -14,15 +9,6 @@ import {
   faCog,
   faGamepad,
   faFeather,
-<<<<<<< HEAD
-} from "@fortawesome/free-solid-svg-icons";
-
-const menuItems = [
-  { icon: faTasks, label: "Quizzes", path: "/quizzes" },
-  { icon: faGamepad, label: "Games", path: "/games" },
-  { icon: faFeather, label: "Feathers", path: "/feathers" },
-  { icon: faUserCircle, label: "You", path: "/profile" },
-=======
 } from '@fortawesome/free-solid-svg-icons';
 
 const menuItems = [
@@ -30,7 +16,6 @@ const menuItems = [
   { icon: faGamepad, label: 'Games', path: '/games' },
   { icon: faFeather, label: 'Feathers', path: '/feathers' },
   { icon: faUserCircle, label: 'You', path: '/profile' },
->>>>>>> main
 ];
 
 const Sidebar = memo(() => {
@@ -50,11 +35,7 @@ const Sidebar = memo(() => {
                       icon={item.icon}
                       className="inline w-16 h-16"
                     />
-<<<<<<< HEAD
-                  )}{" "}
-=======
                   )}{' '}
->>>>>>> main
                   {item.label}
                 </span>
                 <ul className="hidden group-hover:block absolute z-10 bg-white shadow-lg md:static md:shadow-none md:ml-4">
@@ -72,11 +53,7 @@ const Sidebar = memo(() => {
                             icon={child.icon}
                             className="inline w-16 h-16"
                           />
-<<<<<<< HEAD
-                        )}{" "}
-=======
                         )}{' '}
->>>>>>> main
                         {child.label}
                       </Link>
                     </li>
@@ -91,11 +68,7 @@ const Sidebar = memo(() => {
                 <FontAwesomeIcon
                   icon={item.icon}
                   className="inline w-16 h-16"
-<<<<<<< HEAD
-                />{" "}
-=======
                 />{' '}
->>>>>>> main
                 {item.label}
               </Link>
             )}

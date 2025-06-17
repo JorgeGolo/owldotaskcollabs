@@ -2,20 +2,6 @@ import { motion, useInView } from 'framer-motion';
 import React, { useRef } from 'react';
 
 const technologies = [
-<<<<<<< HEAD
-  { name: "React", src: "react.svg", linktitle: "React icon" },
-  { name: "Laravel", src: "laravel.svg", linktitle: "Laravel icon" },
-  { name: "Firebase", src: "firebase.svg", linktitle: "Firebase icon" },
-  {
-    name: "AWS",
-    src: "amazonwebservices.svg",
-    linktitle: "Amazon Web Services icon",
-  },
-  { name: "Tailwind", src: "tailwindcss.svg", linktitle: "Tailwind CSS icon" },
-  { name: "Next.js", src: "nextdotjs.svg", linktitle: "Next.js icon" },
-  { name: "GitHub", src: "github.svg", linktitle: "Github icon" },
-  { name: "Docker", src: "docker.svg", linktitle: "Docker icon" },
-=======
   { name: 'React', src: 'react.svg', linktitle: 'React icon' },
   { name: 'Laravel', src: 'laravel.svg', linktitle: 'Laravel icon' },
   { name: 'Firebase', src: 'firebase.svg', linktitle: 'Firebase icon' },
@@ -28,7 +14,6 @@ const technologies = [
   { name: 'Next.js', src: 'nextdotjs.svg', linktitle: 'Next.js icon' },
   { name: 'GitHub', src: 'github.svg', linktitle: 'Github icon' },
   { name: 'Docker', src: 'docker.svg', linktitle: 'Docker icon' },
->>>>>>> main
 ];
 
 const TechGrid = () => {

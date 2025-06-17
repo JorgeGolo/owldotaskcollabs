@@ -2,11 +2,7 @@ import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import { FaFeather } from 'react-icons/fa';
 
-<<<<<<< HEAD
-Modal.setAppElement("#__next"); // o el ID que tenga tu elemento raíz
-=======
 Modal.setAppElement('#__next'); // o el ID que tenga tu elemento raíz
->>>>>>> main
 
 // Estilos del modal
 const modalStyles = {
@@ -19,21 +15,12 @@ const modalStyles = {
     width: '300px',
     height: 'auto',
     margin: 0,
-<<<<<<< HEAD
-    padding: "20px",
-    borderRadius: "10px 0 0 10px",
-    boxShadow: "-2px 0 5px rgba(0,0,0,0.1)",
-    animation:
-      "slideInFromRight 0.5s ease-out, fadeOut 0.5s ease-in 1.5s forwards",
-    backgroundColor: "#dcfce7",
-=======
     padding: '20px',
     borderRadius: '10px 0 0 10px',
     boxShadow: '-2px 0 5px rgba(0,0,0,0.1)',
     animation:
       'slideInFromRight 0.5s ease-out, fadeOut 0.5s ease-in 1.5s forwards',
     backgroundColor: '#dcfce7',
->>>>>>> main
   },
   overlay: {
     backgroundColor: 'transparent',

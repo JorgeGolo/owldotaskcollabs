@@ -2,13 +2,6 @@ import React from "react";
 
 const cookies = () => {
   return (
-<<<<<<< HEAD
-    <div className="mt-4 p-4 max-w-4xl mx-auto bg-white dark:bg-dark-2 shadow-md rounded-lg cookiescontent">
-      <h1 className="pb-2 border-b-2">Cookie Policy</h1>
-
-      <h2>Introduction</h2>
-      <p>
-=======
     <div className="mt-4 p-4 max-w-4xl mx-auto bg-white shadow-md rounded-lg cookiescontent">
       <h1 className="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b-2 border-gray-300">
         OwldoTask Cookie Policy
@@ -18,7 +11,6 @@ const cookies = () => {
         Introduction
       </h2>
       <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         This Cookie Policy explains how OwldoTask ("we," "us," or "our") uses
         cookies and similar technologies on our website. This policy provides
         you with clear and comprehensive information about the cookies we use
@@ -27,15 +19,10 @@ const cookies = () => {
         laws.
       </p>
 
-<<<<<<< HEAD
-      <h2>What Are Cookies?</h2>
-      <p>
-=======
       <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
         What Are Cookies?
       </h2>
       <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         Cookies are small text files that are stored on your device (computer,
         tablet, or mobile) when you visit our website. They allow us to
         recognize your device and remember certain information about your visit,
@@ -44,12 +31,6 @@ const cookies = () => {
         information to website owners.
       </p>
 
-<<<<<<< HEAD
-      <h2>Types of Cookies We Use</h2>
-
-      <h3>1. Essential Cookies</h3>
-      <p>
-=======
       <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
         Types of Cookies We Use
       </h2>
@@ -58,7 +39,6 @@ const cookies = () => {
         1. Essential Cookies
       </h3>
       <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         These cookies are necessary for the functioning of our website and
         cannot be switched off in our systems. They are usually only set in
         response to actions made by you which amount to a request for services,
@@ -67,15 +47,8 @@ const cookies = () => {
         cookies, but some parts of the site will not then work.
       </p>
 
-<<<<<<< HEAD
       <h3>2. Performance Cookies</h3>
       <p>
-=======
-      <h3 className="text-xl font-semibold text-gray-700 mt-4 mb-3">
-        2. Performance Cookies
-      </h3>
-      <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         These cookies allow us to count visits and traffic sources so we can
         measure and improve the performance of our site. They help us to know
         which pages are the most and least popular and see how visitors move
@@ -84,51 +57,29 @@ const cookies = () => {
         when you have visited our site.
       </p>
 
-<<<<<<< HEAD
       <h3>3. Functionality Cookies</h3>
       <p>
-=======
-      <h3 className="text-xl font-semibold text-gray-700 mt-4 mb-3">
-        3. Functionality Cookies
-      </h3>
-      <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         These cookies enable the website to provide enhanced functionality and
         personalization. They may be set by us or by third-party providers whose
         services we have added to our pages. If you do not allow these cookies,
         then some or all of these services may not function properly.
       </p>
 
-<<<<<<< HEAD
       <p>
-=======
-      <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         Our site uses Firebase Authentication to enable login and registration
         via Google. This process requires the installation of cookies managed by
         Google LLC. If the user does not provide consent for the use of
         third-party cookies, login or registration via Google will not be
         available.
       </p>
-<<<<<<< HEAD
       <p>
-=======
-      <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         The cookies used by Google include, among others: SID, HSID, SSID,
         SAPISID, APISID, NID, AEC, and secure variants such as _Secure-1PAPISID,
         etc. You can view Google’s cookie policy here.
       </p>
 
-<<<<<<< HEAD
       <h3>4. Targeting/Advertising Cookies</h3>
       <p>
-=======
-      <h3 className="text-xl font-semibold text-gray-700 mt-4 mb-3">
-        4. Targeting/Advertising Cookies
-      </h3>
-      <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         These cookies may be set through our site by our advertising partners
         (such as Google AdSense). They may be used by those companies to build a
         profile of your interests and show you relevant adverts on other sites.
@@ -137,21 +88,11 @@ const cookies = () => {
         allow these cookies, you will experience less targeted advertising.
       </p>
 
-<<<<<<< HEAD
       <h2>Specific Cookies Used on Our Website</h2>
 
       <div className="cookies-grid-container">
         {/* Encabezados */}
         <div className="grid-header dark:bg-dark-1 p-2 border-b-2">
-=======
-      <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
-        Specific Cookies Used on Our Website
-      </h2>
-
-      <div className="cookies-grid-container">
-        {/* Encabezados */}
-        <div className="grid-header bg-gray-100">
->>>>>>> main
           <div className="grid-cell font-semibold">Cookie Name</div>
           <div className="grid-cell font-semibold">Provider</div>
           <div className="grid-cell font-semibold">Purpose</div>
@@ -161,11 +102,7 @@ const cookies = () => {
 
         {/* Filas de datos */}
 
-<<<<<<< HEAD
         <div class="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div class="grid-row bg-gray-50">
->>>>>>> main
           <div class="grid-cell" data-label="Cookie Name:">
             owldo_consent
           </div>
@@ -183,11 +120,7 @@ const cookies = () => {
           </div>
         </div>
 
-<<<<<<< HEAD
         <div class="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div class="grid-row bg-gray-50">
->>>>>>> main
           <div class="grid-cell" data-label="Cookie Name:">
             _ga
           </div>
@@ -204,11 +137,7 @@ const cookies = () => {
             2 years
           </div>
         </div>
-<<<<<<< HEAD
         <div class="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div class="grid-row bg-gray-50">
->>>>>>> main
           <div class="grid-cell" data-label="Cookie Name:">
             _ga_[ID]
           </div>
@@ -225,11 +154,7 @@ const cookies = () => {
             2 years
           </div>
         </div>
-<<<<<<< HEAD
         <div class="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div class="grid-row bg-gray-50">
->>>>>>> main
           <div class="grid-cell" data-label="Cookie Name:">
             _gid
           </div>
@@ -246,11 +171,7 @@ const cookies = () => {
             24 hours
           </div>
         </div>
-<<<<<<< HEAD
         <div class="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div class="grid-row bg-gray-50">
->>>>>>> main
           <div class="grid-cell" data-label="Cookie Name:">
             _gat
           </div>
@@ -268,11 +189,7 @@ const cookies = () => {
           </div>
         </div>
 
-<<<<<<< HEAD
         <div class="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div class="grid-row bg-gray-50">
->>>>>>> main
           <div class="grid-cell" data-label="Cookie Name:">
             _dc_gtm_[ID]
           </div>
@@ -290,11 +207,7 @@ const cookies = () => {
           </div>
         </div>
 
-<<<<<<< HEAD
         <div class="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div class="grid-row bg-gray-50">
->>>>>>> main
           <div class="grid-cell" data-label="Cookie Name:">
             __gads, __gac_[ID]
           </div>
@@ -311,11 +224,7 @@ const cookies = () => {
             Up to 13 months
           </div>
         </div>
-<<<<<<< HEAD
         <div class="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div class="grid-row bg-gray-50">
->>>>>>> main
           <div class="grid-cell" data-label="Cookie Name:">
             IDE
           </div>
@@ -332,11 +241,7 @@ const cookies = () => {
             13 months
           </div>
         </div>
-<<<<<<< HEAD
         <div class="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div class="grid-row bg-gray-50">
->>>>>>> main
           <div class="grid-cell" data-label="Cookie Name:">
             DSID, FLC, AID, TAID
           </div>
@@ -354,11 +259,7 @@ const cookies = () => {
           </div>
         </div>
 
-<<<<<<< HEAD
         <div className="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div className="grid-row bg-gray-50">
->>>>>>> main
           <div className="grid-cell" data-label="Cookie Name:">
             SID, HSID, SSID, SAPISID, APISID
           </div>
@@ -376,11 +277,7 @@ const cookies = () => {
           </div>
         </div>
 
-<<<<<<< HEAD
         <div className="grid-row p-2 border-b-2 dark:bg-dark-1">
-=======
-        <div className="grid-row bg-gray-50">
->>>>>>> main
           <div className="grid-cell" data-label="Cookie Name:">
             _Secure-*, AEC, NID
           </div>
@@ -399,23 +296,12 @@ const cookies = () => {
         </div>
       </div>
 
-<<<<<<< HEAD
       <h2>Third-Party Cookies</h2>
       <p>
         Our website includes content and services from third parties that may
         place cookies on your device. These include:
       </p>
       <ul className="list-disc pl-8 mb-6">
-=======
-      <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
-        Third-Party Cookies
-      </h2>
-      <p className="text-gray-700 mb-3 leading-relaxed">
-        Our website includes content and services from third parties that may
-        place cookies on your device. These include:
-      </p>
-      <ul className="list-disc pl-8 mb-6 text-gray-700">
->>>>>>> main
         <li className="mb-2">
           Google Firebase Authentication: Authentication and user management
           services
@@ -423,52 +309,27 @@ const cookies = () => {
         <li className="mb-2">Google Analytics: Web analytics service</li>
         <li className="mb-2">Google Adsense: Advertising services</li>
       </ul>
-<<<<<<< HEAD
       <p>
-=======
-      <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         Please note that we do not have control over cookies set by these third
         parties. We recommend reviewing their respective privacy and cookie
         policies for more information.
       </p>
 
-<<<<<<< HEAD
       <h2>Cookie Management</h2>
 
       <h3>Your Consent</h3>
       <p>
-=======
-      <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
-        Cookie Management
-      </h2>
-
-      <h3 className="text-xl font-semibold text-gray-700 mt-4 mb-3">
-        Your Consent
-      </h3>
-      <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         When you first visit our website, you will be presented with a cookie
         banner giving you the option to accept or decline non-essential cookies.
         You can change your preferences at any time by clicking on the "Cookie
         Preferences" link at the bottom of our website.
       </p>
 
-<<<<<<< HEAD
       <h3>Browser Settings</h3>
       <p>
         Most web browsers allow some control of cookies through browser
         settings. To find out more about cookies, including how to see what
         cookies have been set and how to manage and delete them, visit{" "}
-=======
-      <h3 className="text-xl font-semibold text-gray-700 mt-4 mb-3">
-        Browser Settings
-      </h3>
-      <p className="text-gray-700 mb-3 leading-relaxed">
-        Most web browsers allow some control of cookies through browser
-        settings. To find out more about cookies, including how to see what
-        cookies have been set and how to manage and delete them, visit{' '}
->>>>>>> main
         <a
           href="http://www.allaboutcookies.org"
           className="text-blue-600 hover:underline"
@@ -477,19 +338,11 @@ const cookies = () => {
         </a>
         .
       </p>
-<<<<<<< HEAD
       <p>
         You can prevent the setting of cookies by adjusting the settings on your
         browser:
       </p>
       <ul className="list-disc pl-8 mb-6">
-=======
-      <p className="text-gray-700 mb-3 leading-relaxed">
-        You can prevent the setting of cookies by adjusting the settings on your
-        browser:
-      </p>
-      <ul className="list-disc pl-8 mb-6 text-gray-700">
->>>>>>> main
         <li className="mb-2">
           Chrome: Settings &gt; Privacy and security &gt; Cookies and other site
           data
@@ -506,24 +359,13 @@ const cookies = () => {
           Cookies and site data
         </li>
       </ul>
-<<<<<<< HEAD
       <p>
-=======
-      <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         Please note that by disabling certain cookies, you may not be able to
         use all the features of our website.
       </p>
 
-<<<<<<< HEAD
       <h2>Ad-Blocker Detection</h2>
       <p>
-=======
-      <h2 className="hidden text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
-        Ad-Blocker Detection
-      </h2>
-      <p className="hidden text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         Our website uses technology to detect if you are using an ad-blocker.
         This detection is necessary to inform authenticated users about our
         advertising-supported business model. The ad-blocker detection does not
@@ -531,22 +373,14 @@ const cookies = () => {
         being used.
       </p>
 
-<<<<<<< HEAD
       <h2>Updates to This Cookie Policy</h2>
       <p>
-=======
-      <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
-        Updates to This Cookie Policy
-      </h2>
-      <p className="text-gray-700 mb-6 leading-relaxed">
->>>>>>> main
         We may update this Cookie Policy from time to time to reflect changes in
         technology, regulation, or our business practices. Any changes will be
         posted on this page and, where appropriate, notified to you by email or
         a prominent notice on our website.
       </p>
 
-<<<<<<< HEAD
       <h2>Contact Us</h2>
       <p>
         If you have any questions about our use of cookies or this Cookie
@@ -557,20 +391,6 @@ const cookies = () => {
       </p>
 
       <p className="mb-6 italic">Last updated: 09-06-2025</p>
-=======
-      <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
-        Contact Us
-      </h2>
-      <p className="text-gray-700 mb-3 leading-relaxed">
-        If you have any questions about our use of cookies or this Cookie
-        Policy, please contact us at:
-      </p>
-      <p className="text-gray-700 mb-6 leading-relaxed">
-        Email: <strong>info@owldotask.com</strong>
-      </p>
-
-      <p className="text-gray-700 mb-6 italic">Last updated: 09-06-2025</p>
->>>>>>> main
     </div>
   );
 };

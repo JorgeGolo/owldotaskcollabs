@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import { React, useState, useEffect } from "react";
-import SwiperGallery from "../../components/SwiperGallery";
-import { motion } from "framer-motion";
-import Head from "next/head";
-import Link from "next/link";
-=======
 import { React, useState, useEffect } from 'react';
 import SwiperGallery from '../../components/SwiperGallery';
 import { motion } from 'framer-motion';
 import Head from 'next/head';
 import Link from 'next/link';
->>>>>>> main
 
 const about = () => {
   const [canonicalUrl, setCanonicalUrl] = useState('');
@@ -64,11 +56,7 @@ const about = () => {
             from the passion of a group of friends who wanted to create a
             platform that combines learning with fun and rewards. Our goal is to
             provide a space where users can test their knowledge, discover new
-<<<<<<< HEAD
-            topics, and earn rewards in the form of{" "}
-=======
             topics, and earn rewards in the form of{' '}
->>>>>>> main
             <span className="italic">feathers</span> for their achievements. We
             believe that learning should be an enjoyable experience, and we
             strive to make that a reality with every quiz and task we offer.
@@ -133,11 +121,7 @@ const about = () => {
               links in the footer.
             </li>
             <li>
-<<<<<<< HEAD
-              We hang out on Discord to chat with users and developers:{" "}
-=======
               We hang out on Discord to chat with users and developers:{' '}
->>>>>>> main
               <Link
                 href="https://discord.gg/ZkFUudxw"
                 className="text-blue-500 hover:underline"

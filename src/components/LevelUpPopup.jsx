@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import React, { useEffect } from "react";
-import Modal from "react-modal";
-import { FaFeather } from "react-icons/fa";
-
-Modal.setAppElement("#__next"); // o el ID que tenga tu elemento raíz
-=======
 import React, { useEffect } from 'react';
 import Modal from 'react-modal';
 import { FaFeather } from 'react-icons/fa';
 
 Modal.setAppElement('#__next'); // o el ID que tenga tu elemento raíz
->>>>>>> main
 
 // Estilos del modal para LevelUpPopup
 // Estilos del modal para LevelUpPopup
@@ -31,17 +23,10 @@ const levelUpModalStyles = {
     zIndex: 1001,
 
     // --- Add these lines for vertical and horizontal centering of content ---
-<<<<<<< HEAD
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center", // Centers content vertically
-    alignItems: "center", // Centers content horizontally
-=======
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center', // Centers content vertically
     alignItems: 'center', // Centers content horizontally
->>>>>>> main
     // -------------------------------------------------------------------
   },
   overlay: {

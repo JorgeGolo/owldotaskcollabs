@@ -20,11 +20,7 @@ const useJwtToken = () => {
       return true;
     } catch (error) {
       console.error(
-<<<<<<< HEAD
-        "❌ Front-useJwtToken Error al verificar la expiración del token:",
-=======
         '❌ Front-useJwtToken Error al verificar la expiración del token:',
->>>>>>> main
         error,
       );
       return true;
@@ -36,22 +32,14 @@ const useJwtToken = () => {
     // Si no hay conexión, no se puede obtener un nuevo token
     if (!isReliablyOnline) {
       console.error(
-<<<<<<< HEAD
-        "❌ Front-useJwtToken No se puede obtener un nuevo token, no hay conexión a Internet",
-=======
         '❌ Front-useJwtToken No se puede obtener un nuevo token, no hay conexión a Internet',
->>>>>>> main
       );
       return null;
     }
 
     try {
       const res = await fetch(
-<<<<<<< HEAD
-        "https://8txnxmkveg.us-east-1.awsapprunner.com/api/request-token",
-=======
         'https://8txnxmkveg.us-east-1.awsapprunner.com/api/request-token',
->>>>>>> main
       );
       const data = await res.json();
 
@@ -94,11 +82,7 @@ const useJwtToken = () => {
 
         if (!token) {
           throw new Error(
-<<<<<<< HEAD
-            "Front-useJwtToken No se pudo obtener un token JWT válido",
-=======
             'Front-useJwtToken No se pudo obtener un token JWT válido',
->>>>>>> main
           );
         }
 
@@ -115,20 +99,12 @@ const useJwtToken = () => {
         // Si el token expiró y falla con 401, obtener uno nuevo
         if (response.status === 401) {
           console.log(
-<<<<<<< HEAD
-            "⚠️ Front-useJwtToken Token expirado, obteniendo uno nuevo...",
-=======
             '⚠️ Front-useJwtToken Token expirado, obteniendo uno nuevo...',
->>>>>>> main
           );
           const newToken = await getNewToken();
 
           if (newToken) {
-<<<<<<< HEAD
-            localStorage.setItem("jwt_token", newToken); // ✅ asegurarse de guardar el nuevo token
-=======
             localStorage.setItem('jwt_token', newToken); // ✅ asegurarse de guardar el nuevo token
->>>>>>> main
             headers.Authorization = `Bearer ${newToken}`;
             response = await fetch(url, {
               ...options,
@@ -136,22 +112,14 @@ const useJwtToken = () => {
             });
           } else {
             throw new Error(
-<<<<<<< HEAD
-              "Front-useJwtToken No se pudo obtener un nuevo token después de expiración",
-=======
               'Front-useJwtToken No se pudo obtener un nuevo token después de expiración',
->>>>>>> main
             );
           }
         }
 
         return response;
       } catch (error) {
-<<<<<<< HEAD
-        console.error("❌Front-useJwtToken Error en fetchWithToken:", error);
-=======
         console.error('❌Front-useJwtToken Error en fetchWithToken:', error);
->>>>>>> main
         throw error;
       }
     },

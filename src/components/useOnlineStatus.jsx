@@ -25,13 +25,8 @@ function useOnlineStatus() {
       //const intervalId = setInterval(testConnectivity, 5000); //  Prueba cada 5 segundos
 
       return () => {
-<<<<<<< HEAD
-        window.removeEventListener("online", handleOnline);
-        window.removeEventListener("offline", handleOffline);
-=======
         window.removeEventListener('online', handleOnline);
         window.removeEventListener('offline', handleOffline);
->>>>>>> main
         // clearInterval(intervalId);
       };
     }
@@ -41,19 +36,11 @@ function useOnlineStatus() {
   const testConnectivity = async () => {
     try {
       const response = await fetch(
-<<<<<<< HEAD
-        "https://8txnxmkveg.us-east-1.awsapprunner.com/health",
-        {
-          //  Cambia a una URL de tu API
-          method: "HEAD", //  Más eficiente que GET para solo verificar el estado
-          cache: "no-store", //  Asegura que no use la caché
-=======
         'https://8txnxmkveg.us-east-1.awsapprunner.com/health',
         {
           //  Cambia a una URL de tu API
           method: 'HEAD', //  Más eficiente que GET para solo verificar el estado
           cache: 'no-store', //  Asegura que no use la caché
->>>>>>> main
         },
       );
       setIsReliablyOnline(response.ok); //  Actualiza el estado de "confiable"

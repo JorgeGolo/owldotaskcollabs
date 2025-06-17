@@ -44,11 +44,7 @@ const AdMobBanner1 = () => {
         // NOTA: setAdLoaded(true) se hará dentro del listener 'onAdLoaded'
       } catch (error) {
         console.error(
-<<<<<<< HEAD
           "AdMob: Error en la inicialización o al intentar mostrar el banner (nivel de try-catch):",
-=======
-          'AdMob: Error en la inicialización o al intentar mostrar el banner (nivel de try-catch):',
->>>>>>> main
           error,
         );
         setAdError(error);
@@ -60,11 +56,7 @@ const AdMobBanner1 = () => {
       initializeAdMob();
     } else {
       console.warn(
-<<<<<<< HEAD
         "AdMob: Capacitor no está disponible. ¿Ejecutando en navegador web?",
-=======
-        'AdMob: Capacitor no está disponible. ¿Ejecutando en navegador web?',
->>>>>>> main
       );
     }
 
@@ -78,22 +70,14 @@ const AdMobBanner1 = () => {
   }, []); // El array de dependencias vacío asegura que se ejecute solo una vez al montar
 
   return (
-<<<<<<< HEAD
     <div style={{ textAlign: "center", marginTop: "20px" }}>
-=======
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
->>>>>>> main
       {adLoaded ? (
         <p>Ad Banner (Nativo) - ¡Cargado!</p>
       ) : (
         <p>Cargando Anuncio...</p>
       )}
       {adError && (
-<<<<<<< HEAD
         <p style={{ color: "red" }}>
-=======
-        <p style={{ color: 'red' }}>
->>>>>>> main
           Error del Anuncio: {adError.message || JSON.stringify(adError)}
         </p>
       )}

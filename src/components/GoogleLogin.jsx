@@ -1,32 +1,17 @@
-<<<<<<< HEAD
-import React, { useContext } from "react";
-=======
 import React, { useContext } from 'react';
->>>>>>> main
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithCredential,
   signOut,
-<<<<<<< HEAD
-} from "firebase/auth"; // CAMBIO: Importamos signInWithCredential
-import { app } from "../firebase";
-import { useRouter } from "next/router";
-import { AppClientContext } from "../context/ClientDataProvider";
-=======
 } from 'firebase/auth'; // CAMBIO: Importamos signInWithCredential
 import { app } from '../firebase';
 import { useRouter } from 'next/router';
 import { AppClientContext } from '../context/ClientDataProvider';
->>>>>>> main
 
 import useOnlineStatus from '../components/useOnlineStatus';
 
-<<<<<<< HEAD
-import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
-=======
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
->>>>>>> main
 
 const GoogleLogin = () => {
   const { isReliablyOnline } = useOnlineStatus();
@@ -49,11 +34,7 @@ const GoogleLogin = () => {
       if (!idToken) {
         // CAMBIO: Validamos si obtuvimos el idToken nativo
         console.error(
-<<<<<<< HEAD
-          "❌ No se pudo obtener el ID Token de Google desde el plugin.",
-=======
           '❌ No se pudo obtener el ID Token de Google desde el plugin.',
->>>>>>> main
         );
         return;
       }
@@ -70,11 +51,7 @@ const GoogleLogin = () => {
 
       if (!user || !user.email) {
         console.error(
-<<<<<<< HEAD
-          "❌ No se pudo obtener la información del usuario de Firebase.",
-=======
           '❌ No se pudo obtener la información del usuario de Firebase.',
->>>>>>> main
         );
         return;
       }
@@ -82,13 +59,8 @@ const GoogleLogin = () => {
       const response = await fetchWithToken(
         `https://8txnxmkveg.us-east-1.awsapprunner.com/api/registerCheck/${user.email}`,
         {
-<<<<<<< HEAD
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-=======
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
->>>>>>> main
         },
       );
 
@@ -117,11 +89,7 @@ const GoogleLogin = () => {
         }
       } else {
         console.error(
-<<<<<<< HEAD
-          "❌ Error en la respuesta del servidor:",
-=======
           '❌ Error en la respuesta del servidor:',
->>>>>>> main
           await response.text(),
         );
         await signOut(auth);
@@ -131,15 +99,9 @@ const GoogleLogin = () => {
       console.error('⚠️ Error al verificar el usuario antes del login:', error);
       // Aquí puedes añadir más lógica para manejar errores específicos del plugin
       // Por ejemplo, si el usuario cancela la autenticación nativa
-<<<<<<< HEAD
-      if (error.code === "cancelled") {
-        // Ejemplo de código de error si el usuario cancela
-        console.log("Login de Google cancelado por el usuario.");
-=======
       if (error.code === 'cancelled') {
         // Ejemplo de código de error si el usuario cancela
         console.log('Login de Google cancelado por el usuario.');
->>>>>>> main
       }
       try {
         await signOut(auth);

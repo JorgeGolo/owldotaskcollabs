@@ -5,15 +5,9 @@ import React, {
   useEffect,
   useMemo,
   useCallback,
-<<<<<<< HEAD
-} from "react";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { app } from "../firebase";
-=======
 } from 'react';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import { app } from '../firebase';
->>>>>>> main
 import {
   FaFacebook,
   FaTwitter,
@@ -21,23 +15,14 @@ import {
   FaWhatsapp,
   FaFeather,
   FaReddit,
-<<<<<<< HEAD
-} from "react-icons/fa";
-=======
 } from 'react-icons/fa';
->>>>>>> main
 import {
   FacebookShareButton,
   TwitterShareButton,
   WhatsappShareButton,
   RedditShareButton,
-<<<<<<< HEAD
-} from "react-share";
-import { Bebas_Neue } from "next/font/google";
-=======
 } from 'react-share';
 import { Bebas_Neue } from 'next/font/google';
->>>>>>> main
 
 import useJwtToken from "../components/useJwtToken";
 import useOnlineStatus from "../components/useOnlineStatus";
@@ -69,11 +54,7 @@ export const ClientDataProvider = ({ children }) => {
   const [pointsForGamesError, setPointsFromGamesError] = useState(null);
 
   // 🆕 Usar APP_VERSION para versionado de datos
-<<<<<<< HEAD
-  const CURRENT_APP_VERSION = process.env.APP_VERSION || "1.0.0";
-=======
   const CURRENT_APP_VERSION = process.env.APP_VERSION || '1.0.0';
->>>>>>> main
 
   // --- Estados y funciones para el LevelUpPopup ---
   const [isLevelUpPopupOpen, setIsLevelUpPopupOpen] = useState(false);
@@ -89,15 +70,9 @@ export const ClientDataProvider = ({ children }) => {
   }, []);
   const socialIcons = useMemo(
     () => [
-<<<<<<< HEAD
-      { icon: <FaFacebook size={20} />, link: "https://facebook.com" },
-      { icon: <FaTwitter size={20} />, link: "https://twitter.com" },
-      { icon: <FaWhatsapp size={20} />, link: "https://instagram.com" },
-=======
       { icon: <FaFacebook size={20} />, link: 'https://facebook.com' },
       { icon: <FaTwitter size={20} />, link: 'https://twitter.com' },
       { icon: <FaWhatsapp size={20} />, link: 'https://instagram.com' },
->>>>>>> main
     ],
     [],
   );
@@ -106,21 +81,12 @@ export const ClientDataProvider = ({ children }) => {
     () => [
       {
         icon: <FaFacebook size={20} />,
-<<<<<<< HEAD
-        link: "https://www.facebook.com/owldotask/",
-      },
-      { icon: <FaTwitter size={20} />, link: "https://x.com/owldotask" },
-      {
-        icon: <FaInstagram size={20} />,
-        link: "https://www.instagram.com/owldotask",
-=======
         link: 'https://www.facebook.com/owldotask/',
       },
       { icon: <FaTwitter size={20} />, link: 'https://x.com/owldotask' },
       {
         icon: <FaInstagram size={20} />,
         link: 'https://www.instagram.com/owldotask',
->>>>>>> main
       },
     ],
     [],
@@ -182,13 +148,8 @@ export const ClientDataProvider = ({ children }) => {
       const response = await fetchWithToken(
         `https://8txnxmkveg.us-east-1.awsapprunner.com/api/checkMaxLevels?uid=${userId}`,
         {
-<<<<<<< HEAD
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-=======
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
->>>>>>> main
         },
       );
 
@@ -219,13 +180,8 @@ export const ClientDataProvider = ({ children }) => {
       const response = await fetchWithToken(
         `https://8txnxmkveg.us-east-1.awsapprunner.com/api/checkGamesMaxLevels?uid=${userId}`,
         {
-<<<<<<< HEAD
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-=======
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
->>>>>>> main
         },
       );
 
@@ -250,11 +206,7 @@ export const ClientDataProvider = ({ children }) => {
       const auth = getAuth();
       const user = auth.currentUser;
       if (!user) {
-<<<<<<< HEAD
-        throw new Error("No hay usuario autenticado.");
-=======
         throw new Error('No hay usuario autenticado.');
->>>>>>> main
       }
 
       const clientMail = user.email;
@@ -263,13 +215,8 @@ export const ClientDataProvider = ({ children }) => {
       const response = await fetchWithToken(
         `https://8txnxmkveg.us-east-1.awsapprunner.com/api/${endpoint}`,
         {
-<<<<<<< HEAD
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-=======
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
->>>>>>> main
           body: JSON.stringify(payload),
         },
       );
@@ -279,20 +226,12 @@ export const ClientDataProvider = ({ children }) => {
       try {
         const result = JSON.parse(text);
         if (!result.success) {
-<<<<<<< HEAD
-          throw new Error(result.message || "Error desconocido en la API");
-=======
           throw new Error(result.message || 'Error desconocido en la API');
->>>>>>> main
         }
         // refreshClientData(); // <--- ¡¡¡ELIMINA ESTA LÍNEA!!!
         return result; // Devuelve el resultado para que se pueda usar await
       } catch (jsonError) {
-<<<<<<< HEAD
-        throw new Error("La API devolvió HTML en lugar de JSON.");
-=======
         throw new Error('La API devolvió HTML en lugar de JSON.');
->>>>>>> main
       }
     } catch (error) {
       throw error;
@@ -303,11 +242,7 @@ export const ClientDataProvider = ({ children }) => {
     if (user && user.uid) {
       if (!isReliablyOnline) {
         console.warn(
-<<<<<<< HEAD
-          "⚠️ No hay conexión confiable. No se pueden refrescar los datos del cliente desde la API en este momento.",
-=======
           '⚠️ No hay conexión confiable. No se pueden refrescar los datos del cliente desde la API en este momento.',
->>>>>>> main
         );
         return;
       }
@@ -331,19 +266,11 @@ export const ClientDataProvider = ({ children }) => {
 
             const levelAfterRefresh = data.level || 0;
             if (levelAfterRefresh !== levelBeforeRefresh) {
-<<<<<<< HEAD
-              console.log("🎉 Level up! New level:", levelAfterRefresh);
-              showLevelUpPopup(levelAfterRefresh); // Trigger the popup!
-            } else {
-              console.log(
-                "🔹 No level change. Current level:",
-=======
               console.log('🎉 Level up! New level:', levelAfterRefresh);
               showLevelUpPopup(levelAfterRefresh); // Trigger the popup!
             } else {
               console.log(
                 '🔹 No level change. Current level:',
->>>>>>> main
                 levelAfterRefresh,
               );
             }
@@ -367,13 +294,8 @@ export const ClientDataProvider = ({ children }) => {
 
   // 🆕 Función mejorada para cargar niveles globales con versionado
   const loadGlobalLevels = useCallback(async () => {
-<<<<<<< HEAD
-    const storedLevels = localStorage.getItem("globalLevels");
-    const storedVersion = localStorage.getItem("globalLevelsVersion");
-=======
     const storedLevels = localStorage.getItem('globalLevels');
     const storedVersion = localStorage.getItem('globalLevelsVersion');
->>>>>>> main
 
     // Solo usar localStorage si la versión coincide con la versión actual de la app
     if (storedLevels && storedVersion === CURRENT_APP_VERSION) {
@@ -384,11 +306,7 @@ export const ClientDataProvider = ({ children }) => {
         return;
       } catch (error) {
         console.error(
-<<<<<<< HEAD
-          "⚠️ Error al parsear los niveles globales desde localStorage:",
-=======
           '⚠️ Error al parsear los niveles globales desde localStorage:',
->>>>>>> main
           error,
         );
         // Si hay error, limpiar localStorage
@@ -435,13 +353,8 @@ export const ClientDataProvider = ({ children }) => {
 
   // 🆕 Función mejorada para cargar categorías de iconos con versionado
   const loadIconCategories = useCallback(async () => {
-<<<<<<< HEAD
-    const storedIconCategories = localStorage.getItem("iconCategories");
-    const storedVersion = localStorage.getItem("iconCategoriesVersion");
-=======
     const storedIconCategories = localStorage.getItem('iconCategories');
     const storedVersion = localStorage.getItem('iconCategoriesVersion');
->>>>>>> main
 
     if (storedIconCategories && storedVersion === CURRENT_APP_VERSION) {
       try {
@@ -451,19 +364,11 @@ export const ClientDataProvider = ({ children }) => {
         return;
       } catch (error) {
         console.warn(
-<<<<<<< HEAD
-          "⚠️ Error parsing icon categories from localStorage:",
-          error,
-        );
-        localStorage.removeItem("iconCategories");
-        localStorage.removeItem("iconCategoriesVersion");
-=======
           '⚠️ Error parsing icon categories from localStorage:',
           error,
         );
         localStorage.removeItem('iconCategories');
         localStorage.removeItem('iconCategoriesVersion');
->>>>>>> main
       }
     } else if (storedVersion && storedVersion !== CURRENT_APP_VERSION) {
       //console.log(`🔄 Versión de iconos obsoleta (${storedVersion} → ${CURRENT_APP_VERSION}). Actualizando desde API...`);
@@ -484,23 +389,6 @@ export const ClientDataProvider = ({ children }) => {
 
       if (data && Array.isArray(data) && data.length > 0) {
         setIconCategories(data);
-<<<<<<< HEAD
-        localStorage.setItem("iconCategories", JSON.stringify(data));
-        localStorage.setItem("iconCategoriesVersion", CURRENT_APP_VERSION);
-        //console.log(`💾 Categorías de iconos guardadas en localStorage (App v${CURRENT_APP_VERSION}).`);
-      } else {
-        console.warn("⚠️ No icon categories found.");
-        setIconCategories([]);
-        localStorage.removeItem("iconCategories");
-        localStorage.removeItem("iconCategoriesVersion");
-      }
-    } catch (error) {
-      // Manejo silencioso del error - registra pero no muestra overlay
-      console.error("❌ Error fetching icon categories:", error);
-      setIconCategories([]);
-      localStorage.removeItem("iconCategories");
-      localStorage.removeItem("iconCategoriesVersion");
-=======
         localStorage.setItem('iconCategories', JSON.stringify(data));
         localStorage.setItem('iconCategoriesVersion', CURRENT_APP_VERSION);
         //console.log(`💾 Categorías de iconos guardadas en localStorage (App v${CURRENT_APP_VERSION}).`);
@@ -516,7 +404,6 @@ export const ClientDataProvider = ({ children }) => {
       setIconCategories([]);
       localStorage.removeItem('iconCategories');
       localStorage.removeItem('iconCategoriesVersion');
->>>>>>> main
 
       // Opcional: establecer un estado de error para mostrar UI alternativa
       // setHasConnectionError(true);
@@ -533,13 +420,8 @@ export const ClientDataProvider = ({ children }) => {
 
   useEffect(() => {
     // 🆕 Cargar datos del cliente con versionado
-<<<<<<< HEAD
-    const storedClientData = localStorage.getItem("clientData");
-    const storedClientVersion = localStorage.getItem("clientDataVersion");
-=======
     const storedClientData = localStorage.getItem('clientData');
     const storedClientVersion = localStorage.getItem('clientDataVersion');
->>>>>>> main
 
     if (storedClientData && storedClientVersion === CURRENT_APP_VERSION) {
       try {
@@ -548,19 +430,11 @@ export const ClientDataProvider = ({ children }) => {
         //console.log(`✅ Datos del cliente cargados desde localStorage (App v${CURRENT_APP_VERSION}).`);
       } catch (error) {
         console.warn(
-<<<<<<< HEAD
-          "⚠️ Error al parsear los datos del cliente desde localStorage:",
-          error,
-        );
-        localStorage.removeItem("clientData");
-        localStorage.removeItem("clientDataVersion");
-=======
           '⚠️ Error al parsear los datos del cliente desde localStorage:',
           error,
         );
         localStorage.removeItem('clientData');
         localStorage.removeItem('clientDataVersion');
->>>>>>> main
       }
     } else if (
       storedClientVersion &&
@@ -577,11 +451,7 @@ export const ClientDataProvider = ({ children }) => {
       if (currentUser && currentUser.uid) {
         if (!isReliablyOnline) {
           console.warn(
-<<<<<<< HEAD
-            "⚠️ Conexión no confiable. No se actualizarán los datos del cliente.",
-=======
             '⚠️ Conexión no confiable. No se actualizarán los datos del cliente.',
->>>>>>> main
           );
           return;
         }
@@ -635,21 +505,12 @@ export const ClientDataProvider = ({ children }) => {
   // 🆕 Función para limpiar caché (útil para debugging)
   const clearAppCache = () => {
     const keysToRemove = [
-<<<<<<< HEAD
-      "globalLevels",
-      "globalLevelsVersion",
-      "iconCategories",
-      "iconCategoriesVersion",
-      "clientData",
-      "clientDataVersion",
-=======
       'globalLevels',
       'globalLevelsVersion',
       'iconCategories',
       'iconCategoriesVersion',
       'clientData',
       'clientDataVersion',
->>>>>>> main
     ];
 
     keysToRemove.forEach((key) => localStorage.removeItem(key));
