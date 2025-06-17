@@ -14,10 +14,10 @@ export default {
         light: '#F0F0F0',
         muted: '#B0BEC5',
         graycustom: '#444444',
-      // light colours
+        // light colours
         'light-1': '#f4f4f4',
         'light-red': '#f9bdbd',
-        'light-blue': '"#b3d0ff',
+        'light-blue': '#b3d0ff',
         // dark colours
         'dark-1': '#0f172a',
         'dark-2': '#1f2937',

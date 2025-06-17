@@ -6,7 +6,6 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  /*background-color: #f4f4f4;*/
 }
 
 h1 {
@@ -24,17 +23,14 @@ p {
   @apply mb-4;
 }
 
-/* Cuando el checkbox está marcado, expandimos el subnivel */
-input[type="checkbox"]:checked + ul {
-  max-height: 200px; /* Un valor grande suficiente para mostrar todo el contenido */
+input[type='checkbox']:checked + ul {
+  max-height: 200px;
 }
 
-/* Animación suave */
 ul {
   transition: max-height 0.3s ease-in-out;
 }
 
-/* Solo mostrar subniveles cuando los checkboxes están marcados */
 ul.overflow-hidden {
   max-height: 0;
   overflow: hidden;
