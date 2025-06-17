@@ -210,7 +210,7 @@ const Questionnaire = ({ quiz, chapters, fichalibro, category }) => {
           <div className="mt-4">
             {chapters.map((chapter) => (
               <div key={chapter.id} className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">{chapter.titulo}</h3>
+                <h3>{chapter.titulo}</h3>
                 <p className="text-gray-600 leading-relaxed">{chapter.contenido}</p>
               </div>
             ))}
