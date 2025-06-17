@@ -145,7 +145,7 @@ const sortedQuizzes = useMemo(() => {
         <CategoryMap quizzes={quizzes} />
 
 
-        <h1 className="text-3xl font-bold mt-4 mb-6">All Quizzes</h1>
+        <h1>All Quizzes</h1>
 
         {quizzes.length > 0 ? (
           <div className="overflow-x-auto mt-4 rounded-lg shadow-lg">

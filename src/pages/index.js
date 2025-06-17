@@ -58,7 +58,7 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
             <span className="font-semibold">Owldotask</span> is a platform designed to give users the opportunity to earn profits by doing small tasks.             Complete quizzes, play games, and earn feathers to claim your rewards
           </p>
           
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🗂️ Quiz categories on Owldotask</h2>
+          <h2>🗂️ Quiz categories on Owldotask</h2>
 
           <p>
             Each quiz isn’t just a chance to test your knowledge—it’s an invitation to challenge your assumptions, uncover hidden insights, and grow your understanding with every question you face.
@@ -70,7 +70,7 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
               See all quizzes and categories
             </Link>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🧮 Owldotask quiz stats</h2>
+          <h2>🧮 Owldotask quiz stats</h2>
           <p className="mb-4">
           Thanks to our innovative content creation system — powered by data storage tools, retrieval technologies, 
           and artificial intelligence — we continuously generate new content to keep the platform growing. And now, here are the numbers.
@@ -83,13 +83,13 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
           />
 
 
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🧩 Owldotask games</h2>
+          <h2>🧩 Owldotask games</h2>
 
           <p>
             Games that offer a playful way to practice core skills, challenge your thinking, and earn feathers as proof that even a few minutes of fun can lead to meaningful learning progress.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🎁 Start earning feathers for every task</h2>
+          <h2>🎁 Start earning feathers for every task</h2>
           
           <p className="mb-4">
             Every task you complete earns you points as a reward.
@@ -97,7 +97,7 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
             unlock perks, and even earn real-life rewards. Sing-in with your Google account and click here or on the feather icon next to your avatar for more info.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🚀 Powered by modern technologies</h2>
+          <h2>🚀 Powered by modern technologies</h2>
           <p className="mb-4">
             Our platform is built with the latest web technologies, delivering a fast, smooth, and fully responsive experience.
             With a friendly and intuitive interface, you'll feel at home from the very first click.
@@ -105,20 +105,20 @@ const Home = ({ stats = { feathers: 0, quizzes: 0, questions: 0 }, quizzes }) =>
 
           <TechGrid/>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🌱 Grow with us</h2>
+          <h2>🌱 Grow with us</h2>
           <p className="mb-4">
             This is just the beginning. We're constantly adding new quizzes, games, and platform upgrades.
             Our goal is to build an user-friendly, fun and educational web.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-2">🔒 We take your privacy seriously</h2>
+          <h2>🔒 We take your privacy seriously</h2>
           <p className="mb-4">
             We fully comply with data protection laws (including GDPR),
             and we will never share your information without your consent. <span className="font-semibold">Owldotask</span> is a safe and trusted space,
             crafted to offer a fun and secure experience for users of all ages.
           </p>
 
-          <h2 className="text-2xl font-semibold mt-8 mb-2">📱 Follow us and stay updated</h2>
+          <h2>📱 Follow us and stay updated</h2>
           <p className="mb-6">
             Want to be the first to know about new features, exclusive challenges, and giveaways?
             Follow us on social media and join the <span className="font-semibold">Owldotask</span> community.

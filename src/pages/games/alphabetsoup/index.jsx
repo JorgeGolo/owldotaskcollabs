@@ -397,7 +397,7 @@ const SopaDeLetras = () => {
         </div>
       )}
       <div className="flex flex-col items-center justify-center mt-4">
-        <h1 className="text-3xl font-bold mb-4 text-[#1e2a47]">Alphabet Soup</h1>
+        <h1>Alphabet Soup</h1>
         <Popup isOpen={modalState.isOpen} onClose={closeModal} score={score} goal={modalState.goals[0]} />
 
         <div 
