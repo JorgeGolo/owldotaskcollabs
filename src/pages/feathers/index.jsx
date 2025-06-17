@@ -11,7 +11,7 @@ import {
   faCaretRight,
 } from '@fortawesome/free-solid-svg-icons';
 
-import useJwtToken from '../../components/useJwtToken';
+import useJwtToken from "../../components/useJwtToken";
 
 import useOnlineStatus from '../../components/useOnlineStatus';
 
@@ -171,8 +171,10 @@ const Feathers = () => {
       {!isReliablyOnline && getOfflineMessage()}
 
       {!localClientData?.id ? (
-        <div className="mb-6 p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
-          <p className="text-red-500">Please Login to se your feathers.</p>
+        <div className="mb-6 p-6 dark:bg-dark-2 bg-white rounded-lg shadow hover:shadow-lg">
+          <p className="text-red-500 dark:text-light-red">
+            Please Login to se your feathers.
+          </p>
         </div>
       ) : (
         <div className="mb-6 p-6 bg-white rounded-lg shadow hover:shadow-lg transition">

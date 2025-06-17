@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 function useOnlineStatus() {
   const [isOnline, setIsOnline] = useState(true); //  Estado inicial: asumimos online
   const [isReliablyOnline, setIsReliablyOnline] = useState(true); // Nuevo estado para conexión "confiable"
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const handleOnline = () => {
         setIsOnline(true);
         //  Posiblemente también iniciar la prueba de conectividad aquí
@@ -17,8 +17,8 @@ function useOnlineStatus() {
         setIsReliablyOnline(false); //  Asumimos no confiable al ir offline
       };
 
-      window.addEventListener('online', handleOnline);
-      window.addEventListener('offline', handleOffline);
+      window.addEventListener("online", handleOnline);
+      window.addEventListener("offline", handleOffline);
 
       //  Prueba inicial y periódica de conectividad
       testConnectivity();

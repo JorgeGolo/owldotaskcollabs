@@ -10,10 +10,10 @@ import {
   reauthenticateWithPopup,
 } from 'firebase/auth';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTasks } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
-import useJwtToken from '../../components/useJwtToken'; // Importar el hook que creamos
+import useJwtToken from "../../components/useJwtToken"; // Importar el hook que creamos
 
 import useOnlineStatus from '../../components/useOnlineStatus';
 
@@ -35,7 +35,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
 
   // For re-authentication
-  const [reauthError, setReauthError] = useState('');
+  const [reauthError, setReauthError] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
   const { featherIcon } = useContext(AppClientContext);
@@ -46,8 +46,8 @@ const Profile = () => {
   useEffect(() => {
     setLocalUser(user);
     setLocalClientData(clientData);
-    setPaypal(clientData?.paypal || '');
-    setWallet(clientData?.wallet || '');
+    setPaypal(clientData?.paypal || "");
+    setWallet(clientData?.wallet || "");
   }, [user, clientData]);
 
   useEffect(() => {
@@ -111,7 +111,7 @@ const Profile = () => {
   };
 
   const handleReauthenticate = async () => {
-    setReauthError('');
+    setReauthError("");
     setIsDeleting(true);
 
     try {
@@ -188,12 +188,14 @@ const Profile = () => {
 
       {!isReliablyOnline && getOfflineMessage()}
 
-      <div className="mb-6 p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+      <div className="mb-6 p-6 dark:bg-dark-2 bg-white rounded-lg shadow hover:shadow-lg">
         {!localClientData?.id ? (
-          <p className="text-red-500">Please Login to see your profile</p>
+          <p className="text-red-500 dark:text-light-red">
+            Please Login to see your profile
+          </p>
         ) : (
           <>
-            <h1 className="text-3xl font-bold text-gray-800 mb-4 lg:mb-6">
+            <h1 className="text-3xl font-bold dark:text-light-2 text-gray-800 mb-4 lg:mb-6">
               Profile
             </h1>
 
@@ -230,10 +232,10 @@ const Profile = () => {
                     />
                     <button
                       type="submit"
-                      className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition self-end ${loading || !isReliablyOnline ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition self-end ${loading || !isReliablyOnline ? "opacity-50 cursor-not-allowed" : ""}`}
                       disabled={loading || !isReliablyOnline}
                     >
-                      {loading ? 'Saving...' : 'Save'}
+                      {loading ? "Saving..." : "Save"}
                     </button>
                   </form>
                 </div>
@@ -250,11 +252,11 @@ const Profile = () => {
                       className="my-2 md:mr-2 md:w-auto w-full p-2 rounded border border-gray-300 flex-grow"
                     />
                     <button
-                      className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition self-end ${loading || !isReliablyOnline ? 'opacity-50 cursor-not-allowed' : ''}`}
+                      className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition self-end ${loading || !isReliablyOnline ? "opacity-50 cursor-not-allowed" : ""}`}
                       disabled={loading || !isReliablyOnline}
                       type="submit"
                     >
-                      {loading ? 'Saving...' : 'Save'}
+                      {loading ? "Saving..." : "Save"}
                     </button>
                   </form>
 
@@ -276,10 +278,10 @@ const Profile = () => {
 
             <button
               onClick={handleDeleteAccount}
-              className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition mb-2 ${isDeleting ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition mb-2 ${isDeleting ? "opacity-50 cursor-not-allowed" : ""}`}
               disabled={loading || !isReliablyOnline}
             >
-              {isDeleting ? 'Processing...' : 'Delete account'}
+              {isDeleting ? "Processing..." : "Delete account"}
             </button>
 
             {reauthError && (

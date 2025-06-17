@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import useOnlineStatus from './useOnlineStatus';
+import { useCallback } from "react";
+import useOnlineStatus from "./useOnlineStatus";
 /**
  * Hook personalizado para manejar la autenticación con JWT tokens
  * Gestiona automáticamente la renovación de tokens expirados
@@ -12,7 +12,7 @@ const useJwtToken = () => {
     if (!token) return true;
 
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
+      const payload = JSON.parse(atob(token.split(".")[1]));
       if (payload && payload.exp) {
         const currentTime = Math.floor(Date.now() / 1000);
         return payload.exp < currentTime;

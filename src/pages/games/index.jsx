@@ -1,8 +1,8 @@
 // pages/games.jsx
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
-import Breadcrumb from '../../components/BreadCrumb';
+import Breadcrumb from "../../components/BreadCrumb";
 
 const games = () => {
   const breadcrumbSegments = [

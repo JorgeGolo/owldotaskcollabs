@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
-import { Cookie } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { Cookie } from "lucide-react";
 
-const COOKIE_NAME = 'owldo_consent';
+const COOKIE_NAME = "owldo_consent";
 
 // Recupera el consentimiento desde la cookie
 const getConsent = () => {
@@ -23,7 +23,7 @@ const getConsent = () => {
 const setConsent = (value) => {
   let consentValues;
 
-  if (typeof value === 'string') {
+  if (typeof value === "string") {
     consentValues = {
       ad_storage: value === 'accepted' ? 'granted' : 'denied',
       analytics_storage: value === 'accepted' ? 'granted' : 'denied',
@@ -42,7 +42,7 @@ const setConsent = (value) => {
   }
 
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'update_consent', ...consentValues });
+  window.dataLayer.push({ event: "update_consent", ...consentValues });
 };
 
 // Elimina todas las cookies de consentimiento
@@ -132,7 +132,7 @@ const clearAllCookies = () => {
   };
 
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'consent_revoked', ...revokedConsent });
+  window.dataLayer.push({ event: "consent_revoked", ...revokedConsent });
 };
 
 // Inicializa valores por defecto si no hay consentimiento
@@ -148,7 +148,7 @@ const initializeDefaultConsent = () => {
   document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(defaultConsent))}; path=/; max-age=31536000`;
 
   window.dataLayer = window.dataLayer || [];
-  window.dataLayer.push({ event: 'default_consent', ...defaultConsent });
+  window.dataLayer.push({ event: "default_consent", ...defaultConsent });
 };
 
 export const CookieConsentProvider = () => {
@@ -168,7 +168,7 @@ export const CookieConsentProvider = () => {
       initializeDefaultConsent();
       setVisible(true);
     } else {
-      if (typeof storedConsent === 'string') {
+      if (typeof storedConsent === "string") {
         setConsent(storedConsent); // reenviar a dataLayer
       } else {
         // Si ya hay preferencias personalizadas, reflejarlas en el estado local
@@ -184,7 +184,7 @@ export const CookieConsentProvider = () => {
   }, []);
 
   const accept = () => {
-    setConsent('accepted');
+    setConsent("accepted");
     setConfig({
       ad_storage: true,
       analytics_storage: true,
@@ -199,7 +199,7 @@ export const CookieConsentProvider = () => {
     clearAllCookies();
 
     // Luego establecer el estado como rechazado
-    setConsent('rejected');
+    setConsent("rejected");
     setConfig({
       ad_storage: false,
       analytics_storage: false,
@@ -211,13 +211,13 @@ export const CookieConsentProvider = () => {
 
   const saveCustomConfig = () => {
     setConsent({
-      ad_storage: config.ad_storage ? 'granted' : 'denied',
-      analytics_storage: config.analytics_storage ? 'granted' : 'denied',
-      functionality_storage: 'granted',
+      ad_storage: config.ad_storage ? "granted" : "denied",
+      analytics_storage: config.analytics_storage ? "granted" : "denied",
+      functionality_storage: "granted",
       personalization_storage: config.personalization_storage
-        ? 'granted'
-        : 'denied',
-      security_storage: 'granted',
+        ? "granted"
+        : "denied",
+      security_storage: "granted",
     });
     setVisible(false);
     setForceVisible(false);
@@ -231,7 +231,7 @@ export const CookieConsentProvider = () => {
           <div className="max-w-4xl mx-auto flex flex-col gap-4">
             <p className="text-sm">
               We use cookies to personalize content and analyze traffic. By
-              clicking "Accept", you consent to our use of cookies. Read our{' '}
+              clicking "Accept", you consent to our use of cookies. Read our{" "}
               <a href="/cookies" className="underline">
                 cookie policy
               </a>
@@ -361,10 +361,10 @@ export const CookieConsentProvider = () => {
 };
 
 // Helpers externos
-export const acceptConsent = () => setConsent('accepted');
+export const acceptConsent = () => setConsent("accepted");
 export const rejectConsent = () => {
   clearAllCookies();
-  setConsent('rejected');
+  setConsent("rejected");
 };
 export const getStoredConsent = () => getConsent();
 export const clearAllConsentCookies = () => clearAllCookies();

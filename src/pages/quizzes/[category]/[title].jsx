@@ -58,7 +58,7 @@ export async function getStaticPathsPRO() {
 
     console.log(`✅ ${paths.length} rutas cargadas desde el backend`);
   } catch (err) {
-    console.warn('⚠️ Error al leer el JSON, usando Firebase como fallback');
+    console.warn("⚠️ Error al leer el JSON, usando Firebase como fallback");
 
     const snapshot = await getDocs(collection(db, 'quizzes'));
     paths = snapshot.docs.map((docSnap) => {

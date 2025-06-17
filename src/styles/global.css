@@ -9,8 +9,23 @@ body {
   /*background-color: #f4f4f4;*/
 }
 
+h1 {
+  @apply text-3xl font-bold mt-4 mb-6;
+}
+
+h2 {
+  @apply text-2xl font-semibold mt-8 mb-2;
+}
+
+h3 {
+  @apply text-lg font-semibold mb-2;
+}
+p {
+  @apply mb-4;
+}
+
 /* Cuando el checkbox está marcado, expandimos el subnivel */
-input[type='checkbox']:checked + ul {
+input[type="checkbox"]:checked + ul {
   max-height: 200px; /* Un valor grande suficiente para mostrar todo el contenido */
 }
 

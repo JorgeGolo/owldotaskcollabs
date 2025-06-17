@@ -1,8 +1,8 @@
-const fs = require('fs').promises;
-const path = require('path');
-const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, getDocs } = require('firebase/firestore');
-require('dotenv').config({ path: `.env.local` }); // Carga las variables de .env.local
+const fs = require("fs").promises;
+const path = require("path");
+const { initializeApp } = require("firebase/app");
+const { getFirestore, collection, getDocs } = require("firebase/firestore");
+require("dotenv").config({ path: `.env.local` }); // Carga las variables de .env.local
 
 // Configuración de Firebase
 
@@ -35,17 +35,17 @@ async function generateRoutes() {
     const quizRoutes = [];
 
     const fixedroutes = [
-      '/',
-      '/quizzes/',
-      '/cookies/',
-      '/privacypolicy/',
-      '/termsofservice/',
-      '/signin/',
-      '/about/',
-      '/feathers/',
-      '/profile/',
-      '/games/',
-      '/games/alphabetsoup/',
+      "/",
+      "/quizzes/",
+      "/cookies/",
+      "/privacypolicy/",
+      "/termsofservice/",
+      "/signin/",
+      "/about/",
+      "/feathers/",
+      "/profile/",
+      "/games/",
+      "/games/alphabetsoup/",
     ];
 
     snapshot.forEach((docSnap) => {
@@ -86,7 +86,7 @@ async function generateRoutes() {
       error,
     );
     // DEBUG: Mostrar el stack de error completo
-    console.error('DEBUG: Stack del error:', error.stack);
+    console.error("DEBUG: Stack del error:", error.stack);
   }
 }
 

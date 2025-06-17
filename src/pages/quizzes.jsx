@@ -149,9 +149,7 @@ const Questionnaires = ({ quizzes }) => {
 
         <CategoryMap quizzes={quizzes} />
 
-        <h1 className="text-3xl font-bold mt-4 mb-6 text-gray-800">
-          All Quizzes
-        </h1>
+        <h1>All Quizzes</h1>
 
         {quizzes.length > 0 ? (
           <div className="overflow-x-auto mt-4 rounded-lg shadow-lg">
@@ -185,11 +183,15 @@ const Questionnaires = ({ quizzes }) => {
               </thead>
               <tbody>
                 {sortedQuizzes.map((quiz) => (
-                  <tr key={quiz.id} className="hover:bg-gray-100 border-b">
+                  <tr
+                    key={quiz.id}
+                    className="hover:bg-gray-100 dark:bg-dark-2"
+                  >
                     <td>
                       <Link
                         href={`/quizzes/${encodeURIComponent(quiz.category_slug)}/${encodeURIComponent(quiz.title_slug)}`}
-                        className="block w-full p-4 text-blue-600 hover:underline"
+                        className="block w-full p-4 text-blue-600 hover:underline 
+                        dark:text-light-blue"
                       >
                         {quiz.title}
                       </Link>

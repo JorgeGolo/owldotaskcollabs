@@ -27,10 +27,10 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
   const iconName =
     iconCategories.find(
       (item) => item.name.toLowerCase() === categoryName.toLowerCase(), // Use categoryName to match with the name in the array
-    )?.iconcategory || 'Layers';
+    )?.iconcategory || "Layers";
 
   const IconComponent = LucideIcons[iconName];
-  const iconcolor = '#1e2a47';
+  const iconcolor = "#1e2a47";
 
   return (
     <motion.div
@@ -41,13 +41,19 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
     >
       <Link
         href={`/quizzes/${encodeURIComponent(category)}`}
-        className="p-2 md:p-4 bg-blue-50 text-gray text-center rounded-lg shadow hover:bg-yellow-100 transition flex flex-col items-center"
+        className="p-2 md:p-4 bg-blue-50 text-gray text-center rounded-lg shadow hover:bg-yellow-100 transition flex flex-col items-center
+        dark:bg-strong-blue dark:hover:bg-[#ef7e44]
+        "
       >
         {IconComponent && <IconComponent size={32} color={iconcolor} />}
         <span className="mt-2 text-ssm md:text-sm font-semibold">
           {categoryName}
         </span>
-        <div className="mt-1 text-[11px] text-gray-600">
+        <div
+          className="mt-1 text-[11px] text-gray-600
+        dark:text-white
+        "
+        >
           <p>{quizCount} quizzes</p>
           <p>{questionCount} questions</p>
         </div>

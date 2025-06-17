@@ -15,8 +15,8 @@ const nextConfig = {
 };
 
 // Configuración de Next-PWA (Progressive Web App)
-const withPWA = require('next-pwa')({
-  dest: 'public', // Directorio donde se generarán los archivos del Service Worker y manifest.json
+const withPWA = require("next-pwa")({
+  dest: "public", // Directorio donde se generarán los archivos del Service Worker y manifest.json
   register: true, // Indica si se debe registrar el Service Worker automáticamente
   skipWaiting: true, // Fuerza al nuevo Service Worker a activarse inmediatamente, sin esperar a que se cierren las pestañas anteriores
 
@@ -35,13 +35,13 @@ const withPWA = require('next-pwa')({
       );
 
       if (fs.existsSync(routesFilePath)) {
-        const routesData = fs.readFileSync(routesFilePath, 'utf8');
+        const routesData = fs.readFileSync(routesFilePath, "utf8");
         const parsedRoutes = JSON.parse(routesData);
 
         // Verifica que el contenido sea un array
         if (Array.isArray(parsedRoutes) && parsedRoutes.length > 0) {
           routes = parsedRoutes;
-          console.log('Rutas cargadas correctamente para precaching:', routes);
+          console.log("Rutas cargadas correctamente para precaching:", routes);
         }
       } else {
         console.log(
@@ -63,9 +63,9 @@ const withPWA = require('next-pwa')({
     // Configuración del cacheo en tiempo de ejecución (para recursos dinámicos)
     {
       urlPattern: /\/quizzes\/.*/, // Patrón de URL para las rutas relacionadas con "quizzes"
-      handler: 'NetworkFirst', // Estrategia de caché: intenta obtener de la red primero, luego de la caché si falla
+      handler: "NetworkFirst", // Estrategia de caché: intenta obtener de la red primero, luego de la caché si falla
       options: {
-        cacheName: 'quizzes-cache', // Nombre de la caché para estos recursos
+        cacheName: "quizzes-cache", // Nombre de la caché para estos recursos
         networkTimeoutSeconds: 3, // Tiempo máximo de espera para la red antes de usar la caché (en segundos)
         expiration: {
           maxEntries: 100, // Máximo número de entradas en la caché
@@ -87,7 +87,7 @@ const withPWA = require('next-pwa')({
     },
     {
       urlPattern: /\.(png|svg|ico|jpg)$/,
-      handler: 'StaleWhileRevalidate',
+      handler: "StaleWhileRevalidate",
       options: {
         cacheName: 'static-assets', // Usará el hash real
         expiration: { maxEntries: 100, maxAgeSeconds: 86400 },
@@ -96,9 +96,9 @@ const withPWA = require('next-pwa')({
     // **AÑADIR ESTA SECCIÓN PARA LAS PORTADAS DE LIBROS**
     {
       urlPattern: /\/assets\/bookcovers\/.*/, // **AJUSTADO: sin el dominio completo**
-      handler: 'CacheFirst', // O 'NetworkFirst' según tu preferencia
+      handler: "CacheFirst", // O 'NetworkFirst' según tu preferencia
       options: {
-        cacheName: 'bookcovers-cache',
+        cacheName: "bookcovers-cache",
         expiration: {
           maxEntries: 500, // Ajusta el número de entradas
           maxAgeSeconds: 60 * 24 * 60 * 60, // Ejemplo: 60 días

@@ -14,15 +14,17 @@ export default {
         light: '#F0F0F0',
         muted: '#B0BEC5',
         graycustom: '#444444',
-        // light colours
+      // light colours
         'light-1': '#f4f4f4',
-        'light-blue': '#b3d0ff',
+        'light-red': '#f9bdbd',
+        'light-blue': '"#b3d0ff',
         // dark colours
         'dark-1': '#0f172a',
         'dark-2': '#1f2937',
         'dark-3': '#6e6e6e',
         'dark-4': '#4b5563',
         'dark-5': '#4b5563',
+        'strong-blue': '#2382ff', // Azul para cadenas de texto
       },
 
       fontFamily: {

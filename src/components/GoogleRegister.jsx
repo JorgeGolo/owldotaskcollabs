@@ -8,10 +8,10 @@ import { app } from '../firebase';
 import { useRouter } from 'next/router';
 import { AppClientContext } from '../context/ClientDataProvider';
 
-import useJwtToken from './useJwtToken'; // Importar el hook que creamos
+import useJwtToken from "./useJwtToken"; // Importar el hook que creamos
 
 // CAMBIO: Importamos el plugin de Capacitor
-import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
+import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
 
 import useOnlineStatus from './useOnlineStatus';
 
@@ -142,7 +142,7 @@ const GoogleRegister = ({ acceptedTerms }) => {
       console.error('❌ Error al registrarse con Google:', error);
       // Aquí puedes manejar errores específicos del plugin o de Firebase Authentication
       // Por ejemplo, error si el usuario cancela la autenticación nativa
-      if (error.code === 'cancelled') {
+      if (error.code === "cancelled") {
         // No hacer nada, el usuario canceló
         console.log('Registro de Google cancelado por el usuario.');
       } else if (error.code === 'auth/popup-closed-by-user') {

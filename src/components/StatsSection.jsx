@@ -1,5 +1,5 @@
 // components/StatsSection.tsx
-import CountUp from 'react-countup';
+import CountUp from "react-countup";
 
 const StatsSection = ({ feathersCount, quizzesCount, questionsCount }) => {
   const stats = [

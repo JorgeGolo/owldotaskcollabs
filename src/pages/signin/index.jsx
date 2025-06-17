@@ -15,7 +15,7 @@ const signin = () => {
   const [ageConfirmed, setAgeConfirmed] = useState(false);
 
   // MENSAJE QUE VIENE DE LOGIN - cuando hacn logn y no está registrados
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (router.query.message) {
@@ -39,7 +39,7 @@ const signin = () => {
       <div className="flex justify-center items-center flex-1 bg-gray-100 py-10">
         <div className="p-6 bg-white shadow-lg rounded-lg">
           {errorMessage && (
-            <p style={{ color: 'red', fontWeight: 'bold' }}>{errorMessage}</p>
+            <p style={{ color: "red", fontWeight: "bold" }}>{errorMessage}</p>
           )}
 
           <p className="mb-4">Register with your Google account.</p>

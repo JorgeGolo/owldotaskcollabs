@@ -70,9 +70,9 @@ const SopaDeLetras = () => {
         }
       }
     };
-    document.addEventListener('touchmove', preventDefault, { passive: false });
+    document.addEventListener("touchmove", preventDefault, { passive: false });
     return () => {
-      document.removeEventListener('touchmove', preventDefault);
+      document.removeEventListener("touchmove", preventDefault);
     };
   }, []);
 
@@ -690,7 +690,7 @@ const SopaDeLetras = () => {
             <button
               onClick={iniciarJuego}
               className={`bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none
-              ${!retryAvailable ? 'hidden' : ''}`}
+              ${!retryAvailable ? "hidden" : ""}`}
             >
               Restart
             </button>

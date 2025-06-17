@@ -24,16 +24,16 @@ import {
 } from 'react-share';
 import { Bebas_Neue } from 'next/font/google';
 
-import useJwtToken from '../components/useJwtToken';
-import useOnlineStatus from '../components/useOnlineStatus';
+import useJwtToken from "../components/useJwtToken";
+import useOnlineStatus from "../components/useOnlineStatus";
 
-import LevelUpPopup from '../components/LevelUpPopup'; // Asegúrate de que la ruta sea correcta
+import LevelUpPopup from "../components/LevelUpPopup"; // Asegúrate de que la ruta sea correcta
 
 // ⚙️ Importa y configura la fuente
 const bebasNeue = Bebas_Neue({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const AppClientContext = createContext();
@@ -48,7 +48,7 @@ export const ClientDataProvider = ({ children }) => {
 
   const { initializeToken, fetchWithToken } = useJwtToken();
 
-  const [canEarnPoints, setCanEarnPoints] = useState('cargando');
+  const [canEarnPoints, setCanEarnPoints] = useState("cargando");
   const [pointsError, setPointsError] = useState(null);
   const [canEarnPointsFromGames, setCanEarnPointsFromGames] = useState(null);
   const [pointsForGamesError, setPointsFromGamesError] = useState(null);
@@ -100,7 +100,7 @@ export const ClientDataProvider = ({ children }) => {
 
   const shareOnSocial = (platform, url, message) => {
     switch (platform) {
-      case 'facebook':
+      case "facebook":
         return (
           <span className="flex items-center justify-center">
             <FacebookShareButton url={url} quote={message}>
@@ -108,7 +108,7 @@ export const ClientDataProvider = ({ children }) => {
             </FacebookShareButton>
           </span>
         );
-      case 'twitter':
+      case "twitter":
         return (
           <span className="flex items-center justify-center">
             <TwitterShareButton url={url} title={message}>
@@ -116,7 +116,7 @@ export const ClientDataProvider = ({ children }) => {
             </TwitterShareButton>
           </span>
         );
-      case 'whatsapp':
+      case "whatsapp":
         return (
           <span className="flex items-center justify-center">
             <WhatsappShareButton url={url} title={message}>
@@ -124,7 +124,7 @@ export const ClientDataProvider = ({ children }) => {
             </WhatsappShareButton>
           </span>
         );
-      case 'reddit':
+      case "reddit":
         return (
           <span className="flex items-center justify-center">
             <RedditShareButton url={url} title={message}>
@@ -260,8 +260,8 @@ export const ClientDataProvider = ({ children }) => {
 
           // 🆕 Guardar con versión de la app
           if (data) {
-            localStorage.setItem('clientData', JSON.stringify(data));
-            localStorage.setItem('clientDataVersion', CURRENT_APP_VERSION);
+            localStorage.setItem("clientData", JSON.stringify(data));
+            localStorage.setItem("clientDataVersion", CURRENT_APP_VERSION);
             //console.log(`💾 Datos del cliente guardados en localStorage (v${CURRENT_APP_VERSION})`);
 
             const levelAfterRefresh = data.level || 0;
@@ -310,8 +310,8 @@ export const ClientDataProvider = ({ children }) => {
           error,
         );
         // Si hay error, limpiar localStorage
-        localStorage.removeItem('globalLevels');
-        localStorage.removeItem('globalLevelsVersion');
+        localStorage.removeItem("globalLevels");
+        localStorage.removeItem("globalLevelsVersion");
       }
     } else if (storedVersion && storedVersion !== CURRENT_APP_VERSION) {
       console.log(
@@ -332,19 +332,19 @@ export const ClientDataProvider = ({ children }) => {
           setGlobalLevels(sortedData);
 
           // Guardar con la versión actual de la app
-          localStorage.setItem('globalLevels', JSON.stringify(sortedData));
-          localStorage.setItem('globalLevelsVersion', CURRENT_APP_VERSION);
+          localStorage.setItem("globalLevels", JSON.stringify(sortedData));
+          localStorage.setItem("globalLevelsVersion", CURRENT_APP_VERSION);
           //console.log(`💾 Niveles globales guardados en localStorage (App v${CURRENT_APP_VERSION}).`);
         } else {
           setGlobalLevels(data);
-          localStorage.removeItem('globalLevels');
-          localStorage.removeItem('globalLevelsVersion');
+          localStorage.removeItem("globalLevels");
+          localStorage.removeItem("globalLevelsVersion");
         }
       } else {
         console.warn('⚠️ No se encontraron datos de niveles.');
         setGlobalLevels(null);
-        localStorage.removeItem('globalLevels');
-        localStorage.removeItem('globalLevelsVersion');
+        localStorage.removeItem("globalLevels");
+        localStorage.removeItem("globalLevelsVersion");
       }
     } catch (error) {
       console.error('❌ Error al obtener datos de niveles:', error);
@@ -441,8 +441,8 @@ export const ClientDataProvider = ({ children }) => {
       storedClientVersion !== CURRENT_APP_VERSION
     ) {
       //console.log(`🔄 Versión de datos de cliente obsoleta (${storedClientVersion} → ${CURRENT_APP_VERSION}). Se actualizarán al autenticarse.`);
-      localStorage.removeItem('clientData');
-      localStorage.removeItem('clientDataVersion');
+      localStorage.removeItem("clientData");
+      localStorage.removeItem("clientDataVersion");
     }
 
     const auth = getAuth(app);
@@ -465,21 +465,21 @@ export const ClientDataProvider = ({ children }) => {
             setClientData(data);
 
             // Guardar con versión actual
-            localStorage.setItem('clientData', JSON.stringify(data));
-            localStorage.setItem('clientDataVersion', CURRENT_APP_VERSION);
+            localStorage.setItem("clientData", JSON.stringify(data));
+            localStorage.setItem("clientDataVersion", CURRENT_APP_VERSION);
             //console.log(`💾 Datos del cliente guardados en localStorage (App v${CURRENT_APP_VERSION})`);
           } else {
             setClientData(null);
-            localStorage.removeItem('clientData');
-            localStorage.removeItem('clientDataVersion');
+            localStorage.removeItem("clientData");
+            localStorage.removeItem("clientDataVersion");
           }
         } catch (error) {
           console.error('❌ Error al obtener datos del cliente:', error);
         }
       } else {
         setClientData(null);
-        localStorage.removeItem('clientData');
-        localStorage.removeItem('clientDataVersion');
+        localStorage.removeItem("clientData");
+        localStorage.removeItem("clientDataVersion");
       }
     });
 
@@ -496,8 +496,8 @@ export const ClientDataProvider = ({ children }) => {
       setClientData(updatedClientData);
 
       // Actualizar también en localStorage con versión actual
-      localStorage.setItem('clientData', JSON.stringify(updatedClientData));
-      localStorage.setItem('clientDataVersion', CURRENT_APP_VERSION);
+      localStorage.setItem("clientData", JSON.stringify(updatedClientData));
+      localStorage.setItem("clientDataVersion", CURRENT_APP_VERSION);
       //console.log(`💾 Datos del cliente actualizados en localStorage (App v${CURRENT_APP_VERSION})`);
     }
   };
@@ -525,8 +525,8 @@ export const ClientDataProvider = ({ children }) => {
       setClientData(null);
 
       // Limpiar datos del cliente al cerrar sesión
-      localStorage.removeItem('clientData');
-      localStorage.removeItem('clientDataVersion');
+      localStorage.removeItem("clientData");
+      localStorage.removeItem("clientDataVersion");
       //console.log("🗑️ Datos del cliente eliminados de localStorage");
     } catch (error) {
       console.error('❌ Error al cerrar sesión:', error);
