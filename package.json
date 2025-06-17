@@ -78,11 +78,7 @@
     "autoprefixer": "^10.4.20",
     "eslint": "^9.27.0",
     "postcss": "^8.5.1",
-<<<<<<< HEAD
-    "prettier": "^3.5.3",
-=======
     "prettier": "3.5.3",
->>>>>>> main
     "tailwindcss": "^3.4.17"
   }
 }
