@@ -3,93 +3,93 @@
 @tailwind utilities;
 
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    /*background-color: #f4f4f4;*/
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  /*background-color: #f4f4f4;*/
+}
+
+/* Cuando el checkbox está marcado, expandimos el subnivel */
+input[type='checkbox']:checked + ul {
+  max-height: 200px; /* Un valor grande suficiente para mostrar todo el contenido */
+}
+
+/* Animación suave */
+ul {
+  transition: max-height 0.3s ease-in-out;
+}
+
+/* Solo mostrar subniveles cuando los checkboxes están marcados */
+ul.overflow-hidden {
+  max-height: 0;
+  overflow: hidden;
+}
+
+#loggedcontainer img {
+  width: 20%;
+  height: 20%;
+}
+
+@media (max-width: 768px) {
+  #loggedcontainer img {
+    width: 100%;
+    height: 100%;
+  }
+}
+@layer components {
+  .header-container {
+    @apply bg-primary text-white w-full shadow-md;
   }
 
-    /* Cuando el checkbox está marcado, expandimos el subnivel */
-    input[type="checkbox"]:checked + ul {
-      max-height: 200px; /* Un valor grande suficiente para mostrar todo el contenido */
-    }
-  
-    /* Animación suave */
-    ul {
-      transition: max-height 0.3s ease-in-out;
-    }
-  
-    /* Solo mostrar subniveles cuando los checkboxes están marcados */
-    ul.overflow-hidden {
-      max-height: 0;
-      overflow: hidden;
-    }
+  .logo {
+    @apply w-32px h-32px mr-1;
+  }
 
-    #loggedcontainer img {
-      width: 20%;
-      height: 20%;
-    }
-    
-    @media (max-width: 768px) {
-      #loggedcontainer img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    @layer components {
-      .header-container {
-        @apply bg-primary text-white w-full shadow-md;
-      }
-    
-      .logo {
-        @apply w-32px h-32px mr-1;
-      }
-    
-      .avatar {
-        @apply rounded-full w-8 h-8;
-      }
-    
-      .btn-primary {
-        @apply bg-secondary text-white py-2 px-4 rounded-md shadow-md hover:bg-opacity-80 transition;
-      }
-    
-      .btn-secondary {
-        @apply bg-white text-black py-2 px-4 rounded-md shadow-md hover:bg-gray-600 transition;
-      }
-    
-      .btn-danger {
-        @apply bg-red-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-red-600 transition;
-      }
+  .avatar {
+    @apply rounded-full w-8 h-8;
+  }
 
-      .textgray {
-        @apply text-gray-300;
-      }
-    }
-    
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
-    }
-    
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
+  .btn-primary {
+    @apply bg-secondary text-white py-2 px-4 rounded-md shadow-md hover:bg-opacity-80 transition;
+  }
 
-    .text-3xl {
-      font-size: 1.8rem;
-      line-height: 1.8rem;
-    }
+  .btn-secondary {
+    @apply bg-white text-black py-2 px-4 rounded-md shadow-md hover:bg-gray-600 transition;
+  }
 
-    footer {
-      background-color: #1e2a47;
-      color: #adbadb;
-    }
-    
-    footer a {
-      color: #adbadb;
-      transition: color 0.3s;
-    }
-    
-    footer a:hover {
-      color: white;
-    }
+  .btn-danger {
+    @apply bg-red-500 text-white py-2 px-4 rounded-md shadow-md hover:bg-red-600 transition;
+  }
+
+  .textgray {
+    @apply text-gray-300;
+  }
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.text-3xl {
+  font-size: 1.8rem;
+  line-height: 1.8rem;
+}
+
+footer {
+  background-color: #1e2a47;
+  color: #adbadb;
+}
+
+footer a {
+  color: #adbadb;
+  transition: color 0.3s;
+}
+
+footer a:hover {
+  color: white;
+}

@@ -1,10 +1,10 @@
-import React, { useRef, useContext } from "react";
-import * as LucideIcons from "lucide-react";
-import { AppClientContext } from "../context/ClientDataProvider"; // Asegúrate de usar el contexto correcto
+import React, { useRef, useContext } from 'react';
+import * as LucideIcons from 'lucide-react';
+import { AppClientContext } from '../context/ClientDataProvider'; // Asegúrate de usar el contexto correcto
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from 'framer-motion';
 
 const containerVariants = {
   hidden: {},
@@ -22,16 +22,16 @@ const itemVariants = {
 };
 
 const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
-
   const { iconCategories } = useContext(AppClientContext);
 
-  const iconName = iconCategories.find(
-    (item) => item.name.toLowerCase() === categoryName.toLowerCase() // Use categoryName to match with the name in the array
-  )?.iconcategory || "Layers";
+  const iconName =
+    iconCategories.find(
+      (item) => item.name.toLowerCase() === categoryName.toLowerCase(), // Use categoryName to match with the name in the array
+    )?.iconcategory || 'Layers';
 
   const IconComponent = LucideIcons[iconName];
-  const iconcolor = "#1e2a47";
-  
+  const iconcolor = '#1e2a47';
+
   return (
     <motion.div
       className="w-full"
@@ -44,7 +44,9 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
         className="p-2 md:p-4 bg-blue-50 text-gray text-center rounded-lg shadow hover:bg-yellow-100 transition flex flex-col items-center"
       >
         {IconComponent && <IconComponent size={32} color={iconcolor} />}
-        <span className="mt-2 text-ssm md:text-sm font-semibold">{categoryName}</span>
+        <span className="mt-2 text-ssm md:text-sm font-semibold">
+          {categoryName}
+        </span>
         <div className="mt-1 text-[11px] text-gray-600">
           <p>{quizCount} quizzes</p>
           <p>{questionCount} questions</p>
@@ -82,17 +84,17 @@ const CategoryMap = ({ quizzes, limit = null }) => {
   const categoryCount = categoryEntries.length;
 
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "0px 0px -100px 0px" });
+  const isInView = useInView(ref, { once: true, margin: '0px 0px -100px 0px' });
 
   return (
     <motion.div
       ref={ref}
       className={`grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-2 py-4 ${
-        categoryCount < 8 ? "justify-center" : ""
+        categoryCount < 8 ? 'justify-center' : ''
       }`}
       variants={containerVariants}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView ? 'visible' : 'hidden'}
     >
       {categoryEntries.map(([slug, data]) => (
         <CategoryItem

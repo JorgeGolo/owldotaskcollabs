@@ -27,7 +27,7 @@ function useOnlineStatus() {
       return () => {
         window.removeEventListener('online', handleOnline);
         window.removeEventListener('offline', handleOffline);
-       // clearInterval(intervalId);
+        // clearInterval(intervalId);
       };
     }
   }, []);
@@ -35,10 +35,14 @@ function useOnlineStatus() {
   // Función para probar la conectividad real
   const testConnectivity = async () => {
     try {
-      const response = await fetch('https://8txnxmkveg.us-east-1.awsapprunner.com/health', { //  Cambia a una URL de tu API
-        method: 'HEAD', //  Más eficiente que GET para solo verificar el estado
-        cache: 'no-store', //  Asegura que no use la caché
-      });
+      const response = await fetch(
+        'https://8txnxmkveg.us-east-1.awsapprunner.com/health',
+        {
+          //  Cambia a una URL de tu API
+          method: 'HEAD', //  Más eficiente que GET para solo verificar el estado
+          cache: 'no-store', //  Asegura que no use la caché
+        },
+      );
       setIsReliablyOnline(response.ok); //  Actualiza el estado de "confiable"
     } catch (error) {
       setIsReliablyOnline(false); //  Error = no confiable
