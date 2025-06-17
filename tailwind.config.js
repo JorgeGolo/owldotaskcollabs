@@ -19,6 +19,7 @@ export default {
         graycustom: '#444444', 
         // light colours
         'light-1': '#f4f4f4',
+        'light-red': '#f9bdbd',
         'light-blue': '#b3d0ff', 
         // dark colours
         'dark-1': '#0f172a', 

@@ -176,12 +176,12 @@ const handleSavePaypal = async (e) => {
         getOfflineMessage()
       )}
 
-      <div className="mb-6 p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+      <div className="mb-6 p-6 dark:bg-dark-2 bg-white rounded-lg shadow hover:shadow-lg">
         {(!localClientData?.id) ? (
-          <p className="text-red-500">Please Login to see your profile</p>
+          <p className="text-red-500 dark:text-light-red">Please Login to see your profile</p>
         ) : (
           <>
-            <h1 className="text-3xl font-bold text-gray-800 mb-4 lg:mb-6">Profile</h1>
+            <h1 className="text-3xl font-bold dark:text-light-2 text-gray-800 mb-4 lg:mb-6">Profile</h1>
 
             <div className="mb-6 p-4 bg-gray-50 rounded-md shadow-inner">
               <h2 className="text-2xl font-bold text-gray-800 mb-4 lg:mb-6">Account Information</h2>
