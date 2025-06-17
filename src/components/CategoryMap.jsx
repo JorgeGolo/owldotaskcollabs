@@ -1,10 +1,10 @@
-import React, { useRef, useContext } from "react";
-import * as LucideIcons from "lucide-react";
-import { AppClientContext } from "../context/ClientDataProvider"; // Asegúrate de usar el contexto correcto
+import React, { useRef, useContext } from 'react';
+import * as LucideIcons from 'lucide-react';
+import { AppClientContext } from '../context/ClientDataProvider'; // Asegúrate de usar el contexto correcto
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from 'framer-motion';
 
 const containerVariants = {
   hidden: {},
@@ -27,10 +27,17 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
   const iconName =
     iconCategories.find(
       (item) => item.name.toLowerCase() === categoryName.toLowerCase(), // Use categoryName to match with the name in the array
+<<<<<<< HEAD
     )?.iconcategory || "Layers";
 
   const IconComponent = LucideIcons[iconName];
   const iconcolor = "#1e2a47";
+=======
+    )?.iconcategory || 'Layers';
+
+  const IconComponent = LucideIcons[iconName];
+  const iconcolor = '#1e2a47';
+>>>>>>> main
 
   return (
     <motion.div
@@ -49,11 +56,15 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
         <span className="mt-2 text-ssm md:text-sm font-semibold">
           {categoryName}
         </span>
+<<<<<<< HEAD
         <div
           className="mt-1 text-[11px] text-gray-600
         dark:text-white
         "
         >
+=======
+        <div className="mt-1 text-[11px] text-gray-600">
+>>>>>>> main
           <p>{quizCount} quizzes</p>
           <p>{questionCount} questions</p>
         </div>
@@ -90,17 +101,17 @@ const CategoryMap = ({ quizzes, limit = null }) => {
   const categoryCount = categoryEntries.length;
 
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "0px 0px -100px 0px" });
+  const isInView = useInView(ref, { once: true, margin: '0px 0px -100px 0px' });
 
   return (
     <motion.div
       ref={ref}
       className={`grid grid-cols-3 md:grid-cols-6 lg:grid-cols-6 gap-2 py-4 ${
-        categoryCount < 8 ? "justify-center" : ""
+        categoryCount < 8 ? 'justify-center' : ''
       }`}
       variants={containerVariants}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView ? 'visible' : 'hidden'}
     >
       {categoryEntries.map(([slug, data]) => (
         <CategoryItem

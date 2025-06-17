@@ -1,7 +1,7 @@
-import { React, useContext } from "react";
+import { React, useContext } from 'react';
 //import { Link } from "react-router-dom";
-import Link from "next/link";
-import { AppClientContext } from "../context/ClientDataProvider";
+import Link from 'next/link';
+import { AppClientContext } from '../context/ClientDataProvider';
 
 const Footer = () => {
   const appVersion = process.env.APP_VERSION;

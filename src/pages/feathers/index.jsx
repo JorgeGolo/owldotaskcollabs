@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AppClientContext } from "../../context/ClientDataProvider";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useContext, useEffect, useState } from 'react';
+import { AppClientContext } from '../../context/ClientDataProvider';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
   faCalendar,
@@ -9,15 +9,15 @@ import {
   faTrophy,
   faCaretDown,
   faCaretRight,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
 import useJwtToken from "../../components/useJwtToken";
 
-import useOnlineStatus from "../../components/useOnlineStatus";
+import useOnlineStatus from '../../components/useOnlineStatus';
 
-import Breadcrumb from "../../components/BreadCrumb";
+import Breadcrumb from '../../components/BreadCrumb';
 
-import { FaSpinner } from "react-icons/fa";
+import { FaSpinner } from 'react-icons/fa';
 
 const Feathers = () => {
   const { isReliablyOnline } = useOnlineStatus(); // Estado de conectividad de la red
@@ -50,7 +50,7 @@ const Feathers = () => {
   const [progressLevel, setProgressLevel] = useState(0);
 
   const [localUser, setLocalUser] = useState(user);
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   const [claimAvailable, setclaimAvailable] = useState(true);
 
@@ -112,7 +112,7 @@ const Feathers = () => {
 
       // Verificar que existe la wallet
       if (!clientWallet) {
-        setMessage("❌ No wallet found. Please add a wallet first.");
+        setMessage('❌ No wallet found. Please add a wallet first.');
         setclaimAvailable(true);
         return;
       }
@@ -126,8 +126,8 @@ const Feathers = () => {
       const response = await fetchWithToken(
         `https://8txnxmkveg.us-east-1.awsapprunner.com/api/makePayment2`,
         {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         },
       );
@@ -149,19 +149,19 @@ const Feathers = () => {
       }
 
       console.log(`📡 Respuesta de la API (procesada):`, result);
-      setMessage(`✅ ${result.message || "Feathers claimed successfully!"}`);
+      setMessage(`✅ ${result.message || 'Feathers claimed successfully!'}`);
       await refreshClientData();
     } catch (error) {
-      console.error("Error en claimFeathers:", error);
-      setMessage(error.message || "❌ Error with the crypto payment.");
+      console.error('Error en claimFeathers:', error);
+      setMessage(error.message || '❌ Error with the crypto payment.');
     } finally {
       setclaimAvailable(true);
     }
   };
 
   const breadcrumbSegments = [
-    { name: "Home", path: "/" },
-    { name: "Feathers", path: "/feathers" },
+    { name: 'Home', path: '/' },
+    { name: 'Feathers', path: '/feathers' },
   ];
 
   return (
@@ -182,11 +182,11 @@ const Feathers = () => {
             <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
               <span className="text-yellow-500 inline-flex items-center mr-2">
                 {featherIcon}
-              </span>{" "}
+              </span>{' '}
               Feathers
             </h2>
             <p>
-              Feathers: {localClientData.points} /{" "}
+              Feathers: {localClientData.points} /{' '}
               {
                 localLevelData[localClientData.level - 1]
                   .feathers_needed_to_claim
@@ -197,7 +197,7 @@ const Feathers = () => {
                 className="bg-teal-600 h-2.5 rounded-full"
                 style={{
                   width: `${progress}%`,
-                  transition: "width 1s ease-in-out",
+                  transition: 'width 1s ease-in-out',
                 }}
               ></div>
             </div>
@@ -231,21 +231,21 @@ const Feathers = () => {
               <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
                 <span className="text-yellow-500 inline-flex items-center mr-2">
                   <FontAwesomeIcon icon={falevel} />
-                </span>{" "}
+                </span>{' '}
                 Level {localClientData.level}
               </h2>
 
               <div className="border p-2 rounded-md bg-white">
                 <div className="font-bold italic">Benefits</div>
                 <p>
-                  Quizzes per day: {localClientData.quizzestoday || "0"} /{" "}
+                  Quizzes per day: {localClientData.quizzestoday || '0'} /{' '}
                   {localLevelData[localClientData.level - 1]
-                    ?.maxquizzesperday || "0"}
+                    ?.maxquizzesperday || '0'}
                 </p>
                 <p>
-                  Games per day: {localClientData.gamestoday || "0"} /{" "}
+                  Games per day: {localClientData.gamestoday || '0'} /{' '}
                   {localLevelData[localClientData.level - 1]?.maxgamesperday ||
-                    "0"}
+                    '0'}
                 </p>
                 <p>
                   {4 + localClientData.level} <b>feathers</b> per quiz completed
@@ -258,7 +258,7 @@ const Feathers = () => {
                   {
                     localLevelData[localClientData.level - 1]
                       .feathers_needed_to_claim
-                  }{" "}
+                  }{' '}
                   <b>feathers</b> minimun to claim
                 </p>
               </div>
@@ -266,7 +266,7 @@ const Feathers = () => {
               <div className="border p-2 rounded-md bg-white mt-2">
                 <div className="font-bold italic">Requirements to level up</div>
                 <p>
-                  Quizzes finished: {localClientData.quizzesdone} /{" "}
+                  Quizzes finished: {localClientData.quizzesdone} /{' '}
                   {localLevelData[localClientData.level - 1].quizzestolevelup}
                   {localLevelData[localClientData.level - 1].quizzestolevelup <=
                     localClientData.quizzesdone && (
@@ -276,7 +276,7 @@ const Feathers = () => {
                   )}
                 </p>
                 <p>
-                  Games finished: {localClientData.gamesdone} /{" "}
+                  Games finished: {localClientData.gamesdone} /{' '}
                   {localLevelData[localClientData.level - 1].gamestolevelup}
                   {localLevelData[localClientData.level - 1].gamestolevelup <=
                     localClientData.gamesdone && (
@@ -287,7 +287,7 @@ const Feathers = () => {
                 </p>
 
                 <p>
-                  Feathers to level up: {localClientData.totalfeathers} /{" "}
+                  Feathers to level up: {localClientData.totalfeathers} /{' '}
                   {localLevelData[localClientData.level - 1].tolevelup}
                 </p>
                 <div className="w-full bg-gray-300 rounded-full h-2.5 mt-2">
@@ -295,7 +295,7 @@ const Feathers = () => {
                     className="bg-teal-600 h-2.5 rounded-full"
                     style={{
                       width: `${progressLevel}%`,
-                      transition: "width 1s ease-in-out",
+                      transition: 'width 1s ease-in-out',
                     }}
                   ></div>
                 </div>
@@ -325,14 +325,14 @@ const Feathers = () => {
               <div className="border p-2 rounded-md">
                 <div className="font-bold italic">Benefits</div>
                 <p>
-                  Quizzes per day:{" "}
+                  Quizzes per day:{' '}
                   {localLevelData[localClientData.level]?.maxquizzesperday ||
-                    "N/A"}
+                    'N/A'}
                 </p>
                 <p>
-                  Games per day:{" "}
+                  Games per day:{' '}
                   {localLevelData[localClientData.level]?.maxgamesperday ||
-                    "N/A"}
+                    'N/A'}
                 </p>
                 <p>
                   {4 + localClientData.level + 1} <b>feathers</b> per quiz
@@ -350,7 +350,7 @@ const Feathers = () => {
             <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
               <span className="text-yellow-500 inline-flex items-center mr-2">
                 <FontAwesomeIcon icon={facal} />
-              </span>{" "}
+              </span>{' '}
               Dailies
             </h2>
             <p className="italic">Coming soon</p>

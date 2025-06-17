@@ -18,7 +18,7 @@ const firebaseConfig = {
 async function generateRoutes() {
   try {
     // --- DEBUG: Verificando qué configuración de Firebase se está usando ---
-    console.log("DEBUG: GenerateRoutes script...");
+    console.log('DEBUG: GenerateRoutes script...');
     console.log(`DEBUG: Firebase project: ${firebaseConfig.projectId}`);
     // --- Fin DEBUG ---
 
@@ -28,7 +28,7 @@ async function generateRoutes() {
 
     // Obtener las categorías de los quizzes desde Firestore
     //console.log("DEBUG: Intentando obtener quizzes de la colección 'quizzes' en Firestore...");
-    const snapshot = await getDocs(collection(db, "quizzes"));
+    const snapshot = await getDocs(collection(db, 'quizzes'));
     console.log(`DEBUG: ${snapshot.size} documents in 'quizzes' collection.`); // Usamos .size para saber cuántos docs se encontraron
 
     const categories = new Set();
@@ -68,21 +68,21 @@ async function generateRoutes() {
     // Escribir las rutas en el archivo routesprecache.json
     const filePath = path.join(
       __dirname,
-      "..",
-      "public",
-      "routesprecache.json",
+      '..',
+      'public',
+      'routesprecache.json',
     );
-    await fs.writeFile(filePath, JSON.stringify(routesToPrecache), "utf-8");
+    await fs.writeFile(filePath, JSON.stringify(routesToPrecache), 'utf-8');
     console.log(
-      "Archivo public/routesprecache.json generado exitosamente con las categorías de quizzes.",
+      'Archivo public/routesprecache.json generado exitosamente con las categorías de quizzes.',
     );
     console.log(
-      "DEBUG: Contenido total del archivo routesprecache.json (primeras 500 chars):",
-      JSON.stringify(routesToPrecache).substring(0, 500) + "...",
+      'DEBUG: Contenido total del archivo routesprecache.json (primeras 500 chars):',
+      JSON.stringify(routesToPrecache).substring(0, 500) + '...',
     );
   } catch (error) {
     console.error(
-      "Error al obtener las categorías de Firebase o al escribir el archivo:",
+      'Error al obtener las categorías de Firebase o al escribir el archivo:',
       error,
     );
     // DEBUG: Mostrar el stack de error completo

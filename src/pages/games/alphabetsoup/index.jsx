@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import Popup from "../../../components/Popup";
-import Breadcrumb from "../../../components/BreadCrumb";
-import { AppClientContext } from "../../../context/ClientDataProvider";
-import useAuthStatus from "../../../components/useAuthStatus";
-import useOnlineStatus from "../../../components/useOnlineStatus";
+import React, { useState, useEffect, useContext, useRef } from 'react';
+import Popup from '../../../components/Popup';
+import Breadcrumb from '../../../components/BreadCrumb';
+import { AppClientContext } from '../../../context/ClientDataProvider';
+import useAuthStatus from '../../../components/useAuthStatus';
+import useOnlineStatus from '../../../components/useOnlineStatus';
 
 const SopaDeLetras = () => {
   const { isReliablyOnline } = useOnlineStatus();
@@ -78,183 +78,183 @@ const SopaDeLetras = () => {
 
   // Lista de palabras
   const palabrasPosibles = [
-    "HOUSE",
-    "MOTOR",
-    "BOOK",
-    "TRAIN",
-    "SUN",
-    "LIGHT",
-    "WATER",
-    "FIRE",
-    "EARTH",
-    "AIR",
-    "CAR",
-    "BOAT",
-    "PAPER",
-    "PEN",
-    "FLOWER",
-    "TREE",
-    "TABLE",
-    "CHAIR",
-    "LAPTOP",
-    "KEYBOARD",
-    "MOUSE",
-    "SCREEN",
-    "FRAME",
-    "CLOCK",
-    "PLANT",
-    "KITCHEN",
-    "DOOR",
-    "GARDEN",
-    "ROAD",
-    "BEACH",
-    "SKY",
-    "GROUND",
-    "FOREST",
-    "RIVER",
-    "SEA",
-    "WALL",
-    "WINDOW",
-    "DRAWER",
-    "DRINK",
-    "INKPOT",
-    "TICKET",
-    "PANTS",
-    "SHOES",
-    "HAT",
-    "SCARF",
-    "BOTTLE",
-    "GLASS",
-    "KNIFE",
-    "OVEN",
-    "CARD",
-    "MONEY",
-    "MUSEUM",
-    "THEATER",
-    "CINEMA",
-    "COFFEE",
-    "MILK",
-    "CHEESE",
-    "BREAD",
-    "GUITAR",
-    "DRUM",
-    "BALCONY",
-    "PILLOW",
-    "SHIRT",
-    "SKIRT",
-    "JACKET",
-    "COAT",
-    "STONE",
-    "TRUCK",
-    "MARCH",
-    "TRAVEL",
-    "PLANE",
-    "BIKE",
-    "DREAM",
-    "CLOUD",
-    "STAR",
-    "PLANET",
-    "SWORD",
-    "HELMET",
-    "SHIELD",
-    "RING",
-    "NECKLACE",
-    "EARRING",
-    "GAME",
-    "TOWER",
-    "CASTLE",
-    "BRIDGE",
-    "PAINT",
-    "BRUSH",
-    "BRICK",
-    "CANDLE",
-    "CANOPY",
-    "CARPET",
-    "CART",
-    "CHALK",
-    "CLOAK",
-    "CUPBOARD",
-    "CUSHION",
-    "DESK",
-    "DOCK",
-    "DOLLAR",
-    "DRESS",
-    "DRIVER",
-    "ENGINE",
-    "FENCE",
-    "FLOOR",
-    "FORK",
-    "FRIDGE",
-    "FRUIT",
-    "GLOBE",
-    "GOLD",
-    "HAMMER",
-    "HANDLE",
-    "HANGER",
-    "HEATER",
-    "HILL",
-    "ISLAND",
-    "JEANS",
-    "JUG",
-    "KETTLE",
-    "LADDER",
-    "LAMP",
-    "LEMON",
-    "LOCKER",
-    "MARKER",
-    "MIRROR",
-    "MUG",
-    "NAPKIN",
-    "NEEDLE",
-    "NIGHT",
-    "OCEAN",
-    "OFFICE",
-    "ORANGE",
-    "PALACE",
-    "PENCIL",
-    "PLATES",
-    "PORTAL",
-    "POSTER",
-    "POTATO",
-    "POUCH",
-    "QUARTZ",
-    "QUILL",
-    "RACKET",
-    "RAILWAY",
-    "REMOTE",
-    "ROCKET",
-    "ROOF",
-    "ROOM",
-    "SADDLE",
-    "SALAD",
-    "SANDAL",
-    "SCHOOL",
-    "SEAT",
-    "SHELF",
-    "SHELL",
-    "SINK",
-    "SOCKET",
-    "SPOON",
-    "STAPLE",
-    "STATUE",
-    "STICKER",
-    "STOVE",
-    "SUITCASE",
-    "SWITCH",
-    "TENT",
-    "FOSSIL",
-    "GOWN",
-    "LADLE",
-    "PEBBLE",
-    "SPEAR",
-    "VASE",
-    "BLADE",
-    "PIGEON",
-    "POTION",
-    "TUNNEL",
-    "HARBOR",
-    "ANCHOR",
-    "TUNICS",
+    'HOUSE',
+    'MOTOR',
+    'BOOK',
+    'TRAIN',
+    'SUN',
+    'LIGHT',
+    'WATER',
+    'FIRE',
+    'EARTH',
+    'AIR',
+    'CAR',
+    'BOAT',
+    'PAPER',
+    'PEN',
+    'FLOWER',
+    'TREE',
+    'TABLE',
+    'CHAIR',
+    'LAPTOP',
+    'KEYBOARD',
+    'MOUSE',
+    'SCREEN',
+    'FRAME',
+    'CLOCK',
+    'PLANT',
+    'KITCHEN',
+    'DOOR',
+    'GARDEN',
+    'ROAD',
+    'BEACH',
+    'SKY',
+    'GROUND',
+    'FOREST',
+    'RIVER',
+    'SEA',
+    'WALL',
+    'WINDOW',
+    'DRAWER',
+    'DRINK',
+    'INKPOT',
+    'TICKET',
+    'PANTS',
+    'SHOES',
+    'HAT',
+    'SCARF',
+    'BOTTLE',
+    'GLASS',
+    'KNIFE',
+    'OVEN',
+    'CARD',
+    'MONEY',
+    'MUSEUM',
+    'THEATER',
+    'CINEMA',
+    'COFFEE',
+    'MILK',
+    'CHEESE',
+    'BREAD',
+    'GUITAR',
+    'DRUM',
+    'BALCONY',
+    'PILLOW',
+    'SHIRT',
+    'SKIRT',
+    'JACKET',
+    'COAT',
+    'STONE',
+    'TRUCK',
+    'MARCH',
+    'TRAVEL',
+    'PLANE',
+    'BIKE',
+    'DREAM',
+    'CLOUD',
+    'STAR',
+    'PLANET',
+    'SWORD',
+    'HELMET',
+    'SHIELD',
+    'RING',
+    'NECKLACE',
+    'EARRING',
+    'GAME',
+    'TOWER',
+    'CASTLE',
+    'BRIDGE',
+    'PAINT',
+    'BRUSH',
+    'BRICK',
+    'CANDLE',
+    'CANOPY',
+    'CARPET',
+    'CART',
+    'CHALK',
+    'CLOAK',
+    'CUPBOARD',
+    'CUSHION',
+    'DESK',
+    'DOCK',
+    'DOLLAR',
+    'DRESS',
+    'DRIVER',
+    'ENGINE',
+    'FENCE',
+    'FLOOR',
+    'FORK',
+    'FRIDGE',
+    'FRUIT',
+    'GLOBE',
+    'GOLD',
+    'HAMMER',
+    'HANDLE',
+    'HANGER',
+    'HEATER',
+    'HILL',
+    'ISLAND',
+    'JEANS',
+    'JUG',
+    'KETTLE',
+    'LADDER',
+    'LAMP',
+    'LEMON',
+    'LOCKER',
+    'MARKER',
+    'MIRROR',
+    'MUG',
+    'NAPKIN',
+    'NEEDLE',
+    'NIGHT',
+    'OCEAN',
+    'OFFICE',
+    'ORANGE',
+    'PALACE',
+    'PENCIL',
+    'PLATES',
+    'PORTAL',
+    'POSTER',
+    'POTATO',
+    'POUCH',
+    'QUARTZ',
+    'QUILL',
+    'RACKET',
+    'RAILWAY',
+    'REMOTE',
+    'ROCKET',
+    'ROOF',
+    'ROOM',
+    'SADDLE',
+    'SALAD',
+    'SANDAL',
+    'SCHOOL',
+    'SEAT',
+    'SHELF',
+    'SHELL',
+    'SINK',
+    'SOCKET',
+    'SPOON',
+    'STAPLE',
+    'STATUE',
+    'STICKER',
+    'STOVE',
+    'SUITCASE',
+    'SWITCH',
+    'TENT',
+    'FOSSIL',
+    'GOWN',
+    'LADLE',
+    'PEBBLE',
+    'SPEAR',
+    'VASE',
+    'BLADE',
+    'PIGEON',
+    'POTION',
+    'TUNNEL',
+    'HARBOR',
+    'ANCHOR',
+    'TUNICS',
   ];
 
   const GRID_SIZE = 8;
@@ -293,7 +293,7 @@ const SopaDeLetras = () => {
         Array(tamano)
           .fill(null)
           .map(() => ({
-            letra: "",
+            letra: '',
             palabraIndices: [],
             esPalabra: false,
           })),
@@ -398,7 +398,7 @@ const SopaDeLetras = () => {
       setEncontradas([]);
       setSeleccion({ inicio: null, fin: null, celdas: [] });
     } catch (error) {
-      console.error("Error al iniciar juego:", error);
+      console.error('Error al iniciar juego:', error);
       setGrid([]);
       setPalabras([]);
     }
@@ -475,8 +475,8 @@ const SopaDeLetras = () => {
 
     const palabraSeleccionada = seleccion.celdas
       .map((c) => grid[c.row][c.col].letra)
-      .join("");
-    const palabraInvertida = palabraSeleccionada.split("").reverse().join("");
+      .join('');
+    const palabraInvertida = palabraSeleccionada.split('').reverse().join('');
 
     const index = palabras.findIndex(
       (p) => p === palabraSeleccionada || p === palabraInvertida,
@@ -495,21 +495,21 @@ const SopaDeLetras = () => {
               setScore(scoreValue);
               if (isReliablyOnline) {
                 try {
-                  triggerGoal("gameCompleted");
+                  triggerGoal('gameCompleted');
 
                   // Usamos Promise.all para ejecutar todas las guardadas en paralelo
                   // y esperamos a que TODAS terminen.
                   await Promise.all([
-                    saveDataToApi("savePoints", { points: scoreValue }),
-                    saveDataToApi("saveGametoday", { gamestoday: 1 }),
-                    saveDataToApi("saveGamedone", { gamesdone: 1 }),
+                    saveDataToApi('savePoints', { points: scoreValue }),
+                    saveDataToApi('saveGametoday', { gamestoday: 1 }),
+                    saveDataToApi('saveGamedone', { gamesdone: 1 }),
                   ]);
 
                   // AHORA, y solo ahora, refrescamos los datos del cliente.
                   // Esto garantiza que el servidor ha procesado todo lo anterior.
                   refreshClientData();
                 } catch (error) {
-                  console.error("Error al guardar los datos del juego:", error);
+                  console.error('Error al guardar los datos del juego:', error);
                   // Aquí podrías mostrar un error al usuario si algo falla
                 } finally {
                   setRetryAvailable(true);
@@ -569,9 +569,9 @@ const SopaDeLetras = () => {
   };
 
   const breadcrumbSegments = [
-    { name: "Home", path: "/" },
-    { name: "Games", path: "/games" },
-    { name: "Alphabet Soup", path: `/games/alphabetsoup` },
+    { name: 'Home', path: '/' },
+    { name: 'Games', path: '/games' },
+    { name: 'Alphabet Soup', path: `/games/alphabetsoup` },
   ];
   const isAuthenticated = useAuthStatus();
 
@@ -620,7 +620,9 @@ const SopaDeLetras = () => {
         </div>
       )}
       <div className="flex flex-col items-center justify-center mt-4">
-        <h1>Alphabet Soup</h1>
+        <h1 className="text-3xl font-bold mb-4 text-[#1e2a47]">
+          Alphabet Soup
+        </h1>
         <Popup
           isOpen={modalState.isOpen}
           onClose={closeModal}
@@ -652,10 +654,10 @@ const SopaDeLetras = () => {
                       className={`w-8 h-8 flex items-center justify-center font-bold cursor-pointer text-lg
                       ${
                         estaEncontrada(rowIndex, colIndex)
-                          ? "bg-green-300"
+                          ? 'bg-green-300'
                           : estaSeleccionada(rowIndex, colIndex)
-                            ? "bg-blue-200"
-                            : "bg-white"
+                            ? 'bg-blue-200'
+                            : 'bg-white'
                       }`}
                       onMouseDown={() => handleMouseDown(rowIndex, colIndex)}
                       onTouchStart={() => handleMouseDown(rowIndex, colIndex)}
@@ -674,7 +676,7 @@ const SopaDeLetras = () => {
             {palabras.map((palabra, index) => (
               <span
                 key={index}
-                className={`${encontradas.includes(index) ? "bg-blue-50 text-black line-through" : "bg-blue-800 text-white"} p-2 mr-2 ml-2 border-2 border-[#1e2a47] rounded-lg shadow-lg inline-block m-2`}
+                className={`${encontradas.includes(index) ? 'bg-blue-50 text-black line-through' : 'bg-blue-800 text-white'} p-2 mr-2 ml-2 border-2 border-[#1e2a47] rounded-lg shadow-lg inline-block m-2`}
               >
                 {palabra}
               </span>

@@ -1,19 +1,34 @@
+<<<<<<< HEAD
 import React, { useContext, useEffect } from "react";
+=======
+import React, { useContext, useEffect } from 'react';
+>>>>>>> main
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithCredential,
+<<<<<<< HEAD
 } from "firebase/auth"; // CAMBIO: Importamos signInWithCredential
 import { app } from "../firebase";
 import { useRouter } from "next/router";
 import { AppClientContext } from "../context/ClientDataProvider";
+=======
+} from 'firebase/auth'; // CAMBIO: Importamos signInWithCredential
+import { app } from '../firebase';
+import { useRouter } from 'next/router';
+import { AppClientContext } from '../context/ClientDataProvider';
+>>>>>>> main
 
 import useJwtToken from "./useJwtToken"; // Importar el hook que creamos
 
 // CAMBIO: Importamos el plugin de Capacitor
 import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
 
+<<<<<<< HEAD
 import useOnlineStatus from "./useOnlineStatus";
+=======
+import useOnlineStatus from './useOnlineStatus';
+>>>>>>> main
 
 const GoogleRegister = ({ acceptedTerms }) => {
   const { isReliablyOnline } = useOnlineStatus(); // Estado de conectividad de la red
@@ -33,7 +48,11 @@ const GoogleRegister = ({ acceptedTerms }) => {
   const handleGoogleAuth = async () => {
     if (!acceptedTerms) {
       alert(
+<<<<<<< HEAD
         "You must accept the terms and conditions and confirm your age before registering.",
+=======
+        'You must accept the terms and conditions and confirm your age before registering.',
+>>>>>>> main
       );
       return;
     }
@@ -49,6 +68,7 @@ const GoogleRegister = ({ acceptedTerms }) => {
 
       if (!idToken) {
         console.error(
+<<<<<<< HEAD
           "❌ No se pudo obtener el ID Token de Google desde el plugin.",
         );
         // Aquí podrías añadir una lógica para manejar la cancelación por parte del usuario o un error específico del plugin.
@@ -56,6 +76,15 @@ const GoogleRegister = ({ acceptedTerms }) => {
           alert("Registro cancelado por el usuario.");
         } else {
           alert("Error al obtener credenciales de Google. Intenta de nuevo.");
+=======
+          '❌ No se pudo obtener el ID Token de Google desde el plugin.',
+        );
+        // Aquí podrías añadir una lógica para manejar la cancelación por parte del usuario o un error específico del plugin.
+        if (result.code === 'cancelled') {
+          alert('Registro cancelado por el usuario.');
+        } else {
+          alert('Error al obtener credenciales de Google. Intenta de nuevo.');
+>>>>>>> main
         }
         return;
       }
@@ -74,9 +103,15 @@ const GoogleRegister = ({ acceptedTerms }) => {
 
       if (!user || !user.email) {
         console.error(
+<<<<<<< HEAD
           "❌ No se pudo obtener la información del usuario de Firebase después de signInWithCredential.",
         );
         alert("Error en el registro. Intenta de nuevo.");
+=======
+          '❌ No se pudo obtener la información del usuario de Firebase después de signInWithCredential.',
+        );
+        alert('Error en el registro. Intenta de nuevo.');
+>>>>>>> main
         return;
       }
 
@@ -92,10 +127,17 @@ const GoogleRegister = ({ acceptedTerms }) => {
       // ----------------------------------------------------------------------------------
 
       const response = await fetchWithToken(
+<<<<<<< HEAD
         "https://8txnxmkveg.us-east-1.awsapprunner.com/api/register",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
+=======
+        'https://8txnxmkveg.us-east-1.awsapprunner.com/api/register',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+>>>>>>> main
           body: JSON.stringify(userData),
         },
       );
@@ -104,15 +146,23 @@ const GoogleRegister = ({ acceptedTerms }) => {
 
       if (response.status === 201) {
         console.log(
+<<<<<<< HEAD
           "✅ Usuario registrado y guardado en la base de datos:",
+=======
+          '✅ Usuario registrado y guardado en la base de datos:',
+>>>>>>> main
           data,
         );
         setUser(user);
         setClientData(data.client);
-        router.push("/");
+        router.push('/');
       } else if (response.status === 409) {
         console.warn(
+<<<<<<< HEAD
           "⚠️ Usuario ya registrado. Iniciando sesión automáticamente...",
+=======
+          '⚠️ Usuario ya registrado. Iniciando sesión automáticamente...',
+>>>>>>> main
         );
 
         const loginResponse = await fetchWithToken(
@@ -122,28 +172,39 @@ const GoogleRegister = ({ acceptedTerms }) => {
 
         if (loginResponse.ok) {
           console.log(
+<<<<<<< HEAD
             "✅ Datos del cliente obtenidos al iniciar sesión:",
+=======
+            '✅ Datos del cliente obtenidos al iniciar sesión:',
+>>>>>>> main
             clientData,
           );
           setUser(user);
           setClientData(clientData);
-          router.push("/");
+          router.push('/');
         } else {
-          console.error("❌ Error al obtener los datos del cliente.");
-          alert("Error al obtener tus datos. Intenta de nuevo.");
+          console.error('❌ Error al obtener los datos del cliente.');
+          alert('Error al obtener tus datos. Intenta de nuevo.');
         }
       } else {
+<<<<<<< HEAD
         console.error("❌ Error en el registro:", data);
         alert(
           "Error en el registro. Verifica tu conexión e intenta nuevamente.",
+=======
+        console.error('❌ Error en el registro:', data);
+        alert(
+          'Error en el registro. Verifica tu conexión e intenta nuevamente.',
+>>>>>>> main
         );
       }
     } catch (error) {
-      console.error("❌ Error al registrarse con Google:", error);
+      console.error('❌ Error al registrarse con Google:', error);
       // Aquí puedes manejar errores específicos del plugin o de Firebase Authentication
       // Por ejemplo, error si el usuario cancela la autenticación nativa
       if (error.code === "cancelled") {
         // No hacer nada, el usuario canceló
+<<<<<<< HEAD
         console.log("Registro de Google cancelado por el usuario.");
       } else if (error.code === "auth/popup-closed-by-user") {
         // Para el caso web/PWA
@@ -151,6 +212,15 @@ const GoogleRegister = ({ acceptedTerms }) => {
       } else {
         alert(
           "Error en la conexión con el servidor o autenticación fallida. Intenta de nuevo.",
+=======
+        console.log('Registro de Google cancelado por el usuario.');
+      } else if (error.code === 'auth/popup-closed-by-user') {
+        // Para el caso web/PWA
+        console.log('El popup de autenticación fue cerrado por el usuario.');
+      } else {
+        alert(
+          'Error en la conexión con el servidor o autenticación fallida. Intenta de nuevo.',
+>>>>>>> main
         );
       }
     }

@@ -1,12 +1,12 @@
-import React, { memo, useContext, useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import GoogleLogin from "../components/GoogleLogin";
-import { AppClientContext } from "../context/ClientDataProvider";
-import { FaFeather, FaSpinner } from "react-icons/fa";
-import PointsDisplay from "../components/PointsDisplay";
-import useOnlineStatus from "../components/useOnlineStatus"; // Asumo que ya tienes este hook
-import useAuthStatus from "../components/useAuthStatus"; // ¡Importa el nuevo hook!
-import ThemeToggleButton from "./ThemeToggleButton";
+import React, { memo, useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import GoogleLogin from '../components/GoogleLogin';
+import { AppClientContext } from '../context/ClientDataProvider';
+import { FaFeather, FaSpinner } from 'react-icons/fa';
+import PointsDisplay from '../components/PointsDisplay';
+import useOnlineStatus from '../components/useOnlineStatus'; // Asumo que ya tienes este hook
+import useAuthStatus from '../components/useAuthStatus'; // ¡Importa el nuevo hook!
+import ThemeToggleButton from './ThemeToggleButton';
 
 const Header = memo(() => {
   const { user, clientData, bebasNeueClass } = useContext(AppClientContext);
@@ -73,7 +73,7 @@ const Header = memo(() => {
         <div className="flex items-center space-x-2 cursor-pointer h-10">
           <div
             className="flex items-center"
-            onClick={() => router.push("/feathers")}
+            onClick={() => router.push('/feathers')}
           >
             <PointsDisplay />
             <div className="avatar bg-yellow-500 rounded-full flex items-center justify-center shadow-lg p-2">
@@ -81,12 +81,12 @@ const Header = memo(() => {
             </div>
           </div>
           <img
-            src={user.photoURL || "/assets/images/usuario.png"} // Usa photoURL o el avatar por defecto
+            src={user.photoURL || '/assets/images/usuario.png'} // Usa photoURL o el avatar por defecto
             alt="Foto de perfil"
             className="avatar cursor-pointer"
-            onClick={() => router.push("/profile")}
+            onClick={() => router.push('/profile')}
             onError={(e) => {
-              e.target.src = "/assets/images/usuario.png"; // Fallback por si la URL de la imagen es inválida
+              e.target.src = '/assets/images/usuario.png'; // Fallback por si la URL de la imagen es inválida
             }}
           />
         </div>
@@ -107,7 +107,7 @@ const Header = memo(() => {
                   disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
                   "
             disabled={!isReliablyOnline ? true : false}
-            onClick={() => router.push("/signin")}
+            onClick={() => router.push('/signin')}
           >
             Sign in
           </button>
@@ -127,7 +127,7 @@ const Header = memo(() => {
         <div
           id="logoheader"
           className={`flex items-center cursor-pointer ${bebasNeueClass}`}
-          onClick={() => router.push("/")}
+          onClick={() => router.push('/')}
         >
           <img
             src="/assets/images/logo-64x64.svg"

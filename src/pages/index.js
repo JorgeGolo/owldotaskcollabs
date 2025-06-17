@@ -1,14 +1,14 @@
-import { React, useState, useEffect, useContext } from "react";
-import StatsSection from "../components/StatsSection";
-import Head from "next/head";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { app } from "../firebase";
-import CategoryMap from "../components/CategoryMap"; // importa el componente
-import { AppClientContext } from "../context/ClientDataProvider";
-import TechGrid from "../components/TechGrid";
+import { React, useState, useEffect, useContext } from 'react';
+import StatsSection from '../components/StatsSection';
+import Head from 'next/head';
+import { getFirestore, collection, getDocs } from 'firebase/firestore';
+import { app } from '../firebase';
+import CategoryMap from '../components/CategoryMap'; // importa el componente
+import { AppClientContext } from '../context/ClientDataProvider';
+import TechGrid from '../components/TechGrid';
 
-import AdMobBanner1 from "../components/AdMobBanner1"; // Adjust path as needed
-import Link from "next/link";
+import AdMobBanner1 from '../components/AdMobBanner1'; // Adjust path as needed
+import Link from 'next/link';
 
 const Home = ({
   stats = { feathers: 0, quizzes: 0, questions: 0 },
@@ -23,7 +23,7 @@ const Home = ({
 
   const { featherIcon } = useContext(AppClientContext);
 
-  const [canonicalUrl, setCanonicalUrl] = useState("");
+  const [canonicalUrl, setCanonicalUrl] = useState('');
 
   // Evento de prueba para GTM
   useEffect(() => {
@@ -36,7 +36,7 @@ const Home = ({
   }, []);
 
   useEffect(() => {
-    const url = `https://${window.location.hostname.replace(/^www\./, "")}${window.location.pathname}`;
+    const url = `https://${window.location.hostname.replace(/^www\./, '')}${window.location.pathname}`;
     setCanonicalUrl(url);
   }, []);
 
@@ -55,7 +55,7 @@ const Home = ({
           <h1 className="text-2xl font-bold  mb-6">
             <span className="text-[#214396] dark:text-light-blue">
               Owldotask
-            </span>{" "}
+            </span>{' '}
             – Learn, Play, and Earn
           </h1>
 
@@ -177,16 +177,16 @@ const Home = ({
 
 export async function getStaticProps() {
   const db = getFirestore(app);
-  const querySnapshot = await getDocs(collection(db, "quizzes"));
+  const querySnapshot = await getDocs(collection(db, 'quizzes'));
 
   // Serializador compatible con Next.js
   const serialize = (obj) => {
     if (obj === undefined) return null;
     if (obj === null) return null;
     if (obj instanceof Date) return obj.toISOString();
-    if (typeof obj.toDate === "function") return obj.toDate().toISOString();
+    if (typeof obj.toDate === 'function') return obj.toDate().toISOString();
     if (Array.isArray(obj)) return obj.map(serialize);
-    if (typeof obj === "object") {
+    if (typeof obj === 'object') {
       const newObj = {};
       for (const key in obj) {
         newObj[key] = serialize(obj[key]);

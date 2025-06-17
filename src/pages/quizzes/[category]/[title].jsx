@@ -1,22 +1,22 @@
 // ✅ Página dinámica de cuestionarios con rutas estáticas en Next.js
-import { React, useContext } from "react";
-import { collection, getDocs, query, where, doc } from "firebase/firestore";
-import { db } from "../../../firebase";
-import Breadcrumb from "../../../components/BreadCrumb";
-import Test from "../../../components/Test";
-import Head from "next/head";
-import { motion } from "framer-motion";
-import { AppClientContext } from "../../../context/ClientDataProvider";
+import { React, useContext } from 'react';
+import { collection, getDocs, query, where, doc } from 'firebase/firestore';
+import { db } from '../../../firebase';
+import Breadcrumb from '../../../components/BreadCrumb';
+import Test from '../../../components/Test';
+import Head from 'next/head';
+import { motion } from 'framer-motion';
+import { AppClientContext } from '../../../context/ClientDataProvider';
 
 //
-import useOnlineStatus from "../../../components/useOnlineStatus"; // Importa el hook de estado de conexión
+import useOnlineStatus from '../../../components/useOnlineStatus'; // Importa el hook de estado de conexión
 
 function serialize(obj) {
   if (obj === undefined || obj === null) return null;
-  if (typeof obj.toDate === "function") return obj.toDate().toISOString();
+  if (typeof obj.toDate === 'function') return obj.toDate().toISOString();
   if (obj instanceof Date) return obj.toISOString();
   if (Array.isArray(obj)) return obj.map(serialize);
-  if (typeof obj === "object") {
+  if (typeof obj === 'object') {
     const newObj = {};
     for (const key in obj) {
       newObj[key] = serialize(obj[key]);
@@ -27,7 +27,7 @@ function serialize(obj) {
 }
 
 export async function getStaticPaths() {
-  const snapshot = await getDocs(collection(db, "quizzes"));
+  const snapshot = await getDocs(collection(db, 'quizzes'));
   const paths = snapshot.docs.map((docSnap) => {
     const data = docSnap.data();
     return {
@@ -47,9 +47,9 @@ export async function getStaticPathsPRO() {
 
   try {
     const res = await fetch(
-      "https://8txnxmkveg.us-east-1.awsapprunner.com/api/frontend/quizzes-paths",
+      'https://8txnxmkveg.us-east-1.awsapprunner.com/api/frontend/quizzes-paths',
     );
-    if (!res.ok) throw new Error("JSON fetch failed");
+    if (!res.ok) throw new Error('JSON fetch failed');
     const data = await res.json();
 
     paths = data.map(({ category, title }) => ({
@@ -60,7 +60,7 @@ export async function getStaticPathsPRO() {
   } catch (err) {
     console.warn("⚠️ Error al leer el JSON, usando Firebase como fallback");
 
-    const snapshot = await getDocs(collection(db, "quizzes"));
+    const snapshot = await getDocs(collection(db, 'quizzes'));
     paths = snapshot.docs.map((docSnap) => {
       const data = docSnap.data();
       return {
@@ -81,7 +81,7 @@ export async function getStaticPathsPRO() {
 export async function getStaticProps({ params }) {
   const { title, category } = params;
 
-  const q = query(collection(db, "quizzes"), where("title_slug", "==", title));
+  const q = query(collection(db, 'quizzes'), where('title_slug', '==', title));
   const querySnapshot = await getDocs(q);
 
   if (querySnapshot.empty) {
@@ -92,15 +92,15 @@ export async function getStaticProps({ params }) {
   const rawQuiz = quizDoc.data();
   const quiz = { id: quizDoc.id, ...serialize(rawQuiz) };
 
-  const chaptersRef = collection(doc(db, "quizzes", quizDoc.id), "chapters");
+  const chaptersRef = collection(doc(db, 'quizzes', quizDoc.id), 'chapters');
   const chaptersSnapshot = await getDocs(chaptersRef);
   const chapters = chaptersSnapshot.docs
     .map((doc) => serialize({ id: Number(doc.data().id), ...doc.data() }))
     .sort((a, b) => a.id - b.id);
 
   const fichalibroRef = collection(
-    doc(db, "quizzes", quizDoc.id),
-    "fichalibro",
+    doc(db, 'quizzes', quizDoc.id),
+    'fichalibro',
   );
   const fichalibroSnapshot = await getDocs(fichalibroRef);
   const fichalibro = fichalibroSnapshot.empty
@@ -118,8 +118,8 @@ const Questionnaire = ({ quiz, chapters, fichalibro, category }) => {
   const currentUrl = `https://owldotask.com/quizzes/${category}/${quiz.title_slug}/`;
 
   const breadcrumbSegments = [
-    { name: "Home", path: "/" },
-    { name: "Quizzes", path: "/quizzes" },
+    { name: 'Home', path: '/' },
+    { name: 'Quizzes', path: '/quizzes' },
     { name: quiz.category, path: `/quizzes/${category}` },
     { name: quiz.title, path: currentUrl },
   ];
@@ -127,7 +127,7 @@ const Questionnaire = ({ quiz, chapters, fichalibro, category }) => {
   const { shareOnSocial, getOfflineMessage } = useContext(AppClientContext);
 
   const shareMessage =
-    "Check out OwldoTask and earn feathers by completing tasks!";
+    'Check out OwldoTask and earn feathers by completing tasks!';
 
   return (
     <div className="flex flex-col lg:flex-row">
@@ -135,7 +135,7 @@ const Questionnaire = ({ quiz, chapters, fichalibro, category }) => {
         <title>{`${quiz.title} | Quiz | OwldoTask`}</title>
         <meta
           name="description"
-          content={`Discover our ${quiz.title} quiz and earn ${quiz.numberOfQuestions ?? "a bunch of"} feathers!`}
+          content={`Discover our ${quiz.title} quiz and earn ${quiz.numberOfQuestions ?? 'a bunch of'} feathers!`}
         />
         <link rel="canonical" href={currentUrl} />
 
@@ -163,7 +163,7 @@ const Questionnaire = ({ quiz, chapters, fichalibro, category }) => {
         />
         <meta
           name="twitter:description"
-          content={`Discover our ${quiz.title} quiz and earn ${quiz.numberOfQuestions ?? "a bunch of"} feathers!`}
+          content={`Discover our ${quiz.title} quiz and earn ${quiz.numberOfQuestions ?? 'a bunch of'} feathers!`}
         />
         <meta
           name="twitter:image"
@@ -182,10 +182,10 @@ const Questionnaire = ({ quiz, chapters, fichalibro, category }) => {
             <p className="italic text-sm">Share it!</p>
 
             <div className="flex items-center space-x-2 p-2">
-              {shareOnSocial("facebook", currentUrl, shareMessage)}
-              {shareOnSocial("twitter", currentUrl, shareMessage)}
-              {shareOnSocial("whatsapp", currentUrl, shareMessage)}
-              {shareOnSocial("reddit", currentUrl, shareMessage)}{" "}
+              {shareOnSocial('facebook', currentUrl, shareMessage)}
+              {shareOnSocial('twitter', currentUrl, shareMessage)}
+              {shareOnSocial('whatsapp', currentUrl, shareMessage)}
+              {shareOnSocial('reddit', currentUrl, shareMessage)}{' '}
               {/* ¡Botón de Reddit aquí! */}
             </div>
           </div>
@@ -255,7 +255,9 @@ const Questionnaire = ({ quiz, chapters, fichalibro, category }) => {
           <div className="mt-4">
             {chapters.map((chapter) => (
               <div key={chapter.id} className="mb-6">
-                <h3>{chapter.titulo}</h3>
+                <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                  {chapter.titulo}
+                </h3>
                 <p className="text-gray-600 leading-relaxed">
                   {chapter.contenido}
                 </p>

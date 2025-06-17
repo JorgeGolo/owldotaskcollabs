@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import GoogleRegister from "../../components/GoogleRegister";
+import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import GoogleRegister from '../../components/GoogleRegister';
 
-import useOnlineStatus from "../../components/useOnlineStatus";
+import useOnlineStatus from '../../components/useOnlineStatus';
 
 const signin = () => {
   const { isReliablyOnline } = useOnlineStatus(); // Estado de conectividad de la red
@@ -20,7 +20,7 @@ const signin = () => {
   useEffect(() => {
     if (router.query.message) {
       const messageType = router.query.message;
-      if (messageType === "not-registered") {
+      if (messageType === 'not-registered') {
         setErrorMessage(
           "It looks like you're not registered. Please create an account.",
         );
@@ -57,7 +57,7 @@ const signin = () => {
               className="mr-2"
             />
             <label htmlFor="terms">
-              I accept the{" "}
+              I accept the{' '}
               <Link href="/termsofservice" className="text-blue-500 underline">
                 Terms of service
               </Link>

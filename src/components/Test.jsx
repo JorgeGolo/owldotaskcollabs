@@ -1,18 +1,25 @@
-import React, { useEffect, useState, useCallback, useContext } from "react";
-import DotLoader from "react-spinners/DotLoader";
-import Confetti from "react-confetti";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Popup from "./Popup";
-import { AppClientContext } from "../context/ClientDataProvider";
+import React, { useEffect, useState, useCallback, useContext } from 'react';
+import DotLoader from 'react-spinners/DotLoader';
+import Confetti from 'react-confetti';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import Popup from './Popup';
+import { AppClientContext } from '../context/ClientDataProvider';
 
 //para el cargando
-import { FaSpinner } from "react-icons/fa";
+import { FaSpinner } from 'react-icons/fa';
 
 // token
+<<<<<<< HEAD
 import useJwtToken from "./useJwtToken"; // Importar el hook que creamos
 
 import useAuthStatus from "./useAuthStatus";
 import useOnlineStatus from "./useOnlineStatus";
+=======
+import useJwtToken from './useJwtToken'; // Importar el hook que creamos
+
+import useAuthStatus from './useAuthStatus';
+import useOnlineStatus from './useOnlineStatus';
+>>>>>>> main
 
 const Test = ({ chapters, numberOfQuestions }) => {
   const { isReliablyOnline } = useOnlineStatus();
@@ -53,7 +60,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
   const [questionData, setQuestionData] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [isAnswered, setIsAnswered] = useState(false);
-  const [feedback, setFeedback] = useState("");
+  const [feedback, setFeedback] = useState('');
   const [questionCount, setQuestionCount] = useState(0);
   const [quizFinished, setQuizFinished] = useState(false);
   const [score, setScore] = useState(0);
@@ -62,7 +69,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
 
   let scoretotal = 0;
 
-  const colorheader = "#1e2a47";
+  const colorheader = '#1e2a47';
   const progress = ((questionCount + 1) / numberOfQuestions) * 100;
 
   const getRandomChapter = () => {
@@ -81,11 +88,19 @@ const Test = ({ chapters, numberOfQuestions }) => {
 
       // Usar fetchWithToken en lugar de fetch normal
       const response = await fetchWithToken(
+<<<<<<< HEAD
         "https://8txnxmkveg.us-east-1.awsapprunner.com/api/groq/generate-question",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+=======
+        'https://8txnxmkveg.us-east-1.awsapprunner.com/api/groq/generate-question',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+>>>>>>> main
           },
           body: JSON.stringify({ chapter }),
         },
@@ -98,6 +113,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
           const textResponse = data.choices[0].message.content.trim();
           setQuestionData(JSON.parse(textResponse));
         } catch (err) {
+<<<<<<< HEAD
           console.error("❌ Error al parsear JSON desde Laravel+Groq:", err);
         }
       } else {
@@ -105,6 +121,15 @@ const Test = ({ chapters, numberOfQuestions }) => {
       }
     } catch (error) {
       console.error("❌ Error al llamar al endpoint Laravel:", error);
+=======
+          console.error('❌ Error al parsear JSON desde Laravel+Groq:', err);
+        }
+      } else {
+        console.error('❌ Error en la respuesta del backend:', data);
+      }
+    } catch (error) {
+      console.error('❌ Error al llamar al endpoint Laravel:', error);
+>>>>>>> main
     } finally {
       setLoading(false);
     }
@@ -163,17 +188,26 @@ const Test = ({ chapters, numberOfQuestions }) => {
 
             // Añadimos la promesa de guardar el quiz perfecto
             promisesToSave.push(
+<<<<<<< HEAD
               saveDataToApi("saveQuizzdone", { quizzesdone: 1 }),
             );
 
             // Muestra el primer popup
             triggerGoal("perfectScore");
+=======
+              saveDataToApi('saveQuizzdone', { quizzesdone: 1 }),
+            );
+
+            // Muestra el primer popup
+            triggerGoal('perfectScore');
+>>>>>>> main
             // Espera un poco para que el usuario lo vea antes del siguiente.
             await new Promise((resolve) => setTimeout(resolve, 1000));
           }
 
           // Añade el resto de promesas a la lista
           promisesToSave.push(
+<<<<<<< HEAD
             saveDataToApi("savePoints", { points: scoretotal }),
           );
           promisesToSave.push(
@@ -181,6 +215,15 @@ const Test = ({ chapters, numberOfQuestions }) => {
           );
           promisesToSave.push(
             saveDataToApi("saveQuizztoday", {
+=======
+            saveDataToApi('savePoints', { points: scoretotal }),
+          );
+          promisesToSave.push(
+            saveDataToApi('saveQuestions', { questionsright: score }),
+          );
+          promisesToSave.push(
+            saveDataToApi('saveQuizztoday', {
+>>>>>>> main
               quizzestoday: 1,
               score: scoretotal,
             }),
@@ -189,6 +232,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
           // 🚀 Paso 2: Ejecuta TODAS las promesas de guardado en paralelo.
           // El código solo continuará cuando TODAS se hayan completado con éxito.
           console.log(
+<<<<<<< HEAD
             "🔹 Enviando todas las solicitudes para registrar resultados...",
           );
           await Promise.all(promisesToSave);
@@ -198,6 +242,17 @@ const Test = ({ chapters, numberOfQuestions }) => {
 
           // Muestra el popup de "juego completado"
           triggerGoal("completion");
+=======
+            '🔹 Enviando todas las solicitudes para registrar resultados...',
+          );
+          await Promise.all(promisesToSave);
+          console.log(
+            '✅ Todos los resultados han sido registrados correctamente en el servidor.',
+          );
+
+          // Muestra el popup de "juego completado"
+          triggerGoal('completion');
+>>>>>>> main
           await new Promise((resolve) => setTimeout(resolve, 500));
 
           // ✅ Paso 3: AHORA, y solo ahora, refresca los datos del cliente UNA SOLA VEZ.
@@ -205,7 +260,11 @@ const Test = ({ chapters, numberOfQuestions }) => {
           await refreshClientData();
         }
       } catch (error) {
+<<<<<<< HEAD
         console.error("❌ Error al registrar resultados:", error);
+=======
+        console.error('❌ Error al registrar resultados:', error);
+>>>>>>> main
       } finally {
         setRetryAvailable(true);
       }
@@ -214,7 +273,11 @@ const Test = ({ chapters, numberOfQuestions }) => {
       setQuestionCount((prev) => prev + 1);
       setSelectedOption(null);
       setIsAnswered(false);
+<<<<<<< HEAD
       setFeedback("");
+=======
+      setFeedback('');
+>>>>>>> main
       if (!quizFinished) {
         setChapter(getRandomChapter());
       }
@@ -240,7 +303,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
     setQuizFinished(false);
     setSelectedOption(null);
     setIsAnswered(false);
-    setFeedback("");
+    setFeedback('');
     setChapter(getRandomChapter());
 
     // Verificar si se pueden ganar puntos al reiniciar
@@ -254,10 +317,10 @@ const Test = ({ chapters, numberOfQuestions }) => {
     setSelectedOption(index);
     setIsAnswered(true);
     if (index === questionData?.respuestaCorrecta) {
-      setFeedback("✅ Right!");
+      setFeedback('✅ Right!');
       setScore((prev) => prev + 1);
     } else {
-      setFeedback("❌ Wrong!");
+      setFeedback('❌ Wrong!');
     }
   };
 
@@ -276,7 +339,11 @@ const Test = ({ chapters, numberOfQuestions }) => {
             <div className="hidden text-green-500">Error: {pointsError}</div>
           ) : (
             <div>
+<<<<<<< HEAD
               {canEarnPoints === "cargando" ? (
+=======
+              {canEarnPoints === 'cargando' ? (
+>>>>>>> main
                 <div className="bg-[#fef9c3] border border-[#eab308] p-2 mb-2 italic text-[#705502] rounded-md">
                   Loading...
                 </div>
@@ -330,7 +397,11 @@ const Test = ({ chapters, numberOfQuestions }) => {
             <button
               onClick={restartTest}
               className={`bg-green-500 text-white p-2 rounded transition mt-4
+<<<<<<< HEAD
                   ${!retryAvailable ? "opacity-50 cursor-not-allowed" : "hover:bg-green-700"}`}
+=======
+                  ${!retryAvailable ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-700'}`}
+>>>>>>> main
               disabled={!retryAvailable}
             >
               Free Retry 🆓
@@ -350,6 +421,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
                   key={index}
                   className={`bg-white mb-4 cursor-pointer p-2 rounded ${
                     selectedOption !== null
+<<<<<<< HEAD
                       ? "opacity-50 cursor-not-allowed"
                       : ""
                   } ${
@@ -358,6 +430,16 @@ const Test = ({ chapters, numberOfQuestions }) => {
                         ? "bg-green-300"
                         : "bg-red-300"
                       : "hover:bg-gray-200"
+=======
+                      ? 'opacity-50 cursor-not-allowed'
+                      : ''
+                  } ${
+                    selectedOption === index
+                      ? index === questionData.respuestaCorrecta
+                        ? 'bg-green-300'
+                        : 'bg-red-300'
+                      : 'hover:bg-gray-200'
+>>>>>>> main
                   }`}
                   onClick={() => handleOptionClick(index)}
                 >
@@ -372,14 +454,24 @@ const Test = ({ chapters, numberOfQuestions }) => {
               onClick={handleNextQuestion}
               className={`bg-blue-500 text-white p-2 rounded transition mb-4 mt-4 ${
                 !isAnswered
+<<<<<<< HEAD
                   ? "opacity-50 cursor-not-allowed"
                   : "hover:bg-blue-700"
+=======
+                  ? 'opacity-50 cursor-not-allowed'
+                  : 'hover:bg-blue-700'
+>>>>>>> main
               }`}
               disabled={!isAnswered}
             >
               {questionCount >= numberOfQuestions - 1
+<<<<<<< HEAD
                 ? "Finish"
                 : "Next Question"}
+=======
+                ? 'Finish'
+                : 'Next Question'}
+>>>>>>> main
             </button>
 
             <div className="absolute bottom-0 left-0 w-full h-2 bg-gray-300 rounded">

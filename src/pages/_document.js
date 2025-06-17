@@ -1,4 +1,4 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from 'next/document';
 
 export default function Document() {
   return (
@@ -67,7 +67,7 @@ export default function Document() {
             src="https://www.googletagmanager.com/ns.html?id=GTM-K3N55PGV"
             height="0"
             width="0"
-            style={{ display: "none", visibility: "hidden" }}
+            style={{ display: 'none', visibility: 'hidden' }}
           ></iframe>
         </noscript>
         {/* End Google Tag Manager (noscript) */}

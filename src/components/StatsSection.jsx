@@ -4,6 +4,7 @@ import CountUp from "react-countup";
 const StatsSection = ({ feathersCount, quizzesCount, questionsCount }) => {
   const stats = [
     {
+<<<<<<< HEAD
       label: "Quizzes available",
       value: quizzesCount,
       color: "bg-blue-50 dark:bg-[#2382ff]",
@@ -17,6 +18,21 @@ const StatsSection = ({ feathersCount, quizzesCount, questionsCount }) => {
       label: "Feathers from quizzes",
       value: feathersCount,
       color: "bg-yellow-50 dark:bg-[#a69b28]",
+=======
+      label: 'Quizzes available',
+      value: quizzesCount,
+      color: 'bg-blue-50 dark:bg-[#2382ff]',
+    },
+    {
+      label: 'Questions created',
+      value: questionsCount,
+      color: 'bg-red-50 dark:bg-[#ef7e44]',
+    },
+    {
+      label: 'Feathers from quizzes',
+      value: feathersCount,
+      color: 'bg-yellow-50 dark:bg-[#a69b28]',
+>>>>>>> main
     },
   ];
 

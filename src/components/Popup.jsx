@@ -1,35 +1,48 @@
-import React, { useEffect } from "react";
-import Modal from "react-modal";
-import { FaFeather } from "react-icons/fa";
+import React, { useEffect } from 'react';
+import Modal from 'react-modal';
+import { FaFeather } from 'react-icons/fa';
 
+<<<<<<< HEAD
 Modal.setAppElement("#__next"); // o el ID que tenga tu elemento raíz
+=======
+Modal.setAppElement('#__next'); // o el ID que tenga tu elemento raíz
+>>>>>>> main
 
 // Estilos del modal
 const modalStyles = {
   content: {
-    position: "fixed",
-    top: "auto",
+    position: 'fixed',
+    top: 'auto',
     right: 0,
-    transform: "translateY(-50%)",
-    left: "auto",
-    width: "300px",
-    height: "auto",
+    transform: 'translateY(-50%)',
+    left: 'auto',
+    width: '300px',
+    height: 'auto',
     margin: 0,
+<<<<<<< HEAD
     padding: "20px",
     borderRadius: "10px 0 0 10px",
     boxShadow: "-2px 0 5px rgba(0,0,0,0.1)",
     animation:
       "slideInFromRight 0.5s ease-out, fadeOut 0.5s ease-in 1.5s forwards",
     backgroundColor: "#dcfce7",
+=======
+    padding: '20px',
+    borderRadius: '10px 0 0 10px',
+    boxShadow: '-2px 0 5px rgba(0,0,0,0.1)',
+    animation:
+      'slideInFromRight 0.5s ease-out, fadeOut 0.5s ease-in 1.5s forwards',
+    backgroundColor: '#dcfce7',
+>>>>>>> main
   },
   overlay: {
-    backgroundColor: "transparent",
+    backgroundColor: 'transparent',
   },
 };
 
 const getMessage = (goal, score) => {
   switch (goal) {
-    case "completion":
+    case 'completion':
       return (
         <>
           <div className="text-1xl mb-2">
@@ -41,7 +54,7 @@ const getMessage = (goal, score) => {
           </div>
         </>
       );
-    case "perfectScore":
+    case 'perfectScore':
       return (
         <>
           <div className="text-1xl mb-2">
@@ -53,7 +66,7 @@ const getMessage = (goal, score) => {
           </div>
         </>
       );
-    case "gameCompleted":
+    case 'gameCompleted':
       return (
         <>
           <div className="text-1xl mb-2">
@@ -65,7 +78,7 @@ const getMessage = (goal, score) => {
           </div>
         </>
       );
-    case "bonus":
+    case 'bonus':
       return (
         <>
           <div className="text-1xl mb-2">

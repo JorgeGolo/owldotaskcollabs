@@ -6,18 +6,18 @@ import Breadcrumb from "../../components/BreadCrumb";
 
 const games = () => {
   const breadcrumbSegments = [
-    { name: "Home", path: "/" },
-    { name: "Games", path: "/games" },
+    { name: 'Home', path: '/' },
+    { name: 'Games', path: '/games' },
   ];
 
   // No necesitamos handleGameClick aquí si llamamos a gtag directamente.
   // También podemos eliminar el useEffect en _app.js para este CustomEvent específico.
 
   const handleGameClickAndTrack = (gameName) => {
-    if (typeof window !== "undefined" && window.dataLayer) {
+    if (typeof window !== 'undefined' && window.dataLayer) {
       // Empuja el evento directamente al dataLayer
       window.dataLayer.push({
-        event: "game_selected", // El nombre del evento que tu activador en GTM está esperando
+        event: 'game_selected', // El nombre del evento que tu activador en GTM está esperando
         game_name: gameName, // El parámetro que tu etiqueta de GA4 Evento está esperando
       });
       console.log(
@@ -25,7 +25,7 @@ const games = () => {
       );
     } else {
       console.warn(
-        "dataLayer no está disponible. GTM podría no estar cargado.",
+        'dataLayer no está disponible. GTM podría no estar cargado.',
       );
     }
   };
@@ -39,7 +39,7 @@ const games = () => {
           className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition
                     dark:bg-dark-4 "
           onClick={() =>
-            handleGameClickAndTrack("Alphabet Soup", "/games/alphabetsoup")
+            handleGameClickAndTrack('Alphabet Soup', '/games/alphabetsoup')
           } // Llama a la nueva función
         >
           Alphabet Soup
@@ -50,7 +50,7 @@ const games = () => {
           className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition
                     dark:bg-dark-4 "
           onClick={() =>
-            handleGameClickAndTrack("Alphabet Soup", "/games/alphabetsoup")
+            handleGameClickAndTrack('Alphabet Soup', '/games/alphabetsoup')
           } // Llama a la nueva función
         >
           Alphabet Soup
@@ -60,7 +60,7 @@ const games = () => {
           className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition
                     dark:bg-dark-4 "
           onClick={() =>
-            handleGameClickAndTrack("Alphabet Soup", "/games/alphabetsoup")
+            handleGameClickAndTrack('Alphabet Soup', '/games/alphabetsoup')
           } // Llama a la nueva función
         >
           Alphabet Soup
@@ -70,7 +70,7 @@ const games = () => {
           className="flex items-center justify-center rounded-lg shadow-md bg-blue-100 aspect-square hover:shadow-lg transition
                     dark:bg-dark-4 "
           onClick={() =>
-            handleGameClickAndTrack("Alphabet Soup", "/games/alphabetsoup")
+            handleGameClickAndTrack('Alphabet Soup', '/games/alphabetsoup')
           } // Llama a la nueva función
         >
           Alphabet Soup

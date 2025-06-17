@@ -25,17 +25,30 @@ const setConsent = (value) => {
 
   if (typeof value === "string") {
     consentValues = {
+<<<<<<< HEAD
       ad_storage: value === "accepted" ? "granted" : "denied",
       analytics_storage: value === "accepted" ? "granted" : "denied",
       functionality_storage: "granted",
       personalization_storage: value === "accepted" ? "granted" : "denied",
       security_storage: "granted",
+=======
+      ad_storage: value === 'accepted' ? 'granted' : 'denied',
+      analytics_storage: value === 'accepted' ? 'granted' : 'denied',
+      functionality_storage: 'granted',
+      personalization_storage: value === 'accepted' ? 'granted' : 'denied',
+      security_storage: 'granted',
+>>>>>>> main
     };
     document.cookie = `${COOKIE_NAME}=${value}; path=/; max-age=31536000`;
   } else {
     consentValues = {
+<<<<<<< HEAD
       functionality_storage: "granted",
       security_storage: "granted",
+=======
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+>>>>>>> main
       ...value,
     };
     document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(consentValues))}; path=/; max-age=31536000`;
@@ -50,6 +63,7 @@ const clearAllCookies = () => {
   // Lista de posibles nombres de cookies relacionadas con analytics, ads, etc.
   const cookiesToClear = [
     COOKIE_NAME,
+<<<<<<< HEAD
     "_ga",
     "_ga_*",
     "_gid",
@@ -73,17 +87,51 @@ const clearAllCookies = () => {
     "_gcl_au",
     "_gcl_aw",
     "_gcl_dc",
+=======
+    '_ga',
+    '_ga_*',
+    '_gid',
+    '_gat',
+    '_gat_*',
+    '_fbp',
+    '_fbc',
+    '__utma',
+    '__utmb',
+    '__utmc',
+    '__utmt',
+    '__utmz',
+    '_hjid',
+    '_hjFirstSeen',
+    '_hjIncludedInSessionSample',
+    'IDE',
+    'DSID',
+    'FLC',
+    'AID',
+    'TAID',
+    '_gcl_au',
+    '_gcl_aw',
+    '_gcl_dc',
+>>>>>>> main
   ];
 
   // Eliminar cookies del dominio actual
   cookiesToClear.forEach((cookieName) => {
     // Para cookies con wildcards como _ga_*, necesitamos buscar todas las que coincidan
+<<<<<<< HEAD
     if (cookieName.includes("*")) {
       const prefix = cookieName.replace("*", "");
       const allCookies = document.cookie.split(";");
 
       allCookies.forEach((cookie) => {
         const [name] = cookie.trim().split("=");
+=======
+    if (cookieName.includes('*')) {
+      const prefix = cookieName.replace('*', '');
+      const allCookies = document.cookie.split(';');
+
+      allCookies.forEach((cookie) => {
+        const [name] = cookie.trim().split('=');
+>>>>>>> main
         if (name.startsWith(prefix)) {
           // Eliminar con diferentes combinaciones de path y domain
           document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
@@ -101,6 +149,7 @@ const clearAllCookies = () => {
 
   // Limpiar localStorage y sessionStorage relacionado con analytics
   const storageKeysToRemove = [
+<<<<<<< HEAD
     "_ga",
     "_gid",
     "_gat",
@@ -111,6 +160,18 @@ const clearAllCookies = () => {
     "_hjCachedUserAttributes",
     "fbp",
     "fbc",
+=======
+    '_ga',
+    '_gid',
+    '_gat',
+    'ga_sessionToken',
+    'ga_userId',
+    '_hjTLDTest',
+    '_hjUserAttributesHash',
+    '_hjCachedUserAttributes',
+    'fbp',
+    'fbc',
+>>>>>>> main
   ];
 
   storageKeysToRemove.forEach((key) => {
@@ -124,11 +185,19 @@ const clearAllCookies = () => {
 
   // Notificar a Google Analytics y otros servicios sobre la revocación
   const revokedConsent = {
+<<<<<<< HEAD
     ad_storage: "denied",
     analytics_storage: "denied",
     functionality_storage: "granted",
     personalization_storage: "denied",
     security_storage: "granted",
+=======
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    personalization_storage: 'denied',
+    security_storage: 'granted',
+>>>>>>> main
   };
 
   window.dataLayer = window.dataLayer || [];
@@ -138,11 +207,19 @@ const clearAllCookies = () => {
 // Inicializa valores por defecto si no hay consentimiento
 const initializeDefaultConsent = () => {
   const defaultConsent = {
+<<<<<<< HEAD
     ad_storage: "denied",
     analytics_storage: "denied",
     functionality_storage: "granted",
     personalization_storage: "denied",
     security_storage: "granted",
+=======
+    ad_storage: 'denied',
+    analytics_storage: 'denied',
+    functionality_storage: 'granted',
+    personalization_storage: 'denied',
+    security_storage: 'granted',
+>>>>>>> main
   };
 
   document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(defaultConsent))}; path=/; max-age=31536000`;
@@ -173,10 +250,17 @@ export const CookieConsentProvider = () => {
       } else {
         // Si ya hay preferencias personalizadas, reflejarlas en el estado local
         setConfig({
+<<<<<<< HEAD
           ad_storage: storedConsent.ad_storage === "granted",
           analytics_storage: storedConsent.analytics_storage === "granted",
           personalization_storage:
             storedConsent.personalization_storage === "granted",
+=======
+          ad_storage: storedConsent.ad_storage === 'granted',
+          analytics_storage: storedConsent.analytics_storage === 'granted',
+          personalization_storage:
+            storedConsent.personalization_storage === 'granted',
+>>>>>>> main
         });
         setConsent(storedConsent); // reenviar por si refresca la página
       }
@@ -211,6 +295,7 @@ export const CookieConsentProvider = () => {
 
   const saveCustomConfig = () => {
     setConsent({
+<<<<<<< HEAD
       ad_storage: config.ad_storage ? "granted" : "denied",
       analytics_storage: config.analytics_storage ? "granted" : "denied",
       functionality_storage: "granted",
@@ -218,6 +303,15 @@ export const CookieConsentProvider = () => {
         ? "granted"
         : "denied",
       security_storage: "granted",
+=======
+      ad_storage: config.ad_storage ? 'granted' : 'denied',
+      analytics_storage: config.analytics_storage ? 'granted' : 'denied',
+      functionality_storage: 'granted',
+      personalization_storage: config.personalization_storage
+        ? 'granted'
+        : 'denied',
+      security_storage: 'granted',
+>>>>>>> main
     });
     setVisible(false);
     setForceVisible(false);
@@ -231,7 +325,11 @@ export const CookieConsentProvider = () => {
           <div className="max-w-4xl mx-auto flex flex-col gap-4">
             <p className="text-sm">
               We use cookies to personalize content and analyze traffic. By
+<<<<<<< HEAD
               clicking "Accept", you consent to our use of cookies. Read our{" "}
+=======
+              clicking "Accept", you consent to our use of cookies. Read our{' '}
+>>>>>>> main
               <a href="/cookies" className="underline">
                 cookie policy
               </a>

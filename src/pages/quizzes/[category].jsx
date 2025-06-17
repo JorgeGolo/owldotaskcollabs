@@ -1,15 +1,15 @@
-import { React, useContext } from "react";
-import Link from "next/link";
-import { collection, getDocs, query, where, doc } from "firebase/firestore";
-import { db } from "../../firebase";
-import Breadcrumb from "../../components/BreadCrumb";
-import { FaFeather } from "react-icons/fa";
-import Head from "next/head";
-import { AppClientContext } from "../../context/ClientDataProvider"; // Asegúrate de que la ruta sea la correcta
+import { React, useContext } from 'react';
+import Link from 'next/link';
+import { collection, getDocs, query, where, doc } from 'firebase/firestore';
+import { db } from '../../firebase';
+import Breadcrumb from '../../components/BreadCrumb';
+import { FaFeather } from 'react-icons/fa';
+import Head from 'next/head';
+import { AppClientContext } from '../../context/ClientDataProvider'; // Asegúrate de que la ruta sea la correcta
 
 // ✅ Genera todas las rutas de categorías con slug
 export async function getStaticPaths() {
-  const snapshot = await getDocs(collection(db, "quizzes"));
+  const snapshot = await getDocs(collection(db, 'quizzes'));
   const categories = new Set();
 
   snapshot.forEach((docSnap) => {
@@ -32,11 +32,11 @@ function serialize(obj) {
   if (obj === undefined) return null;
   if (obj === null) return null;
   if (obj instanceof Date) return obj.toISOString();
-  if (typeof obj.toDate === "function") return obj.toDate().toISOString();
+  if (typeof obj.toDate === 'function') return obj.toDate().toISOString();
 
   if (Array.isArray(obj)) return obj.map(serialize);
 
-  if (typeof obj === "object") {
+  if (typeof obj === 'object') {
     const newObj = {};
     for (const key in obj) {
       newObj[key] = serialize(obj[key]);
@@ -50,8 +50,8 @@ export async function getStaticProps({ params }) {
   const { category } = params;
 
   const q = query(
-    collection(db, "quizzes"),
-    where("category_slug", "==", category),
+    collection(db, 'quizzes'),
+    where('category_slug', '==', category),
   );
   const querySnapshot = await getDocs(q);
 
@@ -65,8 +65,8 @@ export async function getStaticProps({ params }) {
       };
 
       const chaptersRef = collection(
-        doc(db, "quizzes", quizDoc.id),
-        "chapters",
+        doc(db, 'quizzes', quizDoc.id),
+        'chapters',
       );
       const chaptersSnapshot = await getDocs(chaptersRef);
       const chapters = chaptersSnapshot.docs.map((chapterDoc) =>
@@ -74,8 +74,8 @@ export async function getStaticProps({ params }) {
       );
 
       const fichalibroRef = collection(
-        doc(db, "quizzes", quizDoc.id),
-        "fichalibro",
+        doc(db, 'quizzes', quizDoc.id),
+        'fichalibro',
       );
       const fichalibroSnapshot = await getDocs(fichalibroRef);
       let fichalibro = null;
@@ -103,8 +103,8 @@ const category = ({ quizzes, category, categoryName }) => {
   const canonicalUrl = `https://owldotask.com/quizzes/${category}/`;
 
   const breadcrumbSegments = [
-    { name: "Home", path: "/" },
-    { name: "Quizzes", path: "/quizzes" },
+    { name: 'Home', path: '/' },
+    { name: 'Quizzes', path: '/quizzes' },
     { name: categoryName, path: `/quizzes/${category}` },
   ];
 

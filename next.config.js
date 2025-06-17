@@ -1,11 +1,11 @@
-const BUILD_DATE = new Date().toISOString().split("T")[1]; // formato YYYY-MM-DD
-const packageJson = require("./package.json");
+const BUILD_DATE = new Date().toISOString().split('T')[1]; // formato YYYY-MM-DD
+const packageJson = require('./package.json');
 const APP_VERSION = packageJson.version;
 
 // Configuración de Next.js
 const nextConfig = {
   trailingSlash: true, // Añade una barra diagonal al final de las URLs (ej., /about/ en lugar de /about)
-  output: "export", // Usa el modo "export" de Next.js para generar un sitio estático
+  output: 'export', // Usa el modo "export" de Next.js para generar un sitio estático
   images: {
     unoptimized: true, // Indica que las imágenes no deben ser optimizadas durante la build (útil con 'output: export')
   },
@@ -22,16 +22,16 @@ const withPWA = require("next-pwa")({
 
   // Precaching automático de rutas SSG (Next.js export)
   additionalManifestEntries: (() => {
-    const fs = require("fs");
-    const path = require("path");
-    let routes = ["/", "/offline/"]; // Rutas predeterminadas
+    const fs = require('fs');
+    const path = require('path');
+    let routes = ['/', '/offline/']; // Rutas predeterminadas
 
     try {
       // Leer el archivo routesprecatch.json de la carpeta public
       const routesFilePath = path.join(
         __dirname,
-        "public",
-        "routesprecache.json",
+        'public',
+        'routesprecache.json',
       );
 
       if (fs.existsSync(routesFilePath)) {
@@ -45,12 +45,12 @@ const withPWA = require("next-pwa")({
         }
       } else {
         console.log(
-          "Archivo routesprecatch.json no encontrado, usando rutas predeterminadas",
+          'Archivo routesprecatch.json no encontrado, usando rutas predeterminadas',
         );
       }
     } catch (error) {
       console.error(
-        "Error al leer el archivo de rutas para precaching:",
+        'Error al leer el archivo de rutas para precaching:',
         error,
       );
     }
@@ -89,7 +89,7 @@ const withPWA = require("next-pwa")({
       urlPattern: /\.(png|svg|ico|jpg)$/,
       handler: "StaleWhileRevalidate",
       options: {
-        cacheName: "static-assets", // Usará el hash real
+        cacheName: 'static-assets', // Usará el hash real
         expiration: { maxEntries: 100, maxAgeSeconds: 86400 },
       },
     },

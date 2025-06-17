@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
-import { AppClientContext } from "../context/ClientDataProvider"; // Asegúrate de usar el contexto correcto
-import { motion } from "framer-motion";
+import React, { useContext } from 'react';
+import { AppClientContext } from '../context/ClientDataProvider'; // Asegúrate de usar el contexto correcto
+import { motion } from 'framer-motion';
 
 const PointsDisplay = () => {
   const { clientData } = useContext(AppClientContext);

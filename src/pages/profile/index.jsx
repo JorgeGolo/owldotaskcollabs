@@ -1,21 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import Breadcrumb from "../../components/BreadCrumb";
-import { AppClientContext } from "../../context/ClientDataProvider";
+import React, { useContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import Breadcrumb from '../../components/BreadCrumb';
+import { AppClientContext } from '../../context/ClientDataProvider';
 import {
   getAuth,
   deleteUser,
   GoogleAuthProvider,
   signInWithPopup,
   reauthenticateWithPopup,
-} from "firebase/auth";
+} from 'firebase/auth';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
 import useJwtToken from "../../components/useJwtToken"; // Importar el hook que creamos
 
-import useOnlineStatus from "../../components/useOnlineStatus";
+import useOnlineStatus from '../../components/useOnlineStatus';
 
 const Profile = () => {
   const { isReliablyOnline } = useOnlineStatus(); // Estado de conectividad de la red
@@ -28,10 +28,10 @@ const Profile = () => {
   const [localClientData, setLocalClientData] = useState(clientData);
   const [progress, setProgress] = useState(0);
 
-  const [paypal, setPaypal] = useState(clientData?.paypal || "");
-  const [wallet, setWallet] = useState(clientData?.wallet || "");
+  const [paypal, setPaypal] = useState(clientData?.paypal || '');
+  const [wallet, setWallet] = useState(clientData?.wallet || '');
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   // For re-authentication
@@ -70,20 +70,20 @@ const Profile = () => {
   const handleSavePaypal = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");
+    setMessage('');
 
     try {
       // 1. Guarda el dato en el servidor.
-      await saveDataToApi("savePaypal", { paypal });
+      await saveDataToApi('savePaypal', { paypal });
 
       // 2. Refresca el estado global de la aplicación.
       await refreshClientData();
 
-      setMessage("✅ PayPal saved.");
+      setMessage('✅ PayPal saved.');
       // 3. Ya no necesitas la línea setLocalClientData. El useEffect se encargará de actualizar el estado local
       // cuando el clientData global del contexto cambie.
     } catch (error) {
-      setMessage(error.message || "❌ Error updating PayPal.");
+      setMessage(error.message || '❌ Error updating PayPal.');
     } finally {
       setLoading(false);
     }
@@ -92,19 +92,19 @@ const Profile = () => {
   const handleSaveWallet = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMessage("");
+    setMessage('');
 
     try {
       // 1. Guarda el dato en el servidor.
-      await saveDataToApi("saveWallet", { wallet });
+      await saveDataToApi('saveWallet', { wallet });
 
       // 2. Refresca el estado global de la aplicación.
       await refreshClientData();
 
-      setMessage("✅ Wallet saved.");
+      setMessage('✅ Wallet saved.');
       // 3. Ya no necesitas la línea setLocalClientData.
     } catch (error) {
-      setMessage(error.message || "❌ Error updating Wallet.");
+      setMessage(error.message || '❌ Error updating Wallet.');
     } finally {
       setLoading(false);
     }
@@ -125,8 +125,8 @@ const Profile = () => {
       // Now proceed with account deletion
       await performAccountDeletion();
     } catch (error) {
-      console.error("Reauthentication error:", error);
-      setReauthError("Failed to authenticate. Please try again.");
+      console.error('Reauthentication error:', error);
+      setReauthError('Failed to authenticate. Please try again.');
       setIsDeleting(false);
     }
   };
@@ -138,25 +138,25 @@ const Profile = () => {
       const response = await fetchWithToken(
         `https://8txnxmkveg.us-east-1.awsapprunner.com/api/delete-client/${localUser.uid}`,
         {
-          method: "DELETE",
-          headers: { "Content-Type": "application/json" },
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
         },
       );
 
       if (response.ok) {
-        alert("✅ Account deleted successfully.");
+        alert('✅ Account deleted successfully.');
         await logout();
-        router.push("/");
+        router.push('/');
       } else {
         const data = await response.json();
-        console.error("❌ Error:", data);
-        setReauthError("Error deleting account from database.");
+        console.error('❌ Error:', data);
+        setReauthError('Error deleting account from database.');
         setIsDeleting(false);
       }
     } catch (error) {
-      console.error("❌ Error:", error);
+      console.error('❌ Error:', error);
       setReauthError(
-        "Error deleting account: " + (error.message || "Unknown error"),
+        'Error deleting account: ' + (error.message || 'Unknown error'),
       );
       setIsDeleting(false);
     }
@@ -164,12 +164,12 @@ const Profile = () => {
 
   const handleDeleteAccount = async () => {
     if (!localUser) {
-      alert("No authenticated user");
+      alert('No authenticated user');
       return;
     }
 
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete your account? This action cannot be undone.",
+      'Are you sure you want to delete your account? This action cannot be undone.',
     );
     if (!confirmDelete) return;
 
@@ -178,8 +178,8 @@ const Profile = () => {
   };
 
   const breadcrumbSegments = [
-    { name: "Home", path: "/" },
-    { name: "Profile", path: "/profile" },
+    { name: 'Home', path: '/' },
+    { name: 'Profile', path: '/profile' },
   ];
 
   return (

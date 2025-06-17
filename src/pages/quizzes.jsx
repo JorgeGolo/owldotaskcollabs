@@ -1,27 +1,27 @@
 // pages/quizzes/index.jsx
-import { React, useMemo, useState, useContext } from "react";
-import Link from "next/link";
-import { collection, getDocs, doc } from "firebase/firestore";
-import { db } from "../firebase";
-import * as LucideIcons from "lucide-react";
-import { FaFeather } from "react-icons/fa";
-import Breadcrumb from "../components/BreadCrumb";
-import Head from "next/head";
-import CategoryMap from "../components/CategoryMap"; // importa el componente
-import { AppClientContext } from "../context/ClientDataProvider"; // Asegúrate de que la ruta sea la correcta
+import { React, useMemo, useState, useContext } from 'react';
+import Link from 'next/link';
+import { collection, getDocs, doc } from 'firebase/firestore';
+import { db } from '../firebase';
+import * as LucideIcons from 'lucide-react';
+import { FaFeather } from 'react-icons/fa';
+import Breadcrumb from '../components/BreadCrumb';
+import Head from 'next/head';
+import CategoryMap from '../components/CategoryMap'; // importa el componente
+import { AppClientContext } from '../context/ClientDataProvider'; // Asegúrate de que la ruta sea la correcta
 
 const categoryIcons = {
-  computing: "Cpu",
-  work: "Briefcase",
-  music: "Music",
-  noticias: "Newspaper",
-  fitness: "Dumbbell",
-  health: "Heart",
-  viajes: "Globe",
-  sports: "Dribbble",
-  psychology: "Brain",
-  books: "Book",
-  celebrities: "Star",
+  computing: 'Cpu',
+  work: 'Briefcase',
+  music: 'Music',
+  noticias: 'Newspaper',
+  fitness: 'Dumbbell',
+  health: 'Heart',
+  viajes: 'Globe',
+  sports: 'Dribbble',
+  psychology: 'Brain',
+  books: 'Book',
+  celebrities: 'Star',
 };
 
 // ✅ Para evitar problemas de serialización en Next.js
@@ -29,9 +29,9 @@ function serialize(obj) {
   if (obj === undefined) return null;
   if (obj === null) return null;
   if (obj instanceof Date) return obj.toISOString();
-  if (typeof obj.toDate === "function") return obj.toDate().toISOString();
+  if (typeof obj.toDate === 'function') return obj.toDate().toISOString();
   if (Array.isArray(obj)) return obj.map(serialize);
-  if (typeof obj === "object") {
+  if (typeof obj === 'object') {
     const newObj = {};
     for (const key in obj) {
       newObj[key] = serialize(obj[key]);
@@ -43,15 +43,15 @@ function serialize(obj) {
 
 // 🔁 SSG
 export async function getStaticProps() {
-  const querySnapshot = await getDocs(collection(db, "quizzes"));
+  const querySnapshot = await getDocs(collection(db, 'quizzes'));
 
   const quizzesRaw = await Promise.all(
     querySnapshot.docs.map(async (quizDoc) => {
       const quizData = { id: quizDoc.id, ...serialize(quizDoc.data()) };
 
       const chaptersRef = collection(
-        doc(db, "quizzes", quizDoc.id),
-        "chapters",
+        doc(db, 'quizzes', quizDoc.id),
+        'chapters',
       );
       const chaptersSnapshot = await getDocs(chaptersRef);
       const chapters = chaptersSnapshot.docs.map((chapterDoc) =>
@@ -59,8 +59,8 @@ export async function getStaticProps() {
       );
 
       const fichalibroRef = collection(
-        doc(db, "quizzes", quizDoc.id),
-        "fichalibro",
+        doc(db, 'quizzes', quizDoc.id),
+        'fichalibro',
       );
       const fichalibroSnapshot = await getDocs(fichalibroRef);
 
@@ -77,10 +77,10 @@ export async function getStaticProps() {
   // ✅ Validar que tengan slugs correctos
   const quizzes = quizzesRaw.filter(
     (q) =>
-      typeof q.category_slug === "string" &&
-      typeof q.title_slug === "string" &&
-      q.category_slug.trim() !== "" &&
-      q.title_slug.trim() !== "",
+      typeof q.category_slug === 'string' &&
+      typeof q.title_slug === 'string' &&
+      q.category_slug.trim() !== '' &&
+      q.title_slug.trim() !== '',
   );
 
   return {
@@ -93,17 +93,17 @@ export async function getStaticProps() {
 const Questionnaires = ({ quizzes }) => {
   const { bebasNeueClass } = useContext(AppClientContext);
 
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
   const handleSort = (key) => {
     setSortConfig((prev) => {
       if (prev.key === key) {
         return {
           key,
-          direction: prev.direction === "asc" ? "desc" : "asc",
+          direction: prev.direction === 'asc' ? 'desc' : 'asc',
         };
       } else {
-        return { key, direction: "asc" };
+        return { key, direction: 'asc' };
       }
     });
   };
@@ -116,11 +116,11 @@ const Questionnaires = ({ quizzes }) => {
         let aValue = a[sortConfig.key];
         let bValue = b[sortConfig.key];
 
-        if (typeof aValue === "string") aValue = aValue.toLowerCase();
-        if (typeof bValue === "string") bValue = bValue.toLowerCase();
+        if (typeof aValue === 'string') aValue = aValue.toLowerCase();
+        if (typeof bValue === 'string') bValue = bValue.toLowerCase();
 
-        if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
-        if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
+        if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
+        if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
         return 0;
       });
     }
@@ -129,8 +129,8 @@ const Questionnaires = ({ quizzes }) => {
   }, [quizzes, sortConfig]);
 
   const breadcrumbSegments = [
-    { name: "Home", path: "/" },
-    { name: "Quizzes", path: "/quizzes" },
+    { name: 'Home', path: '/' },
+    { name: 'Quizzes', path: '/quizzes' },
   ];
 
   return (
@@ -158,26 +158,26 @@ const Questionnaires = ({ quizzes }) => {
                 <tr className="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
                   <th
                     className="p-4 text-left cursor-pointer"
-                    onClick={() => handleSort("title")}
+                    onClick={() => handleSort('title')}
                   >
-                    Name{" "}
-                    {sortConfig.key === "title"
-                      ? sortConfig.direction === "asc"
-                        ? "▲"
-                        : "▼"
-                      : ""}
+                    Name{' '}
+                    {sortConfig.key === 'title'
+                      ? sortConfig.direction === 'asc'
+                        ? '▲'
+                        : '▼'
+                      : ''}
                   </th>
                   <th className="p-4 text-left">Category</th>
                   <th
                     className="p-4 text-left cursor-pointer text-center"
-                    onClick={() => handleSort("numberOfQuestions")}
+                    onClick={() => handleSort('numberOfQuestions')}
                   >
-                    Feathers{" "}
-                    {sortConfig.key === "numberOfQuestions"
-                      ? sortConfig.direction === "asc"
-                        ? "▲"
-                        : "▼"
-                      : ""}
+                    Feathers{' '}
+                    {sortConfig.key === 'numberOfQuestions'
+                      ? sortConfig.direction === 'asc'
+                        ? '▲'
+                        : '▼'
+                      : ''}
                   </th>
                 </tr>
               </thead>
