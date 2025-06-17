@@ -22,16 +22,16 @@ const itemVariants = {
 };
 
 const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
-
   const { iconCategories } = useContext(AppClientContext);
 
-  const iconName = iconCategories.find(
-    (item) => item.name.toLowerCase() === categoryName.toLowerCase() // Use categoryName to match with the name in the array
-  )?.iconcategory || "Layers";
+  const iconName =
+    iconCategories.find(
+      (item) => item.name.toLowerCase() === categoryName.toLowerCase(), // Use categoryName to match with the name in the array
+    )?.iconcategory || "Layers";
 
   const IconComponent = LucideIcons[iconName];
   const iconcolor = "#1e2a47";
-  
+
   return (
     <motion.div
       className="w-full"
@@ -46,10 +46,14 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
         "
       >
         {IconComponent && <IconComponent size={32} color={iconcolor} />}
-        <span className="mt-2 text-ssm md:text-sm font-semibold">{categoryName}</span>
-        <div className="mt-1 text-[11px] text-gray-600
+        <span className="mt-2 text-ssm md:text-sm font-semibold">
+          {categoryName}
+        </span>
+        <div
+          className="mt-1 text-[11px] text-gray-600
         dark:text-white
-        ">
+        "
+        >
           <p>{quizCount} quizzes</p>
           <p>{questionCount} questions</p>
         </div>

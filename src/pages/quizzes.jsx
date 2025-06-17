@@ -21,7 +21,7 @@ const categoryIcons = {
   sports: "Dribbble",
   psychology: "Brain",
   books: "Book",
-  celebrities: "Star"
+  celebrities: "Star",
 };
 
 // ✅ Para evitar problemas de serialización en Next.js
@@ -43,20 +43,25 @@ function serialize(obj) {
 
 // 🔁 SSG
 export async function getStaticProps() {
-  
   const querySnapshot = await getDocs(collection(db, "quizzes"));
 
   const quizzesRaw = await Promise.all(
     querySnapshot.docs.map(async (quizDoc) => {
       const quizData = { id: quizDoc.id, ...serialize(quizDoc.data()) };
 
-      const chaptersRef = collection(doc(db, "quizzes", quizDoc.id), "chapters");
+      const chaptersRef = collection(
+        doc(db, "quizzes", quizDoc.id),
+        "chapters",
+      );
       const chaptersSnapshot = await getDocs(chaptersRef);
       const chapters = chaptersSnapshot.docs.map((chapterDoc) =>
-        serialize({ id: chapterDoc.id, ...chapterDoc.data() })
+        serialize({ id: chapterDoc.id, ...chapterDoc.data() }),
       );
 
-      const fichalibroRef = collection(doc(db, "quizzes", quizDoc.id), "fichalibro");
+      const fichalibroRef = collection(
+        doc(db, "quizzes", quizDoc.id),
+        "fichalibro",
+      );
       const fichalibroSnapshot = await getDocs(fichalibroRef);
 
       let fichalibro = null;
@@ -66,7 +71,7 @@ export async function getStaticProps() {
       }
 
       return { ...quizData, chapters, fichalibro };
-    })
+    }),
   );
 
   // ✅ Validar que tengan slugs correctos
@@ -75,7 +80,7 @@ export async function getStaticProps() {
       typeof q.category_slug === "string" &&
       typeof q.title_slug === "string" &&
       q.category_slug.trim() !== "" &&
-      q.title_slug.trim() !== ""
+      q.title_slug.trim() !== "",
   );
 
   return {
@@ -86,7 +91,6 @@ export async function getStaticProps() {
 }
 
 const Questionnaires = ({ quizzes }) => {
-  
   const { bebasNeueClass } = useContext(AppClientContext);
 
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
@@ -103,39 +107,40 @@ const Questionnaires = ({ quizzes }) => {
       }
     });
   };
-  
-  
-const sortedQuizzes = useMemo(() => {
-  let sorted = [...quizzes];
 
-  if (sortConfig.key) {
-    sorted.sort((a, b) => {
-      let aValue = a[sortConfig.key];
-      let bValue = b[sortConfig.key];
+  const sortedQuizzes = useMemo(() => {
+    let sorted = [...quizzes];
 
-      if (typeof aValue === "string") aValue = aValue.toLowerCase();
-      if (typeof bValue === "string") bValue = bValue.toLowerCase();
+    if (sortConfig.key) {
+      sorted.sort((a, b) => {
+        let aValue = a[sortConfig.key];
+        let bValue = b[sortConfig.key];
 
-      if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
-      if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
-      return 0;
-    });
-  }
+        if (typeof aValue === "string") aValue = aValue.toLowerCase();
+        if (typeof bValue === "string") bValue = bValue.toLowerCase();
 
-  return sorted;
-}, [quizzes, sortConfig]);
-  
+        if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
+        if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
+        return 0;
+      });
+    }
+
+    return sorted;
+  }, [quizzes, sortConfig]);
+
   const breadcrumbSegments = [
     { name: "Home", path: "/" },
     { name: "Quizzes", path: "/quizzes" },
   ];
 
-
   return (
     <div className="flex flex-col lg:flex-row w-full">
       <Head>
         <title>All Quizzes fron all categories | OwldoTask</title>
-        <meta name="description" content="Explore all quizzes and categories on OwldoTask and earn feathers." />
+        <meta
+          name="description"
+          content="Explore all quizzes and categories on OwldoTask and earn feathers."
+        />
         <link rel="canonical" href="https://owldotask.com/quizzes" />
       </Head>
 
@@ -144,26 +149,44 @@ const sortedQuizzes = useMemo(() => {
 
         <CategoryMap quizzes={quizzes} />
 
-
         <h1>All Quizzes</h1>
 
         {quizzes.length > 0 ? (
           <div className="overflow-x-auto mt-4 rounded-lg shadow-lg">
             <table className="w-full bg-white rounded-md">
               <thead>
-              <tr className="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
-              <th className="p-4 text-left cursor-pointer" onClick={() => handleSort("title")}>
-                Name {sortConfig.key === "title" ? (sortConfig.direction === "asc" ? "▲" : "▼") : ""}
-              </th>
-              <th className="p-4 text-left">Category</th>
-              <th className="p-4 text-left cursor-pointer text-center" onClick={() => handleSort("numberOfQuestions")}>
-                Feathers {sortConfig.key === "numberOfQuestions" ? (sortConfig.direction === "asc" ? "▲" : "▼") : ""}
-              </th>
-            </tr>
+                <tr className="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
+                  <th
+                    className="p-4 text-left cursor-pointer"
+                    onClick={() => handleSort("title")}
+                  >
+                    Name{" "}
+                    {sortConfig.key === "title"
+                      ? sortConfig.direction === "asc"
+                        ? "▲"
+                        : "▼"
+                      : ""}
+                  </th>
+                  <th className="p-4 text-left">Category</th>
+                  <th
+                    className="p-4 text-left cursor-pointer text-center"
+                    onClick={() => handleSort("numberOfQuestions")}
+                  >
+                    Feathers{" "}
+                    {sortConfig.key === "numberOfQuestions"
+                      ? sortConfig.direction === "asc"
+                        ? "▲"
+                        : "▼"
+                      : ""}
+                  </th>
+                </tr>
               </thead>
               <tbody>
                 {sortedQuizzes.map((quiz) => (
-                  <tr key={quiz.id} className="hover:bg-gray-100 dark:bg-dark-2">
+                  <tr
+                    key={quiz.id}
+                    className="hover:bg-gray-100 dark:bg-dark-2"
+                  >
                     <td>
                       <Link
                         href={`/quizzes/${encodeURIComponent(quiz.category_slug)}/${encodeURIComponent(quiz.title_slug)}`}
@@ -176,7 +199,9 @@ const sortedQuizzes = useMemo(() => {
                     <td className="p-4">{quiz.category}</td>
                     <td className="p-4">
                       <div className="flex items-center gap-1 justify-center h-full">
-                        <span className={`text-lg ${bebasNeueClass}`}>{quiz.numberOfQuestions}</span>
+                        <span className={`text-lg ${bebasNeueClass}`}>
+                          {quiz.numberOfQuestions}
+                        </span>
                         <FaFeather className="w-5 h-5 text-yellow-500" />
                       </div>
                     </td>

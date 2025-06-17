@@ -5,7 +5,11 @@ const technologies = [
   { name: "React", src: "react.svg", linktitle: "React icon" },
   { name: "Laravel", src: "laravel.svg", linktitle: "Laravel icon" },
   { name: "Firebase", src: "firebase.svg", linktitle: "Firebase icon" },
-  { name: "AWS", src: "amazonwebservices.svg", linktitle: "Amazon Web Services icon" },
+  {
+    name: "AWS",
+    src: "amazonwebservices.svg",
+    linktitle: "Amazon Web Services icon",
+  },
   { name: "Tailwind", src: "tailwindcss.svg", linktitle: "Tailwind CSS icon" },
   { name: "Next.js", src: "nextdotjs.svg", linktitle: "Next.js icon" },
   { name: "GitHub", src: "github.svg", linktitle: "Github icon" },
@@ -31,11 +35,13 @@ const TechGrid = () => {
         >
           <img
             src={`/assets/iconstec/${tech.src}`}
-            title ={tech.linktitle}
+            title={tech.linktitle}
             alt={tech.name}
             className="w-20 h-20 opacity-40"
           />
-          <span className="text-sm mt-1 text-gray-500 font-bold">{tech.name}</span>
+          <span className="text-sm mt-1 text-gray-500 font-bold">
+            {tech.name}
+          </span>
         </div>
       ))}
     </motion.div>

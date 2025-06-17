@@ -1,9 +1,9 @@
-import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const SwiperGallery = () => {
   return (
@@ -19,19 +19,25 @@ const SwiperGallery = () => {
         modules={[Navigation, Pagination, Autoplay]}
       >
         <SwiperSlide>
-          <img src="/assets/img/0.png" alt="Imagen 1"
-                className="w-full h-auto object-cover"
- />
+          <img
+            src="/assets/img/0.png"
+            alt="Imagen 1"
+            className="w-full h-auto object-cover"
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/assets/img/1.png" alt="Imagen 2"
-                className="w-full h-auto object-cover"
- />
+          <img
+            src="/assets/img/1.png"
+            alt="Imagen 2"
+            className="w-full h-auto object-cover"
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/assets/img/2.png" alt="Imagen 3" 
-                className="w-full h-auto object-cover"
-/>
+          <img
+            src="/assets/img/2.png"
+            alt="Imagen 3"
+            className="w-full h-auto object-cover"
+          />
         </SwiperSlide>
       </Swiper>
     </div>

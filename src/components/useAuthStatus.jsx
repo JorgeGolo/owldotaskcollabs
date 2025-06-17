@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { app } from '../firebase'; // Asegúrate de que la ruta sea correcta
+import { useState, useEffect } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { app } from "../firebase"; // Asegúrate de que la ruta sea correcta
 
 function useAuthStatus() {
   const [isLoggedIn, setIsLoggedIn] = useState(null); // null indica que aún no se ha verificado

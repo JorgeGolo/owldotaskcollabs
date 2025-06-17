@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
- import Modal from "react-modal";
- import { FaFeather } from "react-icons/fa";
+import Modal from "react-modal";
+import { FaFeather } from "react-icons/fa";
 
+Modal.setAppElement("#__next"); // o el ID que tenga tu elemento raíz
 
- Modal.setAppElement('#__next'); // o el ID que tenga tu elemento raíz
-
- // Estilos del modal para LevelUpPopup
+// Estilos del modal para LevelUpPopup
 // Estilos del modal para LevelUpPopup
 const levelUpModalStyles = {
   content: {
@@ -27,7 +26,7 @@ const levelUpModalStyles = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center", // Centers content vertically
-    alignItems: "center",     // Centers content horizontally
+    alignItems: "center", // Centers content horizontally
     // -------------------------------------------------------------------
   },
   overlay: {
@@ -36,56 +35,59 @@ const levelUpModalStyles = {
   },
 };
 
- const getLevelUpMessage = (newLevel) => (
-   <>
-     <div className="text-2xl font-bold mb-2">Level Up!</div>
-     <div className="text-1xl mb-2">
-      <span>You've reached level</span><br/>  <span className="font-bold text-5xl md:text-6xl" >{newLevel}</span>
-     </div>
-   </>
- );
+const getLevelUpMessage = (newLevel) => (
+  <>
+    <div className="text-2xl font-bold mb-2">Level Up!</div>
+    <div className="text-1xl mb-2">
+      <span>You've reached level</span>
+      <br /> <span className="font-bold text-5xl md:text-6xl">{newLevel}</span>
+    </div>
+  </>
+);
 
- const LevelUpPopup = ({ isOpen, onClose, newLevel }) => {
-   useEffect(() => {
-     if (isOpen) {
-       const timer = setTimeout(() => {
-         onClose();
-       }, 2000);
-       return () => clearTimeout(timer);
-     }
-   }, [isOpen, onClose]);
+const LevelUpPopup = ({ isOpen, onClose, newLevel }) => {
+  useEffect(() => {
+    if (isOpen) {
+      const timer = setTimeout(() => {
+        onClose();
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, onClose]);
 
-   return (
+  return (
+    <Modal
+      isOpen={isOpen}
+      onRequestClose={onClose}
+      style={levelUpModalStyles}
+      contentLabel="Level Up Popup"
+    >
+      {getLevelUpMessage(newLevel)}
+      <div className="">
+        <style jsx global>
+          {`
+            @keyframes fadeIn {
+              from {
+                opacity: 0;
+              }
+              to {
+                opacity: 1;
+              }
+            }
 
-     <Modal isOpen={isOpen} onRequestClose={onClose} style={levelUpModalStyles} contentLabel="Level Up Popup">
-       {getLevelUpMessage(newLevel)}
-       <div className="">             
-       
-         <style jsx global>
-           {`
-             @keyframes fadeIn {
-               from {
-                 opacity: 0;
-               }
-               to {
-                 opacity: 1;
-               }
-             }
+            @keyframes fadeOut {
+              from {
+                opacity: 1;
+              }
+              to {
+                opacity: 0;
+              }
+            }
+          `}
+        </style>
+      </div>
+    </Modal>
+  );
+};
 
-             @keyframes fadeOut {
-               from {
-                 opacity: 1;
-               }
-               to {
-                 opacity: 0;
-               }
-             }
-
-           `}
-         </style>
-       </div>
-     </Modal>
-   );
- };
-
- export default LevelUpPopup;
+export default LevelUpPopup;

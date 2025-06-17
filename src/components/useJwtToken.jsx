@@ -1,11 +1,10 @@
-import { useCallback } from 'react';
-import useOnlineStatus from './useOnlineStatus';
+import { useCallback } from "react";
+import useOnlineStatus from "./useOnlineStatus";
 /**
  * Hook personalizado para manejar la autenticación con JWT tokens
  * Gestiona automáticamente la renovación de tokens expirados
  */
 const useJwtToken = () => {
-
   const { isReliablyOnline } = useOnlineStatus();
 
   // Verifica si el token ha expirado
@@ -13,29 +12,35 @@ const useJwtToken = () => {
     if (!token) return true;
 
     try {
-      const payload = JSON.parse(atob(token.split('.')[1]));
+      const payload = JSON.parse(atob(token.split(".")[1]));
       if (payload && payload.exp) {
         const currentTime = Math.floor(Date.now() / 1000);
         return payload.exp < currentTime;
       }
       return true;
     } catch (error) {
-      console.error("❌ Front-useJwtToken Error al verificar la expiración del token:", error);
+      console.error(
+        "❌ Front-useJwtToken Error al verificar la expiración del token:",
+        error,
+      );
       return true;
     }
   };
 
   // Obtiene un nuevo token desde el backend
   const getNewToken = async () => {
-
     // Si no hay conexión, no se puede obtener un nuevo token
     if (!isReliablyOnline) {
-      console.error("❌ Front-useJwtToken No se puede obtener un nuevo token, no hay conexión a Internet");
+      console.error(
+        "❌ Front-useJwtToken No se puede obtener un nuevo token, no hay conexión a Internet",
+      );
       return null;
     }
 
     try {
-      const res = await fetch("https://8txnxmkveg.us-east-1.awsapprunner.com/api/request-token");
+      const res = await fetch(
+        "https://8txnxmkveg.us-east-1.awsapprunner.com/api/request-token",
+      );
       const data = await res.json();
 
       if (data && data.token) {
@@ -70,54 +75,63 @@ const useJwtToken = () => {
   }, []);
 
   // Hace peticiones con token, gestionando renovación automática si es necesario
-  const fetchWithToken = useCallback(async (url, options = {}) => {
-    try {
-      let token = await ensureValidToken();
+  const fetchWithToken = useCallback(
+    async (url, options = {}) => {
+      try {
+        let token = await ensureValidToken();
 
-      if (!token) {
-        throw new Error("Front-useJwtToken No se pudo obtener un token JWT válido");
-      }
-
-      const headers = {
-        ...options.headers,
-        Authorization: `Bearer ${token}`,
-      };
-
-      let response = await fetch(url, {
-        ...options,
-        headers,
-      });
-
-      // Si el token expiró y falla con 401, obtener uno nuevo
-      if (response.status === 401) {
-        console.log("⚠️ Front-useJwtToken Token expirado, obteniendo uno nuevo...");
-        const newToken = await getNewToken();
-
-        if (newToken) {
-          localStorage.setItem("jwt_token", newToken); // ✅ asegurarse de guardar el nuevo token
-          headers.Authorization = `Bearer ${newToken}`;
-          response = await fetch(url, {
-            ...options,
-            headers,
-          });
-        } else {
-          throw new Error("Front-useJwtToken No se pudo obtener un nuevo token después de expiración");
+        if (!token) {
+          throw new Error(
+            "Front-useJwtToken No se pudo obtener un token JWT válido",
+          );
         }
-      }
 
-      return response;
-    } catch (error) {
-      console.error("❌Front-useJwtToken Error en fetchWithToken:", error);
-      throw error;
-    }
-  }, [ensureValidToken]);
+        const headers = {
+          ...options.headers,
+          Authorization: `Bearer ${token}`,
+        };
+
+        let response = await fetch(url, {
+          ...options,
+          headers,
+        });
+
+        // Si el token expiró y falla con 401, obtener uno nuevo
+        if (response.status === 401) {
+          console.log(
+            "⚠️ Front-useJwtToken Token expirado, obteniendo uno nuevo...",
+          );
+          const newToken = await getNewToken();
+
+          if (newToken) {
+            localStorage.setItem("jwt_token", newToken); // ✅ asegurarse de guardar el nuevo token
+            headers.Authorization = `Bearer ${newToken}`;
+            response = await fetch(url, {
+              ...options,
+              headers,
+            });
+          } else {
+            throw new Error(
+              "Front-useJwtToken No se pudo obtener un nuevo token después de expiración",
+            );
+          }
+        }
+
+        return response;
+      } catch (error) {
+        console.error("❌Front-useJwtToken Error en fetchWithToken:", error);
+        throw error;
+      }
+    },
+    [ensureValidToken],
+  );
 
   return {
     initializeToken,
     ensureValidToken,
     fetchWithToken,
     isTokenExpired,
-    getNewToken
+    getNewToken,
   };
 };
 

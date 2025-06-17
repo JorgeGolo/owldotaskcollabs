@@ -1,11 +1,10 @@
-const fs = require('fs').promises;
-const path = require('path');
-const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, getDocs } = require('firebase/firestore');
-require('dotenv').config({ path: `.env.local` }); // Carga las variables de .env.local
+const fs = require("fs").promises;
+const path = require("path");
+const { initializeApp } = require("firebase/app");
+const { getFirestore, collection, getDocs } = require("firebase/firestore");
+require("dotenv").config({ path: `.env.local` }); // Carga las variables de .env.local
 
 // Configuración de Firebase
-
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -36,17 +35,17 @@ async function generateRoutes() {
     const quizRoutes = [];
 
     const fixedroutes = [
-      '/',
-      '/quizzes/',
-      '/cookies/',
-      '/privacypolicy/',
-      '/termsofservice/',
-      '/signin/',
-      '/about/',
-      '/feathers/',
-      '/profile/',
-      '/games/',
-      '/games/alphabetsoup/',
+      "/",
+      "/quizzes/",
+      "/cookies/",
+      "/privacypolicy/",
+      "/termsofservice/",
+      "/signin/",
+      "/about/",
+      "/feathers/",
+      "/profile/",
+      "/games/",
+      "/games/alphabetsoup/",
     ];
 
     snapshot.forEach((docSnap) => {
@@ -62,17 +61,32 @@ async function generateRoutes() {
     console.log(`DEBUG: category routes: ${Array.from(categories).length}`);
     console.log(`DEBUG: quizzes routes: ${quizRoutes.length}`);
 
-    const routesToPrecache = fixedroutes.concat(Array.from(categories)).concat(quizRoutes); // Añadir fixedroutes al principio
+    const routesToPrecache = fixedroutes
+      .concat(Array.from(categories))
+      .concat(quizRoutes); // Añadir fixedroutes al principio
 
     // Escribir las rutas en el archivo routesprecache.json
-    const filePath = path.join(__dirname, '..', 'public', 'routesprecache.json');
-    await fs.writeFile(filePath, JSON.stringify(routesToPrecache), 'utf-8');
-    console.log('Archivo public/routesprecache.json generado exitosamente con las categorías de quizzes.');
-    console.log("DEBUG: Contenido total del archivo routesprecache.json (primeras 500 chars):", JSON.stringify(routesToPrecache).substring(0, 500) + '...');
+    const filePath = path.join(
+      __dirname,
+      "..",
+      "public",
+      "routesprecache.json",
+    );
+    await fs.writeFile(filePath, JSON.stringify(routesToPrecache), "utf-8");
+    console.log(
+      "Archivo public/routesprecache.json generado exitosamente con las categorías de quizzes.",
+    );
+    console.log(
+      "DEBUG: Contenido total del archivo routesprecache.json (primeras 500 chars):",
+      JSON.stringify(routesToPrecache).substring(0, 500) + "...",
+    );
   } catch (error) {
-    console.error('Error al obtener las categorías de Firebase o al escribir el archivo:', error);
+    console.error(
+      "Error al obtener las categorías de Firebase o al escribir el archivo:",
+      error,
+    );
     // DEBUG: Mostrar el stack de error completo
-    console.error('DEBUG: Stack del error:', error.stack);
+    console.error("DEBUG: Stack del error:", error.stack);
   }
 }
 
