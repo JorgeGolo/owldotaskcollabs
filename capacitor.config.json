@@ -7,9 +7,9 @@
   "plugins": {
     "FirebaseAuthentication": {
       "skipNativeAuth": true,
-      "providers": ["google.com"], 
+      "providers": ["google.com"],
       "webClientId": "757706039932-lgik8rgirtdb7ec9teb95op13gsn76pf.apps.googleusercontent.com",
-      "redirectUri": "com.owldotask.app://firebase" 
+      "redirectUri": "com.owldotask.app://firebase"
     }
   }
 }

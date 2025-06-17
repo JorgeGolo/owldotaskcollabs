@@ -1,20 +1,25 @@
-import React, { useContext } from "react";
-import { getAuth, GoogleAuthProvider, signInWithCredential, signOut } from "firebase/auth"; // CAMBIO: Importamos signInWithCredential
-import { app } from "../firebase";
-import { useRouter } from "next/router";
-import { AppClientContext } from "../context/ClientDataProvider";
+import React, { useContext } from 'react';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithCredential,
+  signOut,
+} from 'firebase/auth'; // CAMBIO: Importamos signInWithCredential
+import { app } from '../firebase';
+import { useRouter } from 'next/router';
+import { AppClientContext } from '../context/ClientDataProvider';
 
-import useOnlineStatus from "../components/useOnlineStatus";
+import useOnlineStatus from '../components/useOnlineStatus';
 
 import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
-
 
 const GoogleLogin = () => {
   const { isReliablyOnline } = useOnlineStatus();
 
   const auth = getAuth(app);
   const router = useRouter();
-  const { setUser, setClientData, fetchWithToken } = useContext(AppClientContext);
+  const { setUser, setClientData, fetchWithToken } =
+    useContext(AppClientContext);
 
   const handlePreLoginCheck = async () => {
     try {
@@ -26,8 +31,11 @@ const GoogleLogin = () => {
       // Por ejemplo, para Google, suele ser un idToken
       const idToken = result.credential?.idToken; // Acceder al idToken desde el resultado del plugin
 
-      if (!idToken) { // CAMBIO: Validamos si obtuvimos el idToken nativo
-        console.error("❌ No se pudo obtener el ID Token de Google desde el plugin.");
+      if (!idToken) {
+        // CAMBIO: Validamos si obtuvimos el idToken nativo
+        console.error(
+          '❌ No se pudo obtener el ID Token de Google desde el plugin.',
+        );
         return;
       }
 
@@ -35,20 +43,25 @@ const GoogleLogin = () => {
       const credential = GoogleAuthProvider.credential(idToken);
 
       // CAMBIO: Iniciamos sesión en Firebase con la credencial obtenida nativamente
-      const firebaseUserCredential = await signInWithCredential(auth, credential);
+      const firebaseUserCredential = await signInWithCredential(
+        auth,
+        credential,
+      );
       const user = firebaseUserCredential.user; // Obtenemos el objeto user de Firebase
 
       if (!user || !user.email) {
-        console.error("❌ No se pudo obtener la información del usuario de Firebase.");
+        console.error(
+          '❌ No se pudo obtener la información del usuario de Firebase.',
+        );
         return;
       }
 
       const response = await fetchWithToken(
         `https://8txnxmkveg.us-east-1.awsapprunner.com/api/registerCheck/${user.email}`,
         {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        }
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        },
       );
 
       if (response.ok) {
@@ -58,40 +71,42 @@ const GoogleLogin = () => {
           setUser(user);
 
           const clientResponse = await fetchWithToken(
-            `https://8txnxmkveg.us-east-1.awsapprunner.com/api/getClientData?uid=${user.uid}`
+            `https://8txnxmkveg.us-east-1.awsapprunner.com/api/getClientData?uid=${user.uid}`,
           );
 
           const clientData = await clientResponse.json();
           if (clientResponse.ok) {
             setClientData(clientData);
           } else {
-            console.warn("⚠️ No se pudieron cargar los datos del cliente.");
+            console.warn('⚠️ No se pudieron cargar los datos del cliente.');
             setClientData(null);
           }
-
         } else {
-          console.warn("⚠️ Usuario no registrado. Cancelando login...");
+          console.warn('⚠️ Usuario no registrado. Cancelando login...');
           await signOut(auth);
           //router.push("/signin");
-          router.push("/signin?message=not-registered");
+          router.push('/signin?message=not-registered');
         }
-        
       } else {
-        console.error("❌ Error en la respuesta del servidor:", await response.text());
+        console.error(
+          '❌ Error en la respuesta del servidor:',
+          await response.text(),
+        );
         await signOut(auth);
         //router.push("/signin");
       }
     } catch (error) {
-      console.error("⚠️ Error al verificar el usuario antes del login:", error);
+      console.error('⚠️ Error al verificar el usuario antes del login:', error);
       // Aquí puedes añadir más lógica para manejar errores específicos del plugin
       // Por ejemplo, si el usuario cancela la autenticación nativa
-      if (error.code === 'cancelled') { // Ejemplo de código de error si el usuario cancela
-          console.log('Login de Google cancelado por el usuario.');
+      if (error.code === 'cancelled') {
+        // Ejemplo de código de error si el usuario cancela
+        console.log('Login de Google cancelado por el usuario.');
       }
       try {
         await signOut(auth);
       } catch (signOutError) {
-        console.error("⚠️ Error al cerrar sesión:", signOutError);
+        console.error('⚠️ Error al cerrar sesión:', signOutError);
       }
       //router.push("/signin");
     }

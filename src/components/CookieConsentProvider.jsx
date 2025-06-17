@@ -5,7 +5,9 @@ const COOKIE_NAME = 'owldo_consent';
 
 // Recupera el consentimiento desde la cookie
 const getConsent = () => {
-  const match = document.cookie.match(new RegExp(`(^| )${COOKIE_NAME}=([^;]+)`));
+  const match = document.cookie.match(
+    new RegExp(`(^| )${COOKIE_NAME}=([^;]+)`),
+  );
   if (!match) return null;
 
   const raw = decodeURIComponent(match[2]);
@@ -27,14 +29,14 @@ const setConsent = (value) => {
       analytics_storage: value === 'accepted' ? 'granted' : 'denied',
       functionality_storage: 'granted',
       personalization_storage: value === 'accepted' ? 'granted' : 'denied',
-      security_storage: 'granted'
+      security_storage: 'granted',
     };
     document.cookie = `${COOKIE_NAME}=${value}; path=/; max-age=31536000`;
   } else {
     consentValues = {
       functionality_storage: 'granted',
       security_storage: 'granted',
-      ...value
+      ...value,
     };
     document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(consentValues))}; path=/; max-age=31536000`;
   }
@@ -48,22 +50,39 @@ const clearAllCookies = () => {
   // Lista de posibles nombres de cookies relacionadas con analytics, ads, etc.
   const cookiesToClear = [
     COOKIE_NAME,
-    '_ga', '_ga_*', '_gid', '_gat', '_gat_*',
-    '_fbp', '_fbc',
-    '__utma', '__utmb', '__utmc', '__utmt', '__utmz',
-    '_hjid', '_hjFirstSeen', '_hjIncludedInSessionSample',
-    'IDE', 'DSID', 'FLC', 'AID', 'TAID',
-    '_gcl_au', '_gcl_aw', '_gcl_dc'
+    '_ga',
+    '_ga_*',
+    '_gid',
+    '_gat',
+    '_gat_*',
+    '_fbp',
+    '_fbc',
+    '__utma',
+    '__utmb',
+    '__utmc',
+    '__utmt',
+    '__utmz',
+    '_hjid',
+    '_hjFirstSeen',
+    '_hjIncludedInSessionSample',
+    'IDE',
+    'DSID',
+    'FLC',
+    'AID',
+    'TAID',
+    '_gcl_au',
+    '_gcl_aw',
+    '_gcl_dc',
   ];
 
   // Eliminar cookies del dominio actual
-  cookiesToClear.forEach(cookieName => {
+  cookiesToClear.forEach((cookieName) => {
     // Para cookies con wildcards como _ga_*, necesitamos buscar todas las que coincidan
     if (cookieName.includes('*')) {
       const prefix = cookieName.replace('*', '');
       const allCookies = document.cookie.split(';');
-      
-      allCookies.forEach(cookie => {
+
+      allCookies.forEach((cookie) => {
         const [name] = cookie.trim().split('=');
         if (name.startsWith(prefix)) {
           // Eliminar con diferentes combinaciones de path y domain
@@ -82,12 +101,19 @@ const clearAllCookies = () => {
 
   // Limpiar localStorage y sessionStorage relacionado con analytics
   const storageKeysToRemove = [
-    '_ga', '_gid', '_gat', 'ga_sessionToken', 'ga_userId',
-    '_hjTLDTest', '_hjUserAttributesHash', '_hjCachedUserAttributes',
-    'fbp', 'fbc'
+    '_ga',
+    '_gid',
+    '_gat',
+    'ga_sessionToken',
+    'ga_userId',
+    '_hjTLDTest',
+    '_hjUserAttributesHash',
+    '_hjCachedUserAttributes',
+    'fbp',
+    'fbc',
   ];
 
-  storageKeysToRemove.forEach(key => {
+  storageKeysToRemove.forEach((key) => {
     try {
       localStorage.removeItem(key);
       sessionStorage.removeItem(key);
@@ -102,7 +128,7 @@ const clearAllCookies = () => {
     analytics_storage: 'denied',
     functionality_storage: 'granted',
     personalization_storage: 'denied',
-    security_storage: 'granted'
+    security_storage: 'granted',
   };
 
   window.dataLayer = window.dataLayer || [];
@@ -116,7 +142,7 @@ const initializeDefaultConsent = () => {
     analytics_storage: 'denied',
     functionality_storage: 'granted',
     personalization_storage: 'denied',
-    security_storage: 'granted'
+    security_storage: 'granted',
   };
 
   document.cookie = `${COOKIE_NAME}=${encodeURIComponent(JSON.stringify(defaultConsent))}; path=/; max-age=31536000`;
@@ -132,7 +158,7 @@ export const CookieConsentProvider = () => {
   const [config, setConfig] = useState({
     ad_storage: false,
     analytics_storage: false,
-    personalization_storage: false
+    personalization_storage: false,
   });
 
   useEffect(() => {
@@ -149,7 +175,8 @@ export const CookieConsentProvider = () => {
         setConfig({
           ad_storage: storedConsent.ad_storage === 'granted',
           analytics_storage: storedConsent.analytics_storage === 'granted',
-          personalization_storage: storedConsent.personalization_storage === 'granted'
+          personalization_storage:
+            storedConsent.personalization_storage === 'granted',
         });
         setConsent(storedConsent); // reenviar por si refresca la página
       }
@@ -161,7 +188,7 @@ export const CookieConsentProvider = () => {
     setConfig({
       ad_storage: true,
       analytics_storage: true,
-      personalization_storage: true
+      personalization_storage: true,
     });
     setVisible(false);
     setForceVisible(false);
@@ -170,26 +197,27 @@ export const CookieConsentProvider = () => {
   const reject = () => {
     // Primero eliminar todas las cookies existentes
     clearAllCookies();
-    
+
     // Luego establecer el estado como rechazado
     setConsent('rejected');
     setConfig({
       ad_storage: false,
       analytics_storage: false,
-      personalization_storage: false
+      personalization_storage: false,
     });
     setVisible(false);
     setForceVisible(false);
   };
-  
 
   const saveCustomConfig = () => {
     setConsent({
       ad_storage: config.ad_storage ? 'granted' : 'denied',
       analytics_storage: config.analytics_storage ? 'granted' : 'denied',
       functionality_storage: 'granted',
-      personalization_storage: config.personalization_storage ? 'granted' : 'denied',
-      security_storage: 'granted'
+      personalization_storage: config.personalization_storage
+        ? 'granted'
+        : 'denied',
+      security_storage: 'granted',
     });
     setVisible(false);
     setForceVisible(false);
@@ -198,18 +226,30 @@ export const CookieConsentProvider = () => {
 
   return (
     <>
-      {(visible || forceVisible) ? (
+      {visible || forceVisible ? (
         <div className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 z-50 shadow-md">
           <div className="max-w-4xl mx-auto flex flex-col gap-4">
             <p className="text-sm">
-              We use cookies to personalize content and analyze traffic. By clicking "Accept", you consent to our use of cookies. Read our <a href="/cookies" className="underline">cookie policy</a>.
+              We use cookies to personalize content and analyze traffic. By
+              clicking "Accept", you consent to our use of cookies. Read our{' '}
+              <a href="/cookies" className="underline">
+                cookie policy
+              </a>
+              .
             </p>
-  
+
             {showConfig ? (
               <div className="bg-gray-700 p-3 rounded-md space-y-3 text-sm text-white">
-                <p>Some cookies are necessary for the proper functioning of the site and are always active.</p>
-                <p>By checking the boxes, you consent to the use of cookies for analytics, advertising, and/or personalization, according to your selection.</p>          
-  
+                <p>
+                  Some cookies are necessary for the proper functioning of the
+                  site and are always active.
+                </p>
+                <p>
+                  By checking the boxes, you consent to the use of cookies for
+                  analytics, advertising, and/or personalization, according to
+                  your selection.
+                </p>
+
                 <div className="flex flex-col gap-1 pl-1">
                   <label className="opacity-60 cursor-not-allowed">
                     <input type="checkbox" checked disabled className="mr-2" />
@@ -220,14 +260,17 @@ export const CookieConsentProvider = () => {
                     Security Cookies (Required)
                   </label>
                 </div>
-  
+
                 <div className="flex flex-col gap-1 pt-2 pl-1">
                   <label>
                     <input
                       type="checkbox"
                       checked={config.analytics_storage}
                       onChange={() =>
-                        setConfig((prev) => ({ ...prev, analytics_storage: !prev.analytics_storage }))
+                        setConfig((prev) => ({
+                          ...prev,
+                          analytics_storage: !prev.analytics_storage,
+                        }))
                       }
                       className="mr-2"
                     />
@@ -238,7 +281,10 @@ export const CookieConsentProvider = () => {
                       type="checkbox"
                       checked={config.ad_storage}
                       onChange={() =>
-                        setConfig((prev) => ({ ...prev, ad_storage: !prev.ad_storage }))
+                        setConfig((prev) => ({
+                          ...prev,
+                          ad_storage: !prev.ad_storage,
+                        }))
                       }
                       className="mr-2"
                     />
@@ -249,14 +295,18 @@ export const CookieConsentProvider = () => {
                       type="checkbox"
                       checked={config.personalization_storage}
                       onChange={() =>
-                        setConfig((prev) => ({ ...prev, personalization_storage: !prev.personalization_storage }))
+                        setConfig((prev) => ({
+                          ...prev,
+                          personalization_storage:
+                            !prev.personalization_storage,
+                        }))
                       }
                       className="mr-2"
                     />
                     Personalization Cookies
                   </label>
                 </div>
-  
+
                 <div className="flex gap-2 mt-3">
                   <button
                     onClick={saveCustomConfig}
@@ -274,10 +324,16 @@ export const CookieConsentProvider = () => {
               </div>
             ) : (
               <div className="flex flex-wrap gap-2 justify-end">
-                <button onClick={accept} className="px-4 py-2 bg-blue-600 hover:bg-blue-600 rounded text-sm">
+                <button
+                  onClick={accept}
+                  className="px-4 py-2 bg-blue-600 hover:bg-blue-600 rounded text-sm"
+                >
                   Accept All
                 </button>
-                <button onClick={reject} className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-sm">
+                <button
+                  onClick={reject}
+                  className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-sm"
+                >
                   Reject All
                 </button>
 
@@ -302,7 +358,6 @@ export const CookieConsentProvider = () => {
       )}
     </>
   );
-  
 };
 
 // Helpers externos

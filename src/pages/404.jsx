@@ -1,4 +1,3 @@
-
 import Head from 'next/head';
 
 export default function Custom404() {
@@ -11,7 +10,8 @@ export default function Custom404() {
         <div className="text-7xl">🦉</div>
         <h1 className="text-2xl mt-4 font-semibold">404 - Page Not Found</h1>
         <p className="max-w-md my-4 text-gray-600">
-          Whoops... the owl couldn't find what you were looking for. The page may have been moved or never existed.
+          Whoops... the owl couldn't find what you were looking for. The page
+          may have been moved or never existed.
         </p>
         <a
           href="/"
