@@ -70,9 +70,9 @@ const SopaDeLetras = () => {
         }
       }
     };
-    document.addEventListener("touchmove", preventDefault, { passive: false });
+    document.addEventListener('touchmove', preventDefault, { passive: false });
     return () => {
-      document.removeEventListener("touchmove", preventDefault);
+      document.removeEventListener('touchmove', preventDefault);
     };
   }, []);
 
@@ -620,9 +620,7 @@ const SopaDeLetras = () => {
         </div>
       )}
       <div className="flex flex-col items-center justify-center mt-4">
-        <h1 className="text-3xl font-bold mb-4 text-[#1e2a47]">
-          Alphabet Soup
-        </h1>
+        <h1>Alphabet Soup</h1>
         <Popup
           isOpen={modalState.isOpen}
           onClose={closeModal}
@@ -632,7 +630,7 @@ const SopaDeLetras = () => {
 
         <div
           ref={gameContainerRef}
-          className="relative border-4 border-[#1e2a47] rounded-lg p-1 bg-white shadow-lg touch-none" // `touch-none` para mejor control
+          className="relative border-4 border-[#1e2a47] rounded-lg p-1 dark:bg-dark-1 bg-white shadow-lg touch-none" // `touch-none` para mejor control
           // Eventos consolidados en el contenedor para mayor robustez
           onMouseUp={handleMouseUp}
           onTouchEnd={handleMouseUp}
@@ -654,10 +652,10 @@ const SopaDeLetras = () => {
                       className={`w-8 h-8 flex items-center justify-center font-bold cursor-pointer text-lg
                       ${
                         estaEncontrada(rowIndex, colIndex)
-                          ? 'bg-green-300'
+                          ? 'bg-green-300 dark:bg-green-500'
                           : estaSeleccionada(rowIndex, colIndex)
-                            ? 'bg-blue-200'
-                            : 'bg-white'
+                            ? 'bg-blue-200 dark:bg-dark-3'
+                            : 'bg-white dark:bg-dark-1'
                       }`}
                       onMouseDown={() => handleMouseDown(rowIndex, colIndex)}
                       onTouchStart={() => handleMouseDown(rowIndex, colIndex)}
@@ -690,7 +688,7 @@ const SopaDeLetras = () => {
             <button
               onClick={iniciarJuego}
               className={`bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none
-              ${!retryAvailable ? "hidden" : ""}`}
+              ${!retryAvailable ? 'hidden' : ''}`}
             >
               Restart
             </button>
