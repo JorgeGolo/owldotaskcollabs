@@ -7,7 +7,7 @@ const PointsDisplay = () => {
   const points = clientData?.points ?? 0;
 
   return (
-    <motion.p
+    <motion.span
       key={points} // Al cambiar la key, se dispara la animación de entrada
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
@@ -15,7 +15,7 @@ const PointsDisplay = () => {
       className="mt-1 text-[#adbadb] font-bebas text-2xl mr-1"
     >
       {points}
-    </motion.p>
+    </motion.span>
   );
 };
 

@@ -304,7 +304,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
 
       <div>
         {questionCount < numberOfQuestions && (
-          <span className="font-bold text-gray-500">
+          <span className="font-bold">
             Question {questionCount + 1} of {numberOfQuestions}
           </span>
         )}

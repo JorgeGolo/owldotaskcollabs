@@ -15,7 +15,7 @@ const signin = () => {
   const [ageConfirmed, setAgeConfirmed] = useState(false);
 
   // MENSAJE QUE VIENE DE LOGIN - cuando hacn logn y no está registrados
-  const [errorMessage, setErrorMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     if (router.query.message) {
@@ -36,52 +36,50 @@ const signin = () => {
     <div>
       {!isReliablyOnline ?? getOfflineMessage()}
 
-      <div className="flex justify-center items-center flex-1 bg-gray-100 py-10">
-        <div className="p-6 bg-white shadow-lg rounded-lg">
-          {errorMessage && (
-            <p style={{ color: "red", fontWeight: "bold" }}>{errorMessage}</p>
-          )}
+      <div className="mt-6 mb-6 p-4 md:p-6 bg-white dark:bg-dark-2 rounded-lg shadow hover:shadow-lg transition">
+        {errorMessage && (
+          <p style={{ color: 'red', fontWeight: 'bold' }}>{errorMessage}</p>
+        )}
 
-          <p className="mb-4">Register with your Google account.</p>
+        <p className="mb-4">Register with your Google account.</p>
 
-          {/* Botón de Registro */}
-          <GoogleRegister acceptedTerms={acceptedTerms && ageConfirmed} />
+        {/* Botón de Registro */}
+        <GoogleRegister acceptedTerms={acceptedTerms && ageConfirmed} />
 
-          {/* Checkbox de términos */}
-          <div className="flex items-center my-4">
-            <input
-              type="checkbox"
-              id="terms"
-              checked={acceptedTerms}
-              onChange={() => setAcceptedTerms(!acceptedTerms)}
-              className="mr-2"
-            />
-            <label htmlFor="terms">
-              I accept the{' '}
-              <Link href="/termsofservice" className="text-blue-500 underline">
-                Terms of service
-              </Link>
-            </label>
-          </div>
-
-          <div className="flex items-center mb-4">
-            <input
-              type="checkbox"
-              id="age"
-              checked={ageConfirmed}
-              onChange={() => setAgeConfirmed(!ageConfirmed)}
-              className="mr-2"
-            />
-            <label htmlFor="age">I confirm that I am over 13 years old</label>
-          </div>
-
-          <button
-            onClick={() => router.back()}
-            className="mb-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
-          >
-            Back
-          </button>
+        {/* Checkbox de términos */}
+        <div className="flex items-center my-4">
+          <input
+            type="checkbox"
+            id="terms"
+            checked={acceptedTerms}
+            onChange={() => setAcceptedTerms(!acceptedTerms)}
+            className="mr-2"
+          />
+          <label htmlFor="terms">
+            I accept the{' '}
+            <Link href="/termsofservice" className="text-blue-500 underline">
+              Terms of service
+            </Link>
+          </label>
         </div>
+
+        <div className="flex items-center mb-4">
+          <input
+            type="checkbox"
+            id="age"
+            checked={ageConfirmed}
+            onChange={() => setAgeConfirmed(!ageConfirmed)}
+            className="mr-2"
+          />
+          <label htmlFor="age">I confirm that I am over 13 years old</label>
+        </div>
+
+        <button
+          onClick={() => router.back()}
+          className="mb-2 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition"
+        >
+          Back
+        </button>
       </div>
     </div>
   );

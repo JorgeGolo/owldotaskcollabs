@@ -1,16 +1,12 @@
-import React from "react";
+import React from 'react';
 
 const cookies = () => {
   return (
-    <div className="mt-4 p-4 max-w-4xl mx-auto bg-white shadow-md rounded-lg cookiescontent">
-      <h1 className="text-3xl font-bold text-gray-800 mb-6 pb-2 border-b-2 border-gray-300">
-        OwldoTask Cookie Policy
-      </h1>
+    <div className="mt-4 p-4 max-w-4xl mx-auto bg-white dark:bg-dark-2 shadow-md rounded-lg">
+      <h1 className="pb-2 border-b-2">OwldoTask Cookie Policy</h1>
 
-      <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
-        Introduction
-      </h2>
-      <p className="text-gray-700 mb-6 leading-relaxed">
+      <h2>Introduction</h2>
+      <p>
         This Cookie Policy explains how OwldoTask ("we," "us," or "our") uses
         cookies and similar technologies on our website. This policy provides
         you with clear and comprehensive information about the cookies we use
@@ -19,10 +15,8 @@ const cookies = () => {
         laws.
       </p>
 
-      <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
-        What Are Cookies?
-      </h2>
-      <p className="text-gray-700 mb-6 leading-relaxed">
+      <h2>What Are Cookies?</h2>
+      <p>
         Cookies are small text files that are stored on your device (computer,
         tablet, or mobile) when you visit our website. They allow us to
         recognize your device and remember certain information about your visit,
@@ -31,14 +25,10 @@ const cookies = () => {
         information to website owners.
       </p>
 
-      <h2 className="text-2xl font-semibold text-gray-700 mt-6 mb-4 border-b border-gray-200 pb-2">
-        Types of Cookies We Use
-      </h2>
+      <h2>Types of Cookies We Use</h2>
 
-      <h3 className="text-xl font-semibold text-gray-700 mt-4 mb-3">
-        1. Essential Cookies
-      </h3>
-      <p className="text-gray-700 mb-6 leading-relaxed">
+      <h3>1. Essential Cookies</h3>
+      <p>
         These cookies are necessary for the functioning of our website and
         cannot be switched off in our systems. They are usually only set in
         response to actions made by you which amount to a request for services,
@@ -329,7 +319,7 @@ const cookies = () => {
       <p>
         Most web browsers allow some control of cookies through browser
         settings. To find out more about cookies, including how to see what
-        cookies have been set and how to manage and delete them, visit{" "}
+        cookies have been set and how to manage and delete them, visit{' '}
         <a
           href="http://www.allaboutcookies.org"
           className="text-blue-600 hover:underline"

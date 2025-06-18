@@ -58,7 +58,7 @@ export async function getStaticPathsPRO() {
 
     console.log(`✅ ${paths.length} rutas cargadas desde el backend`);
   } catch (err) {
-    console.warn("⚠️ Error al leer el JSON, usando Firebase como fallback");
+    console.warn('⚠️ Error al leer el JSON, usando Firebase como fallback');
 
     const snapshot = await getDocs(collection(db, 'quizzes'));
     paths = snapshot.docs.map((docSnap) => {
@@ -179,7 +179,7 @@ const Questionnaire = ({ quiz, chapters, fichalibro, category }) => {
         <div className="mt-2 mb-2">
           <div className="pl-2 flex items-center bg-[#fef9c3] border border-[#eab308] rounded-md text-[#3f2e1f]">
             {/* Share to get 1 <span className="inline-flex items-center ml-1">{featherIcon}</span> feather */}
-            <p className="italic text-sm">Share it!</p>
+            <span className="italic text-sm">Share it!</span>
 
             <div className="flex items-center space-x-2 p-2">
               {shareOnSocial('facebook', currentUrl, shareMessage)}
@@ -255,17 +255,13 @@ const Questionnaire = ({ quiz, chapters, fichalibro, category }) => {
           <div className="mt-4">
             {chapters.map((chapter) => (
               <div key={chapter.id} className="mb-6">
-                <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  {chapter.titulo}
-                </h3>
-                <p className="text-gray-600 leading-relaxed">
-                  {chapter.contenido}
-                </p>
+                <h3>{chapter.titulo}</h3>
+                <p>{chapter.contenido}</p>
               </div>
             ))}
           </div>
         ) : (
-          <p className="mt-4 text-gray-500">No content.</p>
+          <p>No content.</p>
         )}
       </div>
     </div>
