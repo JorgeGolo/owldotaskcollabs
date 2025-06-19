@@ -138,7 +138,7 @@ const category = ({ quizzes, category, categoryName }) => {
                 {quizzes.map((quiz) => (
                   <tr
                     key={quiz.id}
-                    className="dark:bg-dark-2 hover:bg-gray-100"
+                    className="dark:bg-dark-2 hover:bg-gray-100 border-b border-blue-500"
                   >
                     <td>
                       <Link

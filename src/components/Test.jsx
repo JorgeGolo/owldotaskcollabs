@@ -348,7 +348,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
               {questionData?.opciones.map((opcion, index) => (
                 <li
                   key={index}
-                  className={`bg-white mb-4 cursor-pointer p-2 rounded dark:bg-dark-1 border-2 border-blue-500 ${
+                  className={`bg-white mb-4 cursor-pointer p-2 rounded dark:bg-dark-1 border border-blue-500 dark:border-gray-blue ${
                     selectedOption !== null
                       ? 'opacity-50 cursor-not-allowed'
                       : ''
