@@ -1,96 +1,87 @@
-# Working from Visual Studio Code
+# Owldotask
 
-Local and cloud repository.
+---
 
-# Getting Started with Create React App
+Owldotask is a platform designed to give users the opportunity to earn rewards
+by completing small tasks, such as quizzes and mini-games.
 
-This project was bootstrapped with
-[Create React App](https://github.com/facebook/create-react-app).
+Every task completed grants points as a reward. These points, called
+**feathers**, help users climb the leaderboard, unlock perks, and even earn
+real-life rewards. Users can sign in with their Google accounts to create their
+own account at [https://owldotask.com](https://owldotask.com).
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## Technical Description
 
-### `npm start`
+This repository is a collaborator's copy of the frontend for
+[https://owldotask.com](https://owldotask.com).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+It's built with **React** and **Next.js** using **Static Site Generation
+(SSG)**, with **CI/CD** implemented via Git commits to GitHub.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The frontend communicates via **API routes** with a **Laravel** backend
+installation, which is also deployed with its own CI/CD pipeline.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about
-[running tests](https://facebook.github.io/create-react-app/docs/running-tests)
-for more information.
+## Collaboration Guidelines - Git Workflow
 
-### `npm run build`
+### Prettier
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the
-best performance.
+Collaborators on this repository use **Prettier** (as a Visual Studio Code
+extension) to maintain clean and consistent code.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Git and GitHub Workflow
 
-See the section about
-[deployment](https://facebook.github.io/create-react-app/docs/deployment) for
-more information.
+Here's how to effectively contribute to our repository using Git and GitHub:
 
-### `npm run eject`
+1.  **Ensure your local `main` branch is up-to-date with the remote
+    repository.** First, switch to your `main` branch and pull the latest
+    changes:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+    ```bash
+    git checkout main
+    git pull origin main
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can
-`eject` at any time. This command will remove the single build dependency from
-your project.
+2.  **Always work on a separate branch for your changes.** Give your branch a
+    descriptive name (e.g., `your-name/feature-description` like
+    `randall/add-login-button`).
 
-Instead, it will copy all the configuration files and the transitive
-dependencies (webpack, Babel, ESLint, etc) right into your project so you have
-full control over them. All of the commands except `eject` will still work, but
-they will point to the copied scripts so you can tweak them. At this point
-you're on your own.
+    Create and switch to your new branch:
 
-You don't have to ever use `eject`. The curated feature set is suitable for
-small and middle deployments, and you shouldn't feel obligated to use this
-feature. However we understand that this tool wouldn't be useful if you couldn't
-customize it when you are ready for it.
+    ```bash
+    git checkout -b your-descriptive-branch-name
+    ```
 
-## Learn More
+3.  **Make your changes and commit.** Once you've made your modifications, stage
+    and commit them:
 
-You can learn more in the
-[Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    ```bash
+    git add .
+    git commit -m "Brief, descriptive commit message"
+    ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+4.  **Push your branch to the remote repository.** Once you're ready to share
+    your work or create a Pull Request, push your branch:
 
-### Code Splitting
+    - **First time pushing this branch?** Use:
+      ```bash
+      git push --set-upstream origin your-descriptive-branch-name
+      ```
+    - **For subsequent pushes on this branch,** you can simply use:
+      ```bash
+      git push
+      ```
 
-This section has moved here:
-[https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+5.  **Create a Pull Request (PR).** Go to the GitHub web interface and navigate
+    to our repository. GitHub will usually detect your recently pushed branch
+    and prompt you to open a Pull Request. Follow the on-screen instructions to
+    create it, add reviewers, and provide a clear description of your changes.
 
-### Analyzing the Bundle Size
+### What happens next?
 
-This section has moved here:
-[https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here:
-[https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here:
-[https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here:
-[https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here:
-[https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Once your PR is created, team members will review your changes, leave comments,
+and eventually approve it. After approval, your branch will be merged into the
+`main` branch.
