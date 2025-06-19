@@ -125,7 +125,7 @@ const category = ({ quizzes, category, categoryName }) => {
 
         {quizzes.length > 0 ? (
           <div className="overflow-x-auto mt-4 rounded-lg shadow-lg">
-            <table className="w-full bg-white rounded-md text-sm md:text-base">
+            <table className="w-full rounded-md text-sm md:text-base">
               <thead>
                 <tr className="bg-gradient-to-r from-blue-600 to-blue-400 text-white">
                   <th className="p-4 text-left">Name</th>
@@ -136,11 +136,14 @@ const category = ({ quizzes, category, categoryName }) => {
               </thead>
               <tbody>
                 {quizzes.map((quiz) => (
-                  <tr key={quiz.id} className="hover:bg-gray-100 border-b">
+                  <tr
+                    key={quiz.id}
+                    className="dark:bg-dark-2 hover:bg-gray-100"
+                  >
                     <td>
                       <Link
                         href={`/quizzes/${encodeURIComponent(category)}/${quiz.title_slug}`}
-                        className="block w-full p-4 text-blue-600 hover:underline"
+                        className="dark:text-light-blue block w-full p-4 text-blue-600 hover:underline"
                       >
                         {quiz.title}
                       </Link>

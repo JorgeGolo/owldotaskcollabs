@@ -342,13 +342,13 @@ const Test = ({ chapters, numberOfQuestions }) => {
         ) : loading ? (
           <DotLoader color={colorheader} loading={loading} size={60} />
         ) : (
-          <div className="mt-4 p-4 bg-blue-50 rounded-lg relative border border-blue-500">
+          <div className="mt-4 p-4 dark:bg-dark-2 bg-blue-50 rounded-lg relative border border-blue-500">
             <p className="font-semibold mt-2 mb-4">{questionData?.pregunta}</p>
             <ul>
               {questionData?.opciones.map((opcion, index) => (
                 <li
                   key={index}
-                  className={`bg-white mb-4 cursor-pointer p-2 rounded ${
+                  className={`bg-white mb-4 cursor-pointer p-2 rounded dark:bg-dark-1 border-2 border-blue-500 ${
                     selectedOption !== null
                       ? 'opacity-50 cursor-not-allowed'
                       : ''
