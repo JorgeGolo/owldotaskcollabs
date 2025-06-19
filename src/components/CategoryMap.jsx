@@ -27,10 +27,10 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
   const iconName =
     iconCategories.find(
       (item) => item.name.toLowerCase() === categoryName.toLowerCase(), // Use categoryName to match with the name in the array
-    )?.iconcategory || "Layers";
+    )?.iconcategory || 'Layers';
 
   const IconComponent = LucideIcons[iconName];
-  const iconcolor = "#1e2a47";
+  const iconcolor = '#1e2a47';
 
   return (
     <motion.div
@@ -50,12 +50,12 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
           {categoryName}
         </span>
         <div
-          className="mt-1 text-[11px] text-gray-600
+          className="mt-1 text-gray-600
         dark:text-white
         "
         >
-          <p>{quizCount} quizzes</p>
-          <p>{questionCount} questions</p>
+          <span className="text-ssm block mb-2">{quizCount} quizzes</span>
+          <p className="text-more font-bebas">{questionCount} questions</p>
         </div>
       </Link>
     </motion.div>
