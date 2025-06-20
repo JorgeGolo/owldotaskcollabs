@@ -14,6 +14,8 @@ import useJwtToken from './useJwtToken'; // Importar el hook que creamos
 import useAuthStatus from './useAuthStatus';
 import useOnlineStatus from './useOnlineStatus';
 
+import { mockQuestionData } from '../context/mockQuestion'; // 👈 Importa los datos de prueba
+
 const Test = ({ chapters, numberOfQuestions }) => {
   const { isReliablyOnline } = useOnlineStatus();
 
@@ -72,6 +74,20 @@ const Test = ({ chapters, numberOfQuestions }) => {
 
   // Función para obtener preguntas
   const fetchQuestion = useCallback(async () => {
+    if (process.env.NODE_ENV === 'development') {
+      let chapter = 'texto para simular una pregunta';
+      console.log('🔧 Modo Desarrollo: Cargando pregunta de prueba.');
+      setLoading(true);
+
+      // Simulamos un pequeño retraso de red para que el spinner de carga sea visible
+      setTimeout(() => {
+        setQuestionData(mockQuestionData);
+        setLoading(false);
+      }, 500); // 500ms de retraso simulado
+
+      return; // ¡IMPORTANTE! Salimos de la función para no ejecutar el código de abajo.
+    }
+
     if (!chapter || quizFinished) return;
 
     if (!isReliablyOnline) return;
