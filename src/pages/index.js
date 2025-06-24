@@ -27,9 +27,9 @@ const Home = ({
 
   // Evento de prueba para GTM
   useEffect(() => {
-    if (typeof window !== "undefined" && window.dataLayer) {
+    if (typeof window !== 'undefined' && window.dataLayer) {
       window.dataLayer.push({
-        event: "page_view",
+        event: 'page_view',
         custom_page: window.location.pathname,
       });
     }
@@ -66,7 +66,7 @@ const Home = ({
             claim your rewards
           </p>
 
-          <h2>🗂️ Quiz categories on Owldotask</h2>
+          <h2 className="mt-6">🗂️ Quiz categories on Owldotask</h2>
 
           <p>
             Each quiz isn’t just a chance to test your knowledge—it’s an
@@ -83,7 +83,7 @@ const Home = ({
             See all quizzes and categories
           </Link>
 
-          <h2>🧮 Owldotask quiz stats</h2>
+          <h2 className="mt-6">🧮 Owldotask quiz stats</h2>
           <p className="mb-4">
             Thanks to our innovative content creation system — powered by data
             storage tools, retrieval technologies, and artificial intelligence —
@@ -97,7 +97,7 @@ const Home = ({
             questionsCount={stats.questions}
           />
 
-          <h2>🧩 Owldotask games</h2>
+          <h2 className="mt-6">🧩 Owldotask games</h2>
 
           <p>
             Games that offer a playful way to practice core skills, challenge
@@ -105,11 +105,11 @@ const Home = ({
             fun can lead to meaningful learning progress.
           </p>
 
-          <h2>🎁 Start earning feathers for every task</h2>
+          <h2 className="mt-6">🎁 Start earning feathers for every task</h2>
 
           <p className="mb-4">
             Every task you complete earns you points as a reward. These points,
-            called <span className="font-semibold">feathers</span>{" "}
+            called <span className="font-semibold">feathers</span>{' '}
             <span className="text-yellow-500 inline-flex items-center ml-1">
               {featherIcon}
             </span>
@@ -118,7 +118,7 @@ const Home = ({
             or on the feather icon next to your avatar for more info.
           </p>
 
-          <h2>🚀 Powered by modern technologies</h2>
+          <h2 className="mt-6">🚀 Powered by modern technologies</h2>
           <p className="mb-4">
             Our platform is built with the latest web technologies, delivering a
             fast, smooth, and fully responsive experience. With a friendly and
@@ -127,32 +127,32 @@ const Home = ({
 
           <TechGrid />
 
-          <h2>🌱 Grow with us</h2>
+          <h2 className="mt-6">🌱 Grow with us</h2>
           <p className="mb-4">
             This is just the beginning. We're constantly adding new quizzes,
             games, and platform upgrades. Our goal is to build an user-friendly,
             fun and educational web.
           </p>
 
-          <h2>🔒 We take your privacy seriously</h2>
+          <h2 className="mt-6">🔒 We take your privacy seriously</h2>
           <p className="mb-4">
             We fully comply with data protection laws (including GDPR), and we
-            will never share your information without your consent.{" "}
+            will never share your information without your consent.{' '}
             <span className="font-semibold">Owldotask</span> is a safe and
             trusted space, crafted to offer a fun and secure experience for
             users of all ages.
           </p>
 
-          <h2>📱 Follow us and stay updated</h2>
+          <h2 className="mt-6">📱 Follow us and stay updated</h2>
           <p className="mb-6">
             Want to be the first to know about new features, exclusive
-            challenges, and giveaways? Follow us on social media and join the{" "}
+            challenges, and giveaways? Follow us on social media and join the{' '}
             <span className="font-semibold">Owldotask</span> community. Because
             learning is better together.
           </p>
 
           <p className="text-lg font-medium mt-8 text-center">
-            <span className="font-bold">Owldotask</span> isn’t just a website.{" "}
+            <span className="font-bold">Owldotask</span> isn’t just a website.{' '}
             <br />
             It’s your new way to learn, compete, enjoy, and grow. <br />
             <span className="italic">Explore, answer, play and earn.</span>
