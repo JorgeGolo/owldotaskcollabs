@@ -602,7 +602,7 @@ const SopaDeLetras = () => {
                     </div>
                   ) : (
                     <div className="bg-[#fef9c3] border border-[#eab308] p-2 mb-2 italic text-[#705502]">
-                      <p>
+                      <p className="rounded-md">
                         You can play more games, but you cannot earn more
                         feathers here today.
                       </p>

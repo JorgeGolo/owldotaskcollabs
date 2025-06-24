@@ -302,7 +302,7 @@ const Test = ({ chapters, numberOfQuestions }) => {
                 </div>
               ) : (
                 <div className="bg-[#fef9c3] border border-[#eab308] p-2 mb-2 italic text-[#705502] rounded-md">
-                  <p>
+                  <p className="rounded-md">
                     You can try more quizzes, but you cannot earn more feathers
                     here today.
                   </p>
