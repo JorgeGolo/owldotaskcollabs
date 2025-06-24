@@ -185,7 +185,7 @@ const Questionnaires = ({ quizzes }) => {
                 {sortedQuizzes.map((quiz) => (
                   <tr
                     key={quiz.id}
-                    className="hover:bg-gray-100 dark:bg-dark-2"
+                    className="hover:bg-gray-100 dark:bg-dark-2 border-b border-blue-500"
                   >
                     <td>
                       <Link
