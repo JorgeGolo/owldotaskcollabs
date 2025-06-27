@@ -198,10 +198,7 @@ const Profile = () => {
             Profile
           </h1>
 
-          <div className="mb-6 p-4 bg-gray-50 rounded-md shadow-inner">
-            <h2 className="text-2xl font-bold mb-4 lg:mb-6">
-              Account Information
-            </h2>
+          <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner">
             <div className="flex flex-wrap gap-4 justify-between">
               <div className="w-full my-2">
                 <label className="w-full md:w-smallwidth inline-block">

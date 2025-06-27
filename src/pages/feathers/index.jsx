@@ -190,7 +190,7 @@ const Feathers = () => {
                   .feathers_needed_to_claim
               }
             </p>
-            <div className="w-full bg-gray-300 rounded-full h-2.5 mt-2">
+            <div className="w-full bg-gray-300 rounded-full h-2.5 mt-2 mb-4">
               <div
                 className="bg-teal-600 h-2.5 rounded-full"
                 style={{
@@ -199,8 +199,6 @@ const Feathers = () => {
                 }}
               ></div>
             </div>
-
-            <hr className="my-4" />
 
             {message && <p className="my-2">{message}</p>}
 
@@ -224,8 +222,8 @@ const Feathers = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 dark:bg-dark-2 lg:grid-cols-2 gap-4 lg:gap-8">
-            <div className="lg:mb-6 md:mb-6 mb-0 p-4 bg-gray-50 rounded-md shadow-inner">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
+            <div className="lg:mb-6 md:mb-6 mb-0 p-4 dark:bg-dark-2 rounded-md shadow-inner">
               <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
                 <span className="text-yellow-500 inline-flex items-center mr-2">
                   <FontAwesomeIcon icon={falevel} />
@@ -310,7 +308,7 @@ const Feathers = () => {
               <FontAwesomeIcon icon={faarrowdown} className="text-4xl" />
             </div>
 
-            <div className="mb-6 p-4 bg-gray-50 rounded-md shadow-inner">
+            <div className="mb-6 p-4 dark:bg-dark-2 rounded-md shadow-inner">
               <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
                 <span className="text-yellow-500 inline-flex items-center mr-2">
                   <FontAwesomeIcon icon={falevel} />
@@ -341,7 +339,7 @@ const Feathers = () => {
             </div>
           </div>
 
-          <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner">
+          <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner mt-4 dark:bg-dark-2 ">
             <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
               <span className="text-yellow-500 inline-flex items-center mr-2">
                 <FontAwesomeIcon icon={facal} />
