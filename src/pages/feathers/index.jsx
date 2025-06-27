@@ -177,7 +177,7 @@ const Feathers = () => {
       ) : (
         <>
           <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner">
-            <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
+            <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
               <span className="text-yellow-500 inline-flex items-center mr-2">
                 {featherIcon}
               </span>{' '}
@@ -219,14 +219,14 @@ const Feathers = () => {
             >
               Claim
               {!claimAvailable && (
-                <FaSpinner className="ml-2 inline animate-spin text-gray-600" />
+                <FaSpinner className="ml-2 inline animate-spin" />
               )}
             </button>
           </div>
 
           <div className="grid grid-cols-1 dark:bg-dark-2 lg:grid-cols-2 gap-4 lg:gap-8">
             <div className="lg:mb-6 md:mb-6 mb-0 p-4 bg-gray-50 rounded-md shadow-inner">
-              <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
+              <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
                 <span className="text-yellow-500 inline-flex items-center mr-2">
                   <FontAwesomeIcon icon={falevel} />
                 </span>{' '}
@@ -307,14 +307,11 @@ const Feathers = () => {
 
             {/* Flecha vertical para móvil */}
             <div className="flex justify-center lg:hidden">
-              <FontAwesomeIcon
-                icon={faarrowdown}
-                className="text-gray-300 text-4xl"
-              />
+              <FontAwesomeIcon icon={faarrowdown} className="text-4xl" />
             </div>
 
             <div className="mb-6 p-4 bg-gray-50 rounded-md shadow-inner">
-              <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
+              <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
                 <span className="text-yellow-500 inline-flex items-center mr-2">
                   <FontAwesomeIcon icon={falevel} />
                 </span>
@@ -345,7 +342,7 @@ const Feathers = () => {
           </div>
 
           <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner">
-            <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
+            <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
               <span className="text-yellow-500 inline-flex items-center mr-2">
                 <FontAwesomeIcon icon={facal} />
               </span>{' '}
@@ -367,7 +364,7 @@ export default Feathers;
 
           Sección de estadísticas de juegos y quizzes 
             <div className="p-4 bg-gray-50 rounded-md shadow-inner mb-6">
-              <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
+              <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
                 <span className="text-yellow-500 inline-flex items-center mr-2">
                   <FontAwesomeIcon icon={faIconsQuizz} />
               </span>Total Quizzes</h2>
@@ -378,7 +375,7 @@ export default Feathers;
             <hr className="my-4 border-gray-300" />
 
             <div className="p-4 bg-gray-50 rounded-md shadow-inner mb-6">
-              <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
+              <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
                 <span className="text-yellow-500 inline-flex items-center mr-2">
                   <FontAwesomeIcon icon={faGame} />
               </span>Total Games Completed</h2>

@@ -24,6 +24,7 @@ export default {
         'dark-3': '#6e6e6e',
         'dark-4': '#4b5563',
         'dark-5': '#4b5563',
+        'metallic-blue': '#244066',
         'strong-blue': '#2382ff', // Azul para cadenas de texto
         'gray-blue': '#41577c',
       },

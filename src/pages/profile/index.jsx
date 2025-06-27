@@ -194,17 +194,17 @@ const Profile = () => {
         </p>
       ) : (
         <>
-          <h1 className="text-3xl font-bold dark:text-light-2 text-gray-800 mb-4 lg:mb-6">
+          <h1 className="text-3xl font-bold dark:text-light-2 mb-4 lg:mb-6">
             Profile
           </h1>
 
           <div className="mb-6 p-4 bg-gray-50 rounded-md shadow-inner">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4 lg:mb-6">
+            <h2 className="text-2xl font-bold mb-4 lg:mb-6">
               Account Information
             </h2>
             <div className="flex flex-wrap gap-4 justify-between">
               <div className="w-full my-2">
-                <label className="text-gray-600 w-full md:w-smallwidth inline-block">
+                <label className="w-full md:w-smallwidth inline-block">
                   Mail:
                 </label>
                 <input
@@ -213,13 +213,11 @@ const Profile = () => {
                   className="my-2 md:mr-2 md:w-auto w-full p-2 rounded border border-gray-300 flex-grow"
                   disabled
                 />
-                <span className="italic text-gray-600">
-                  This data cannot be modified
-                </span>
+                <span className="italic">This data cannot be modified</span>
               </div>
               <div className="w-full my-2">
                 <form onSubmit={handleSavePaypal}>
-                  <label className="text-gray-600 w-full md:w-smallwidth inline-block">
+                  <label className="w-full md:w-smallwidth inline-block">
                     Paypal:
                   </label>
                   <input
@@ -240,7 +238,7 @@ const Profile = () => {
               </div>
               <div className="w-full my-2">
                 <form onSubmit={handleSaveWallet}>
-                  <label className="text-gray-600 w-full md:w-smallwidth inline-block">
+                  <label className="w-full md:w-smallwidth inline-block">
                     Wallet:
                   </label>
                   <input
@@ -259,7 +257,7 @@ const Profile = () => {
                   </button>
                 </form>
 
-                {message && <p className="text-gray-700 mt-2">{message}</p>}
+                {message && <p className="mt-2">{message}</p>}
               </div>
             </div>
           </div>
