@@ -10,10 +10,10 @@ import {
   reauthenticateWithPopup,
 } from 'firebase/auth';
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTasks } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTasks } from '@fortawesome/free-solid-svg-icons';
 
-import useJwtToken from "../../components/useJwtToken"; // Importar el hook que creamos
+import useJwtToken from '../../components/useJwtToken'; // Importar el hook que creamos
 
 import useOnlineStatus from '../../components/useOnlineStatus';
 
@@ -35,7 +35,7 @@ const Profile = () => {
   const [loading, setLoading] = useState(false);
 
   // For re-authentication
-  const [reauthError, setReauthError] = useState("");
+  const [reauthError, setReauthError] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
 
   const { featherIcon } = useContext(AppClientContext);
@@ -46,8 +46,8 @@ const Profile = () => {
   useEffect(() => {
     setLocalUser(user);
     setLocalClientData(clientData);
-    setPaypal(clientData?.paypal || "");
-    setWallet(clientData?.wallet || "");
+    setPaypal(clientData?.paypal || '');
+    setWallet(clientData?.wallet || '');
   }, [user, clientData]);
 
   useEffect(() => {
@@ -111,7 +111,7 @@ const Profile = () => {
   };
 
   const handleReauthenticate = async () => {
-    setReauthError("");
+    setReauthError('');
     setIsDeleting(true);
 
     try {
@@ -188,113 +188,111 @@ const Profile = () => {
 
       {!isReliablyOnline && getOfflineMessage()}
 
-      <div className="mb-6 p-6 dark:bg-dark-2 bg-white rounded-lg shadow hover:shadow-lg">
-        {!localClientData?.id ? (
-          <p className="text-red-500 dark:text-light-red">
-            Please Login to see your profile
-          </p>
-        ) : (
-          <>
-            <h1 className="text-3xl font-bold dark:text-light-2 text-gray-800 mb-4 lg:mb-6">
-              Profile
-            </h1>
+      {!localClientData?.id ? (
+        <p className="text-red-500 dark:text-light-red">
+          Please Login to see your profile
+        </p>
+      ) : (
+        <>
+          <h1 className="text-3xl font-bold dark:text-light-2 text-gray-800 mb-4 lg:mb-6">
+            Profile
+          </h1>
 
-            <div className="mb-6 p-4 bg-gray-50 rounded-md shadow-inner">
-              <h2 className="text-2xl font-bold text-gray-800 mb-4 lg:mb-6">
-                Account Information
-              </h2>
-              <div className="flex flex-wrap gap-4 justify-between">
-                <div className="w-full my-2">
+          <div className="mb-6 p-4 bg-gray-50 rounded-md shadow-inner">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4 lg:mb-6">
+              Account Information
+            </h2>
+            <div className="flex flex-wrap gap-4 justify-between">
+              <div className="w-full my-2">
+                <label className="text-gray-600 w-full md:w-smallwidth inline-block">
+                  Mail:
+                </label>
+                <input
+                  type="text"
+                  value={localClientData.email}
+                  className="my-2 md:mr-2 md:w-auto w-full p-2 rounded border border-gray-300 flex-grow"
+                  disabled
+                />
+                <span className="italic text-gray-600">
+                  This data cannot be modified
+                </span>
+              </div>
+              <div className="w-full my-2">
+                <form onSubmit={handleSavePaypal}>
                   <label className="text-gray-600 w-full md:w-smallwidth inline-block">
-                    Mail:
+                    Paypal:
+                  </label>
+                  <input
+                    type="email"
+                    value={paypal}
+                    onChange={(e) => setPaypal(e.target.value)}
+                    placeholder="Add your PayPal email"
+                    className="my-2 md:mr-2 md:w-auto w-full p-2 rounded border border-gray-300 flex-grow"
+                  />
+                  <button
+                    type="submit"
+                    className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition self-end ${loading || !isReliablyOnline ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={loading || !isReliablyOnline}
+                  >
+                    {loading ? 'Saving...' : 'Save'}
+                  </button>
+                </form>
+              </div>
+              <div className="w-full my-2">
+                <form onSubmit={handleSaveWallet}>
+                  <label className="text-gray-600 w-full md:w-smallwidth inline-block">
+                    Wallet:
                   </label>
                   <input
                     type="text"
-                    value={localClientData.email}
+                    value={wallet}
+                    onChange={(e) => setWallet(e.target.value)}
+                    placeholder="Add your wallet address"
                     className="my-2 md:mr-2 md:w-auto w-full p-2 rounded border border-gray-300 flex-grow"
-                    disabled
                   />
-                  <span className="italic text-gray-600">
-                    This data cannot be modified
-                  </span>
-                </div>
-                <div className="w-full my-2">
-                  <form onSubmit={handleSavePaypal}>
-                    <label className="text-gray-600 w-full md:w-smallwidth inline-block">
-                      Paypal:
-                    </label>
-                    <input
-                      type="email"
-                      value={paypal}
-                      onChange={(e) => setPaypal(e.target.value)}
-                      placeholder="Add your PayPal email"
-                      className="my-2 md:mr-2 md:w-auto w-full p-2 rounded border border-gray-300 flex-grow"
-                    />
-                    <button
-                      type="submit"
-                      className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition self-end ${loading || !isReliablyOnline ? "opacity-50 cursor-not-allowed" : ""}`}
-                      disabled={loading || !isReliablyOnline}
-                    >
-                      {loading ? "Saving..." : "Save"}
-                    </button>
-                  </form>
-                </div>
-                <div className="w-full my-2">
-                  <form onSubmit={handleSaveWallet}>
-                    <label className="text-gray-600 w-full md:w-smallwidth inline-block">
-                      Wallet:
-                    </label>
-                    <input
-                      type="text"
-                      value={wallet}
-                      onChange={(e) => setWallet(e.target.value)}
-                      placeholder="Add your wallet address"
-                      className="my-2 md:mr-2 md:w-auto w-full p-2 rounded border border-gray-300 flex-grow"
-                    />
-                    <button
-                      className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition self-end ${loading || !isReliablyOnline ? "opacity-50 cursor-not-allowed" : ""}`}
-                      disabled={loading || !isReliablyOnline}
-                      type="submit"
-                    >
-                      {loading ? "Saving..." : "Save"}
-                    </button>
-                  </form>
+                  <button
+                    className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition self-end ${loading || !isReliablyOnline ? 'opacity-50 cursor-not-allowed' : ''}`}
+                    disabled={loading || !isReliablyOnline}
+                    type="submit"
+                  >
+                    {loading ? 'Saving...' : 'Save'}
+                  </button>
+                </form>
 
-                  {message && <p className="text-gray-700 mt-2">{message}</p>}
-                </div>
+                {message && <p className="text-gray-700 mt-2">{message}</p>}
               </div>
             </div>
+          </div>
 
-            <hr className="my-4 border-gray-300" />
+          <hr className="my-4 border-gray-300" />
 
-            <button
-              onClick={logout}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-2"
-            >
-              Logout
-            </button>
+          <button
+            onClick={logout}
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-2"
+          >
+            Logout
+          </button>
 
-            <hr className="my-4 border-gray-300" />
+          <hr className="my-4 border-gray-300" />
 
-            <button
-              onClick={handleDeleteAccount}
-              className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition mb-2 ${isDeleting ? "opacity-50 cursor-not-allowed" : ""}`}
-              disabled={loading || !isReliablyOnline}
-            >
-              {isDeleting ? "Processing..." : "Delete account"}
-            </button>
+          <button
+            onClick={handleDeleteAccount}
+            className={`bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 transition mb-2 ${isDeleting ? 'opacity-50 cursor-not-allowed' : ''}`}
+            disabled={loading || !isReliablyOnline}
+          >
+            {isDeleting ? 'Processing...' : 'Delete account'}
+          </button>
 
-            {reauthError && (
-              <div className="mt-2 p-2 bg-red-100 text-red-700 rounded">
-                {reauthError}
-                <p className="mt-1 text-sm">
-                  Please try again or contact support if the problem persists.
-                </p>
-              </div>
-            )}
-          </>
-        )}
-      </div>
+          {reauthError && (
+            <div className="mt-2 p-2 bg-red-100 text-red-700 rounded">
+              {reauthError}
+              <p className="mt-1 text-sm">
+                Please try again or contact support if the problem persists.
+              </p>
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };

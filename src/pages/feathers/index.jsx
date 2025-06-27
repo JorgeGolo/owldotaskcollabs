@@ -11,7 +11,7 @@ import {
   faCaretRight,
 } from '@fortawesome/free-solid-svg-icons';
 
-import useJwtToken from "../../components/useJwtToken";
+import useJwtToken from '../../components/useJwtToken';
 
 import useOnlineStatus from '../../components/useOnlineStatus';
 
@@ -171,14 +171,12 @@ const Feathers = () => {
       {!isReliablyOnline && getOfflineMessage()}
 
       {!localClientData?.id ? (
-        <div className="mb-6 p-6 dark:bg-dark-2 bg-white rounded-lg shadow hover:shadow-lg">
-          <p className="text-red-500 dark:text-light-red">
-            Please Login to se your feathers.
-          </p>
-        </div>
+        <p className="text-red-500 dark:text-light-red">
+          Please Login to se your feathers.
+        </p>
       ) : (
-        <div className="mb-6 p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
-          <div className="mb-6 p-4 bg-gray-50 rounded-md shadow-inner">
+        <>
+          <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner">
             <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
               <span className="text-yellow-500 inline-flex items-center mr-2">
                 {featherIcon}
@@ -226,7 +224,7 @@ const Feathers = () => {
             </button>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
+          <div className="grid grid-cols-1 dark:bg-dark-2 lg:grid-cols-2 gap-4 lg:gap-8">
             <div className="lg:mb-6 md:mb-6 mb-0 p-4 bg-gray-50 rounded-md shadow-inner">
               <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
                 <span className="text-yellow-500 inline-flex items-center mr-2">
@@ -346,7 +344,7 @@ const Feathers = () => {
             </div>
           </div>
 
-          <div className="mb-6 p-4 bg-gray-50 rounded-md shadow-inner">
+          <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner">
             <h2 className="flex text-2xl font-bold text-gray-800 mb-2 lg:mb-4">
               <span className="text-yellow-500 inline-flex items-center mr-2">
                 <FontAwesomeIcon icon={facal} />
@@ -355,8 +353,16 @@ const Feathers = () => {
             </h2>
             <p className="italic">Coming soon</p>
           </div>
+        </>
+      )}
+    </div>
+  );
+};
 
-          {/*
+export default Feathers;
+
+{
+  /*
             <hr className="border-gray-300" />
 
           Sección de estadísticas de juegos y quizzes 
@@ -379,11 +385,5 @@ const Feathers = () => {
               <p>Mini tasks: </p>
               <p>Games completed: </p>
             </div>
-            */}
-        </div>
-      )}
-    </div>
-  );
-};
-
-export default Feathers;
+            */
+}

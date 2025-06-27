@@ -30,7 +30,7 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
     )?.iconcategory || 'Layers';
 
   const IconComponent = LucideIcons[iconName];
-  const iconcolor = '#b3d0ff';
+  const iconcolor = '#1f2937';
 
   return (
     <motion.div
@@ -45,7 +45,7 @@ const CategoryItem = ({ category, categoryName, quizCount, questionCount }) => {
         dark:bg-strong-blue dark:hover:bg-[#ef7e44]
         "
       >
-        {IconComponent && <IconComponent size={46} color={iconcolor} />}
+        {IconComponent && <IconComponent size={30} color={iconcolor} />}
         <span className="mt-2 text-ssm md:text-sm font-semibold">
           {categoryName}
         </span>
