@@ -33,43 +33,55 @@ installation, which is also deployed with its own CI/CD pipeline.
 
 ### Local Frontend Setup
 
-1.  **Prerequisites. Make sure you have the following installed on your system:
+1.  **Prerequisites**. Make sure you have the following installed on your
+    system:
 
-		- Node.js and npm/yarn
-		- Git
+        - Node.js and npm/yarn
+        - Git
 
-2.  **Clone the Repository.
+2.  **Clone** the Repository.
 
     ```bash
     git clone https://docs.github.com/es/repositories
     cd [repository-name]
     ```
 
-3. Frontend Configuration (React + Next.js)
+3.  **Frontend Configuration** (React + Next.js)
 
     ```bash
     npm install
     # or if you use yarn
     yarn install
     ```
-    
-4 . Configure environment variables: If you wish to actively participate in local project testing, you can join our Discord server and request the specific .env test files for that purpose.
 
-5 . Run development mode:
+4 . **Configure environment variables**: If you wish to actively participate in
+local project testing, you can join our Discord server and request the specific
+.env test files for that purpose.
+
+5 . **Run development mode**:
 
     ```bash
     npm run dev
     # or if you use yarn
     yarn dev
     ```
-6 . Additional Considerations:
 
- - Frontend-Backend Communication: The frontend communicates with the backend via API routes.
- - PWA (Progressive Web App): The project includes PWA functionalities. The _app.js file registers the Service Worker (sw.js) for the PWA. During development, the Service Worker is unregistered to avoid conflicts.
- - package.json Scripts: Familiarize yourself with the scripts defined in package.json, such as dev, build, start, and generate-routes. The build script also runs a script to generate static routes for PWA pre-caching.
- - Project Structure: The main frontend source code is commonly organized within src/, including components/, assets/, styles/, and context/. Page files are located in pages/. The _app.js file initializes all pages and is where the Service Worker registration is included.
- - Versioning: The project version is set in package.json.
- 
+6 . **Additional Considerations**:
+
+- Frontend-Backend Communication: The frontend communicates with the backend via
+  API routes.
+- PWA (Progressive Web App): The project includes PWA functionalities. The
+  \_app.js file registers the Service Worker (sw.js) for the PWA. During
+  development, the Service Worker is unregistered to avoid conflicts.
+- package.json Scripts: Familiarize yourself with the scripts defined in
+  package.json, such as dev, build, start, and generate-routes. The build script
+  also runs a script to generate static routes for PWA pre-caching.
+- Project Structure: The main frontend source code is commonly organized within
+  src/, including components/, assets/, styles/, and context/. Page files are
+  located in pages/. The \_app.js file initializes all pages and is where the
+  Service Worker registration is included.
+- Versioning: The project version is set in package.json.
+
 ### Prettier
 
 Collaborators on this repository use **Prettier** (as a Visual Studio Code
