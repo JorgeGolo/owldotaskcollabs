@@ -32,7 +32,7 @@ const getMessage = (goal, score) => {
     case 'completion':
       return (
         <>
-          <div className="text-1xl mb-2">
+          <div className="text-1xl mb-2 dark:text-green-800">
             <span>You've won </span>
             <span className="font-bold font-bebas inline-flex items-center">
               {score} <FaFeather className="w-4 h-4 text-yellow-500 ml-1" />
@@ -44,7 +44,7 @@ const getMessage = (goal, score) => {
     case 'perfectScore':
       return (
         <>
-          <div className="text-1xl mb-2">
+          <div className="text-1xl mb-2 dark:text-green-800">
             <span>Perfect score, </span>
             <span className="font-bold font-bebas inline-flex items-center">
               + 5 <FaFeather className="w-4 h-4 text-yellow-500 ml-1" />
@@ -56,7 +56,7 @@ const getMessage = (goal, score) => {
     case 'gameCompleted':
       return (
         <>
-          <div className="text-1xl mb-2">
+          <div className="text-1xl mb-2 dark:text-green-800">
             <span>Game Completed, </span>
             <span className="font-bold font-bebas inline-flex items-center">
               +{score} <FaFeather className="w-4 h-4 text-yellow-500 ml-1" />
@@ -68,7 +68,7 @@ const getMessage = (goal, score) => {
     case 'bonus':
       return (
         <>
-          <div className="text-1xl mb-2">
+          <div className="text-1xl mb-2 dark:text-green-800">
             <span>You've won </span>
             <span className="font-bold font-bebas inline-flex items-center">
               {score} <FaFeather className="w-4 h-4 text-yellow-500 ml-1" />
@@ -80,7 +80,7 @@ const getMessage = (goal, score) => {
     default:
       return (
         <>
-          <div className="text-1xl mb-2">
+          <div className="text-1xl mb-2 dark:text-green-800">
             <span>You've won </span>
             <span className="font-bold font-bebas inline-flex items-center">
               {score} <FaFeather className="w-4 h-4 text-yellow-500 ml-1" />

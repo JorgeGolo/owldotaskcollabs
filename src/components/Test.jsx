@@ -168,6 +168,10 @@ const Test = ({ chapters, numberOfQuestions }) => {
       setQuizFinished(true);
       setRetryAvailable(false);
 
+      if (process.env.NODE_ENV === 'development') {
+        triggerGoal('completion');
+      }
+
       try {
         if (score > 0 && canEarnPoints === true) {
           // 🔥 Paso 1: Prepara todas las operaciones de guardado que necesitas hacer.
