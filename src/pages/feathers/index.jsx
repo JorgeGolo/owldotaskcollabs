@@ -231,7 +231,7 @@ const Feathers = () => {
                 Level {localClientData.level}
               </h2>
 
-              <div className="border p-2 rounded-md bg-white">
+              <div className="border p-2 rounded-md bg-white dark:bg-metallig-blue">
                 <div className="font-bold italic">Benefits</div>
                 <p>
                   Quizzes per day: {localClientData.quizzestoday || '0'} /{' '}
@@ -259,7 +259,7 @@ const Feathers = () => {
                 </p>
               </div>
 
-              <div className="border p-2 rounded-md bg-white mt-2">
+              <div className="border p-2 rounded-md bg-white dark:bg-metallig-blue mt-2">
                 <div className="font-bold italic">Requirements to level up</div>
                 <p>
                   Quizzes finished: {localClientData.quizzesdone} /{' '}
