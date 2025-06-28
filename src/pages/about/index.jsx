@@ -44,9 +44,12 @@ const about = () => {
         />
       </Head>
       <div className="p-4 max-w-5xl">
-        <div className="mb-6 p-6 bg-white rounded-lg shadow hover:shadow-lg transition">
+        <div className="mb-6 p-6 bg-white rounded-lg shadow hover:shadow-lg dark:bg-dark-2">
           <h1 className="text-2xl font-bold mb-6">
-            <span className="text-[#214396]">OwldoTask</span> – About Us
+            <span className="text-[#214396] dark:text-light-blue">
+              OwldoTask
+            </span>{' '}
+            – About Us
           </h1>
 
           <h2 className="text-2xl font-semibold mt-8 mb-2">🤝 The team</h2>
