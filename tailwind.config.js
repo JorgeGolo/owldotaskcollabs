@@ -23,9 +23,8 @@ export default {
         'dark-2': '#1f2937',
         'dark-3': '#6e6e6e',
         'dark-4': '#4b5563',
-        'dark-5': '#4b5563',
-        'metallic-blue': '#244066',
-        'strong-blue': '#2382ff', // Azul para cadenas de texto
+        'dark-5': '#244066',
+        'strong-blue': '#2382ff',
         'gray-blue': '#41577c',
       },
 
