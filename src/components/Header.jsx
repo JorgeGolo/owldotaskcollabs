@@ -1,27 +1,24 @@
+// src/components/Header.jsx
 import React, { memo, useContext, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import GoogleLogin from '../components/GoogleLogin';
+import GoogleLogin from './GoogleLogin'; // Componente para login con Google
 import { AppClientContext } from '../context/ClientDataProvider';
 import { FaFeather, FaSpinner } from 'react-icons/fa';
-import PointsDisplay from '../components/PointsDisplay';
-import useOnlineStatus from '../components/useOnlineStatus'; // Asumo que ya tienes este hook
-import useAuthStatus from '../components/useAuthStatus'; // ¡Importa el nuevo hook!
+import PointsDisplay from './PointsDisplay';
+import useOnlineStatus from './useOnlineStatus';
+import useAuthStatus from './useAuthStatus';
 import ThemeToggleButton from './ThemeToggleButton';
 
 const Header = memo(() => {
   const { user, clientData, bebasNeueClass } = useContext(AppClientContext);
   const router = useRouter();
   const { isReliablyOnline } = useOnlineStatus(); // Estado de conectividad de la red
-  const isLoggedIn = useAuthStatus(); // ¡Usa el nuevo hook!
+  const isLoggedIn = useAuthStatus(); // Hook para verificar el estado de autenticación
 
   // Estado local para controlar la carga inicial de la UI, no de la autenticación en sí
   const [isUiLoading, setIsUiLoading] = useState(true);
 
   // Este useEffect se encarga de determinar cuándo la UI puede dejar de "cargando"
-  // Considera que la UI está lista cuando:
-  // 1. La verificación de login ha terminado (isLoggedIn no es null).
-  // 2. Si el usuario está logueado, necesitamos también clientData.
-  // 3. Si no está logueado, no necesitamos clientData.
   useEffect(() => {
     if (isLoggedIn !== null) {
       // Solo proceder si el estado de autenticación ya se ha verificado
@@ -67,7 +64,6 @@ const Header = memo(() => {
     }
 
     // PASO 2: Si el usuario está autenticado y tenemos sus datos de cliente
-    // (Asegúrate de que user.photoURL exista antes de intentar mostrarlo)
     else if (isLoggedIn && user && clientData?.id) {
       return (
         <div className="flex items-center space-x-2 cursor-pointer h-10">
@@ -83,7 +79,7 @@ const Header = memo(() => {
           <img
             src={user.photoURL || '/assets/images/usuario.png'} // Usa photoURL o el avatar por defecto
             alt="Foto de perfil"
-            className="avatar cursor-pointer"
+            className="avatar cursor-pointer rounded-full h-10 w-10 object-cover" // Añadido Tailwind para estilo de avatar
             onClick={() => router.push('/profile')}
             onError={(e) => {
               e.target.src = '/assets/images/usuario.png'; // Fallback por si la URL de la imagen es inválida
@@ -96,20 +92,29 @@ const Header = memo(() => {
     // PASO 3: Si no hay usuario autenticado, muestra los botones de login/signin
     else {
       return (
-        <div className="md:block space-x-2 h-10">
+        <div className="md:block space-x-2 h-10 flex items-center">
+          {' '}
+          {/* Añadido flex y items-center para alinear los botones */}
           {!isReliablyOnline && (
-            <span className="text-gray italic bold">Offline</span>
+            <span className="text-gray-400 italic font-bold">Offline</span>
           )}
-
-          <GoogleLogin />
+          {/* Nuevo botón para Login con Email y Contraseña */}
           <button
-            className="inline-block bg-white text-black p-2 rounded hover:bg-gray-600 transition
-                  disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
-                  "
-            disabled={!isReliablyOnline ? true : false}
-            onClick={() => router.push('/signin')}
+            className="inline-block bg-blue-600 text-white p-2 rounded hover:bg-blue-700 transition
+                       disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400"
+            disabled={!isReliablyOnline}
+            onClick={() => router.push('/signin?mode=login')} // Redirige a signin en modo login
           >
-            Sign in
+            Login
+          </button>
+          {/* Botón de Registro (Sign In) */}
+          <button
+            className="inline-block bg-green-600 text-white p-2 rounded hover:bg-green-700 transition // Cambiado a color verde para registro
+                       disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400"
+            disabled={!isReliablyOnline}
+            onClick={() => router.push('/signin?mode=register')} // Redirige a signin en modo registro
+          >
+            Register
           </button>
         </div>
       );
@@ -120,7 +125,7 @@ const Header = memo(() => {
     <header className="header-container">
       <div
         id="header"
-        className="dark:bg-dark-1 text-white p-2 w-full flex flex-wrap items-center
+        className="dark:bg-gray-900 bg-gray-800 text-white p-2 w-full flex flex-wrap items-center shadow-md // Ajustado bg y shadow
         "
       >
         {/* Logo */}
@@ -132,11 +137,12 @@ const Header = memo(() => {
           <img
             src="/assets/images/logo-64x64.svg"
             alt="Logo"
-            className="logo"
+            className="logo h-10 w-10 mr-2" // Ajustado tamaño y margen
             title="OwldoTask Logo"
           />
           <span className="title text-white text-3xl font-bebas flex items-center mt-2">
-            Owl<span className="text-secondary">do</span>Task
+            Owl<span className="text-yellow-400">do</span>Task{' '}
+            {/* Cambiado color secundario a amarillo */}
           </span>
         </div>
         <div className="flex-1"></div>
