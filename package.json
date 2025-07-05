@@ -1,6 +1,6 @@
 {
   "name": "feathers",
-  "version": "1.0.12",
+  "version": "1.0.17",
   "private": true,
   "dependencies": {
     "@capacitor-community/admob": "^7.0.3",
@@ -11,6 +11,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@google/generative-ai": "^0.22.0",
+    "@headlessui/react": "^2.2.4",
     "@svgr/plugin-svgo": "^8.1.0",
     "@tailwindcss/cli": "^4.0.0",
     "axios": "^1.8.4",
@@ -78,6 +79,8 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@capacitor/assets": "^3.0.5",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.27.0",
     "postcss": "^8.5.1",
