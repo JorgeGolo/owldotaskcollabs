@@ -114,7 +114,7 @@ const GoogleLogin = () => {
 
   return (
     <button
-      className="inline-block bg-white text-black p-2 rounded hover:bg-gray-600 transition
+      className="w-full inline-block bg-white text-black p-2 rounded hover:bg-gray-600 transition
       disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
       "
       disabled={!isReliablyOnline ? true : false}

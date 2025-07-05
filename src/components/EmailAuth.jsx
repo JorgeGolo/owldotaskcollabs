@@ -1,41 +1,45 @@
 // src/components/EmailAuth.jsx
 import React, { useState, useContext, useEffect } from 'react';
 import {
-  createUserWithEmailAndPassword, // Para registrar nuevos usuarios con email y contraseña
-  signInWithEmailAndPassword, // Para iniciar sesión con email y contraseña
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { auth } from '../firebase'; // Importa la instancia de autenticación de Firebase
-import { useRouter } from 'next/router'; // Hook de Next.js para la navegación
-import { AppClientContext } from '../context/ClientDataProvider'; // Contexto para manejar datos del cliente
-import useJwtToken from './useJwtToken'; // Hook personalizado para manejar tokens JWT
+import { auth } from '../firebase';
+import { useRouter } from 'next/router';
+import { AppClientContext } from '../context/ClientDataProvider';
+import useJwtToken from './useJwtToken';
 
-const EmailAuth = ({ acceptedTerms, ageConfirmed }) => {
+// Recibe initialIsRegistering como prop
+const EmailAuth = ({ acceptedTerms, ageConfirmed, initialIsRegistering }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // Estado para alternar entre el formulario de registro (true) y el de inicio de sesión (false)
-  const [isRegistering, setIsRegistering] = useState(true);
-  const [localErrorMessage, setLocalErrorMessage] = useState(null); // Mensajes de error específicos del componente
-  const [localSuccessMessage, setLocalSuccessMessage] = useState(null); // Mensajes de éxito específicos del componente
+  // Usa initialIsRegistering para el estado inicial del formulario
+  const [isRegistering, setIsRegistering] = useState(initialIsRegistering);
+  const [localErrorMessage, setLocalErrorMessage] = useState(null);
+  const [localSuccessMessage, setLocalSuccessMessage] = useState(null);
 
   const router = useRouter();
   const { setUser, setClientData } = useContext(AppClientContext);
   const { initializeToken, fetchWithToken } = useJwtToken();
 
-  // Inicializa el token JWT cuando el componente se monta
   useEffect(() => {
     initializeToken();
   }, [initializeToken]);
 
-  // Función para limpiar los mensajes de error y éxito
+  // Efecto para actualizar isRegistering si la prop initialIsRegistering cambia
+  useEffect(() => {
+    setIsRegistering(initialIsRegistering);
+    resetMessages(); // También limpia los mensajes al cambiar de modo
+  }, [initialIsRegistering]);
+
   const resetMessages = () => {
     setLocalErrorMessage(null);
     setLocalSuccessMessage(null);
   };
 
-  // Manejador principal para el registro o inicio de sesión
   const handleAuth = async (e) => {
-    e.preventDefault(); // Previene el comportamiento por defecto del formulario
-    resetMessages(); // Limpia mensajes anteriores
+    e.preventDefault();
+    resetMessages();
 
     if (!email || !password) {
       setLocalErrorMessage('Please enter both email and password.');
@@ -52,13 +56,12 @@ const EmailAuth = ({ acceptedTerms, ageConfirmed }) => {
       }
 
       try {
-        // Crea el usuario en Firebase Authentication
         const firebaseUserCredential = await createUserWithEmailAndPassword(
           auth,
           email,
           password,
         );
-        const user = firebaseUserCredential.user; // Obtiene el objeto de usuario de Firebase
+        const user = firebaseUserCredential.user;
 
         if (!user || !user.email) {
           setLocalErrorMessage(
@@ -67,14 +70,12 @@ const EmailAuth = ({ acceptedTerms, ageConfirmed }) => {
           return;
         }
 
-        // Prepara los datos del usuario para enviar a tu backend
         const userData = {
-          name: user.displayName || email.split('@')[0], // Usa el nombre de visualización o parte del email
+          name: user.displayName || email.split('@')[0],
           email: user.email,
           uid: user.uid,
         };
 
-        // Llama a tu API de registro en el backend
         const response = await fetchWithToken(
           'https://8txnxmkveg.us-east-1.awsapprunner.com/api/register',
           {
@@ -87,13 +88,11 @@ const EmailAuth = ({ acceptedTerms, ageConfirmed }) => {
         const data = await response.json();
 
         if (response.status === 201) {
-          // Registro exitoso
           setLocalSuccessMessage('Registration successful! Redirecting...');
-          setUser(user); // Actualiza el usuario en el contexto
-          setClientData(data.client); // Actualiza los datos del cliente en el contexto
-          router.push('/'); // Redirige a la página principal
+          setUser(user);
+          setClientData(data.client);
+          router.push('/');
         } else if (response.status === 409) {
-          // El usuario ya está registrado, intenta iniciar sesión automáticamente
           console.warn('User already registered. Attempting to log in...');
           const loginResponse = await fetchWithToken(
             `https://8txnxmkveg.us-east-1.awsapprunner.com/api/getClientData?uid=${user.uid}`,
@@ -111,13 +110,11 @@ const EmailAuth = ({ acceptedTerms, ageConfirmed }) => {
             );
           }
         } else {
-          // Otros errores del backend
           setLocalErrorMessage(
             data.message || 'Registration failed. Please try again.',
           );
         }
       } catch (err) {
-        // Manejo de errores de Firebase Authentication durante el registro
         let message = 'Registration failed.';
         if (err.code === 'auth/email-already-in-use') {
           message =
@@ -133,36 +130,32 @@ const EmailAuth = ({ acceptedTerms, ageConfirmed }) => {
     } else {
       // Lógica para el INICIO DE SESIÓN
       try {
-        // Inicia sesión con email y contraseña en Firebase
         const firebaseUserCredential = await signInWithEmailAndPassword(
           auth,
           email,
           password,
         );
-        const user = firebaseUserCredential.user; // Obtiene el objeto de usuario de Firebase
+        const user = firebaseUserCredential.user;
 
         if (!user || !user.email) {
           setLocalErrorMessage('Error logging in. User information not found.');
           return;
         }
 
-        // Una vez autenticado con Firebase, obtiene los datos del cliente de tu backend
         const loginResponse = await fetchWithToken(
           `https://8txnxmkveg.us-east-1.awsapprunner.com/api/getClientData?uid=${user.uid}`,
         );
         const clientData = await loginResponse.json();
 
         if (loginResponse.ok) {
-          // Inicio de sesión exitoso y datos del cliente obtenidos
           setLocalSuccessMessage('Login successful! Redirecting...');
-          setUser(user); // Actualiza el usuario en el contexto
-          setClientData(clientData); // Actualiza los datos del cliente en el contexto
-          router.push('/'); // Redirige a la página principal
+          setUser(user);
+          setClientData(clientData);
+          router.push('/');
         } else {
           setLocalErrorMessage('Error fetching client data after login.');
         }
       } catch (err) {
-        // Manejo de errores de Firebase Authentication durante el inicio de sesión
         let message = 'Login failed.';
         if (err.code === 'auth/wrong-password') {
           message = 'Incorrect password.';
@@ -171,7 +164,6 @@ const EmailAuth = ({ acceptedTerms, ageConfirmed }) => {
         } else if (err.code === 'auth/invalid-email') {
           message = 'Invalid email address.';
         } else if (err.code === 'auth/invalid-credential') {
-          // Para versiones más recientes de Firebase
           message =
             'Invalid credentials. Please check your email and password.';
         }
@@ -235,24 +227,11 @@ const EmailAuth = ({ acceptedTerms, ageConfirmed }) => {
         <button
           type="submit"
           className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400"
-          // El botón de registro se deshabilita si los términos no son aceptados
-          disabled={!acceptedTerms && isRegistering}
+          disabled={(!acceptedTerms || !ageConfirmed) && isRegistering}
         >
           {isRegistering ? 'Register' : 'Sign In'}
         </button>
       </form>
-
-      <button
-        onClick={() => {
-          setIsRegistering(!isRegistering); // Cambia entre registro e inicio de sesión
-          resetMessages(); // Limpia los mensajes al cambiar de modo
-        }}
-        className="mt-4 w-full bg-gray-200 text-gray-800 p-2 rounded hover:bg-gray-300 transition dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-600"
-      >
-        {isRegistering
-          ? 'Already have an account? Sign In'
-          : 'Need an account? Register'}
-      </button>
     </div>
   );
 };
