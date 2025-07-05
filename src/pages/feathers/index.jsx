@@ -19,13 +19,7 @@ import Breadcrumb from '../../components/BreadCrumb';
 
 import { FaSpinner } from 'react-icons/fa';
 
-import ConfirmModal from '../../components/ConfirmModal'; // Asegúrate que la ruta sea correcta
-
 const Feathers = () => {
-  const [showClaimModal, setShowClaimModal] = useState(false); // Nuevo estado para controlar la visibilidad del modal
-  const [modalTitle, setModalTitle] = useState(''); // Estado para el título del modal
-  const [modalMessage, setModalMessage] = useState(''); // Estado para el mensaje del modal
-
   const { isReliablyOnline } = useOnlineStatus(); // Estado de conectividad de la red
 
   const facal = faCalendar;
@@ -58,13 +52,16 @@ const Feathers = () => {
   const [localUser, setLocalUser] = useState(user);
   const [message, setMessage] = useState('');
 
-  const [claimAvailable, setClaimAvailable] = useState(true);
+  const [claimAvailable, setclaimAvailable] = useState(true);
 
   useEffect(() => {
     //setLocalUser(user);
     setLocalClientData(clientData);
     setLocalLevelData(levelData);
   }, [user, clientData, levelData]);
+
+  // Al cargar esta página, se deben comprobar datos con la función checkCanEarnPoints de ClientDataProvider.jsx
+  // y se actualizan los datos del cliente con refreshClientData también de ClientDataProvider.jsx
 
   useEffect(() => {
     if (localClientData && localClientData.points !== undefined) {
@@ -78,7 +75,7 @@ const Feathers = () => {
     } else {
       setProgress(0);
     }
-  }, [localClientData, localLevelData]); // Añadido localLevelData a las dependencias
+  }, [localClientData]);
 
   useEffect(() => {
     if (localClientData && localClientData.totalfeathers !== undefined) {
@@ -101,43 +98,22 @@ const Feathers = () => {
     initializeToken();
   }, [initializeToken]);
 
-  // Función para abrir el modal de confirmación
-  const openClaimModal = () => {
-    setModalTitle('Confirmar Reclamación de Feathers');
-    setModalMessage(
-      `¿Estás seguro de que quieres reclamar ${localClientData.points} feathers? Esto restablecerá tus puntos.`,
-    );
-    setShowClaimModal(true);
-  };
-
-  // Función que se ejecuta cuando el usuario confirma en el modal
-  const handleConfirmClaim = async () => {
-    // Aquí se ejecuta la lógica original de claimFeathers
-    // Primero, cierra el modal para evitar que se quede abierto durante la espera
-    closeClaimModal();
-    await claimFeathers();
-  };
-
-  // Función para cerrar el modal
-  const closeClaimModal = () => {
-    setShowClaimModal(false);
-  };
-
   const claimFeathers = async () => {
     if (!isReliablyOnline || !claimAvailable) {
+      // Si no hay conexión, no se puede hacer la reclamación
       return;
     }
 
-    setClaimAvailable(false); // Deshabilita el botón
+    setclaimAvailable(false);
 
     try {
       const clientMail = localClientData.email;
       const clientWallet = localClientData.wallet;
 
+      // Verificar que existe la wallet
       if (!clientWallet) {
-        setMessage(
-          '❌ No se encontró una billetera. Por favor, añade una primero.',
-        );
+        setMessage('❌ No wallet found. Please add a wallet first.');
+        setclaimAvailable(true);
         return;
       }
 
@@ -158,6 +134,7 @@ const Feathers = () => {
 
       console.log(`📡 Estado HTTP de la API: ${response.status}`);
 
+      // Intentar parsear la respuesta como JSON
       let result;
       const text = await response.text();
       try {
@@ -172,16 +149,13 @@ const Feathers = () => {
       }
 
       console.log(`📡 Respuesta de la API (procesada):`, result);
-      setMessage(
-        `✅ ${result.message || '¡Feathers reclamados exitosamente!'}`,
-      );
-      await refreshClientData(); // Actualiza los datos del cliente después de una reclamación exitosa
+      setMessage(`✅ ${result.message || 'Feathers claimed successfully!'}`);
+      await refreshClientData();
     } catch (error) {
-      // Eliminado 'any' porque es JS, no TS
       console.error('Error en claimFeathers:', error);
-      setMessage(error.message || '❌ Error con el pago de cripto.');
+      setMessage(error.message || '❌ Error with the crypto payment.');
     } finally {
-      setClaimAvailable(true); // Vuelve a habilitar el botón
+      setclaimAvailable(true);
     }
   };
 
@@ -191,206 +165,192 @@ const Feathers = () => {
   ];
 
   return (
-    <>
-      <div className="p-4 w-full">
-        <Breadcrumb segments={breadcrumbSegments} />
+    <div className="p-4 w-full">
+      <Breadcrumb segments={breadcrumbSegments} />
 
-        {!isReliablyOnline && getOfflineMessage()}
+      {!isReliablyOnline && getOfflineMessage()}
 
-        {!localClientData?.id ? (
-          <p className="text-red-500 dark:text-light-red">
-            Please Login to se your feathers.
-          </p>
-        ) : (
-          <>
-            <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner">
-              <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
-                <span className="text-yellow-500 inline-flex items-center mr-2">
-                  {featherIcon}
-                </span>{' '}
-                Feathers
-              </h2>
-              <p>
-                Feathers: {localClientData.points} /{' '}
-                {
-                  localLevelData[localClientData.level - 1]
-                    .feathers_needed_to_claim
-                }
-              </p>
-              <div className="w-full bg-gray-300 rounded-full h-2.5 mt-2 mb-4">
-                <div
-                  className="bg-teal-600 h-2.5 rounded-full"
-                  style={{
-                    width: `${progress}%`,
-                    transition: 'width 1s ease-in-out',
-                  }}
-                ></div>
-              </div>
-
-              {message && <p className="my-2">{message}</p>}
-
-              <button
-                onClick={openClaimModal} // Aquí se abre el modal
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-2
-              disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
-              "
-                disabled={
-                  !claimAvailable ||
-                  !isReliablyOnline ||
-                  !localLevelData[localClientData.level - 1] || // Asegúrate de que existe el nivel
-                  localClientData.points <
-                    localLevelData[localClientData.level - 1]
-                      .feathers_needed_to_claim
-                }
-              >
-                Claim
-                {!claimAvailable && (
-                  <FaSpinner className="ml-2 inline animate-spin" />
-                )}
-              </button>
+      {!localClientData?.id ? (
+        <p className="text-red-500 dark:text-light-red">
+          Please Login to se your feathers.
+        </p>
+      ) : (
+        <>
+          <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner">
+            <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
+              <span className="text-yellow-500 inline-flex items-center mr-2">
+                {featherIcon}
+              </span>{' '}
+              Feathers
+            </h2>
+            <p>
+              Feathers: {localClientData.points} /{' '}
+              {
+                localLevelData[localClientData.level - 1]
+                  .feathers_needed_to_claim
+              }
+            </p>
+            <div className="w-full bg-gray-300 rounded-full h-2.5 mt-2 mb-4">
+              <div
+                className="bg-teal-600 h-2.5 rounded-full"
+                style={{
+                  width: `${progress}%`,
+                  transition: 'width 1s ease-in-out',
+                }}
+              ></div>
             </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
-              <div className="lg:mb-6 md:mb-6 mb-0 p-4 dark:bg-dark-2 rounded-md shadow-inner">
-                <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
-                  <span className="text-yellow-500 inline-flex items-center mr-2">
-                    <FontAwesomeIcon icon={falevel} />
-                  </span>{' '}
-                  Level {localClientData.level}
-                </h2>
+            {message && <p className="my-2">{message}</p>}
 
-                <div className="border p-2 rounded-md bg-white dark:bg-dark-4">
-                  <div className="font-bold italic">Benefits</div>
-                  <p>
-                    Quizzes per day: {localClientData.quizzestoday || '0'} /{' '}
-                    {localLevelData[localClientData.level - 1]
-                      ?.maxquizzesperday || '0'}
-                  </p>
-                  <p>
-                    Games per day: {localClientData.gamestoday || '0'} /{' '}
-                    {localLevelData[localClientData.level - 1]
-                      ?.maxgamesperday || '0'}
-                  </p>
-                  <p>
-                    {4 + localClientData.level} <b>feathers</b> per quiz
-                    completed
-                  </p>
-                  <p>
-                    {10 + localClientData.level} <b>feathers</b> per game
-                    completed
-                  </p>
-                  <p>
-                    {
-                      localLevelData[localClientData.level - 1]
-                        .feathers_needed_to_claim
-                    }{' '}
-                    <b>feathers</b> minimun to claim
-                  </p>
-                </div>
+            <button
+              onClick={claimFeathers}
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-2
+              disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
+              "
+              disabled={
+                !claimAvailable ||
+                !isReliablyOnline ||
+                localClientData.points <
+                  localLevelData[localClientData.level - 1]
+                    .feathers_needed_to_claim
+              }
+            >
+              Claim
+              {!claimAvailable && (
+                <FaSpinner className="ml-2 inline animate-spin" />
+              )}
+            </button>
+          </div>
 
-                <div className="border p-2 rounded-md bg-white mt-2 dark:bg-dark-2">
-                  <div className="font-bold italic">
-                    Requirements to level up
-                  </div>
-                  <p>
-                    Quizzes finished: {localClientData.quizzesdone} /{' '}
-                    {localLevelData[localClientData.level - 1].quizzestolevelup}
-                    {localLevelData[localClientData.level - 1]
-                      .quizzestolevelup <= localClientData.quizzesdone && (
-                      <span className="mx-2 text-green-500 font-bold italic text-sm">
-                        Done!
-                      </span>
-                    )}
-                  </p>
-                  <p>
-                    Games finished: {localClientData.gamesdone} /{' '}
-                    {localLevelData[localClientData.level - 1].gamestolevelup}
-                    {localLevelData[localClientData.level - 1].gamestolevelup <=
-                      localClientData.gamesdone && (
-                      <span className="mx-2 text-green-500 font-bold italic text-sm">
-                        Done!
-                      </span>
-                    )}
-                  </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
+            <div className="lg:mb-6 md:mb-6 mb-0 p-4 dark:bg-dark-2 rounded-md shadow-inner">
+              <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
+                <span className="text-yellow-500 inline-flex items-center mr-2">
+                  <FontAwesomeIcon icon={falevel} />
+                </span>{' '}
+                Level {localClientData.level}
+              </h2>
 
-                  <p>
-                    Feathers to level up: {localClientData.totalfeathers} /{' '}
-                    {localLevelData[localClientData.level - 1].tolevelup}
-                  </p>
-                  <div className="w-full bg-gray-300 rounded-full h-2.5 mt-2">
-                    <div
-                      className="bg-teal-600 h-2.5 rounded-full"
-                      style={{
-                        width: `${progressLevel}%`,
-                        transition: 'width 1s ease-in-out',
-                      }}
-                    ></div>
-                  </div>
-                </div>
-
-                {/* mostrar levelData  - a veces oculta por clase hidden*/}
-                <p className="hidden">
-                  {localLevelData && JSON.stringify(localLevelData)}
+              <div className="border p-2 rounded-md bg-white dark:bg-dark-4">
+                <div className="font-bold italic">Benefits</div>
+                <p>
+                  Quizzes per day: {localClientData.quizzestoday || '0'} /{' '}
+                  {localLevelData[localClientData.level - 1]
+                    ?.maxquizzesperday || '0'}
+                </p>
+                <p>
+                  Games per day: {localClientData.gamestoday || '0'} /{' '}
+                  {localLevelData[localClientData.level - 1]?.maxgamesperday ||
+                    '0'}
+                </p>
+                <p>
+                  {4 + localClientData.level} <b>feathers</b> per quiz completed
+                </p>
+                <p>
+                  {10 + localClientData.level} <b>feathers</b> per game
+                  completed
+                </p>
+                <p>
+                  {
+                    localLevelData[localClientData.level - 1]
+                      .feathers_needed_to_claim
+                  }{' '}
+                  <b>feathers</b> minimun to claim
                 </p>
               </div>
 
-              {/* Flecha vertical para móvil */}
-              <div className="flex justify-center lg:hidden">
-                <FontAwesomeIcon icon={faarrowdown} className="text-4xl" />
-              </div>
+              <div className="border p-2 rounded-md bg-white mt-2 dark:bg-dark-2">
+                <div className="font-bold italic">Requirements to level up</div>
+                <p>
+                  Quizzes finished: {localClientData.quizzesdone} /{' '}
+                  {localLevelData[localClientData.level - 1].quizzestolevelup}
+                  {localLevelData[localClientData.level - 1].quizzestolevelup <=
+                    localClientData.quizzesdone && (
+                    <span className="mx-2 text-green-500 font-bold italic text-sm">
+                      Done!
+                    </span>
+                  )}
+                </p>
+                <p>
+                  Games finished: {localClientData.gamesdone} /{' '}
+                  {localLevelData[localClientData.level - 1].gamestolevelup}
+                  {localLevelData[localClientData.level - 1].gamestolevelup <=
+                    localClientData.gamesdone && (
+                    <span className="mx-2 text-green-500 font-bold italic text-sm">
+                      Done!
+                    </span>
+                  )}
+                </p>
 
-              <div className="mb-6 p-4 dark:bg-dark-2 rounded-md shadow-inner">
-                <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
-                  <span className="text-yellow-500 inline-flex items-center mr-2">
-                    <FontAwesomeIcon icon={falevel} />
-                  </span>
-                  Level {localClientData.level + 1}
-                </h2>
-                <div className="border p-2 rounded-md dark:bg-dark-4">
-                  <div className="font-bold italic">Benefits</div>
-                  <p>
-                    Quizzes per day:{' '}
-                    {localLevelData[localClientData.level]?.maxquizzesperday ||
-                      'N/A'}
-                  </p>
-                  <p>
-                    Games per day:{' '}
-                    {localLevelData[localClientData.level]?.maxgamesperday ||
-                      'N/A'}
-                  </p>
-                  <p>
-                    {4 + localClientData.level + 1} <b>feathers</b> per quiz
-                    completed
-                  </p>
-                  <p>
-                    {10 + localClientData.level + 1} <b>feathers</b> per game
-                    completed
-                  </p>
+                <p>
+                  Feathers to level up: {localClientData.totalfeathers} /{' '}
+                  {localLevelData[localClientData.level - 1].tolevelup}
+                </p>
+                <div className="w-full bg-gray-300 rounded-full h-2.5 mt-2">
+                  <div
+                    className="bg-teal-600 h-2.5 rounded-full"
+                    style={{
+                      width: `${progressLevel}%`,
+                      transition: 'width 1s ease-in-out',
+                    }}
+                  ></div>
                 </div>
               </div>
+
+              {/* mostrar levelData  - a veces oculta por clase hidden*/}
+              <p className="hidden">
+                {localLevelData && JSON.stringify(localLevelData)}
+              </p>
             </div>
 
-            <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner mt-4 dark:bg-dark-2 ">
+            {/* Flecha vertical para móvil */}
+            <div className="flex justify-center lg:hidden">
+              <FontAwesomeIcon icon={faarrowdown} className="text-4xl" />
+            </div>
+
+            <div className="mb-6 p-4 dark:bg-dark-2 rounded-md shadow-inner">
               <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
                 <span className="text-yellow-500 inline-flex items-center mr-2">
-                  <FontAwesomeIcon icon={facal} />
-                </span>{' '}
-                Dailies
+                  <FontAwesomeIcon icon={falevel} />
+                </span>
+                Level {localClientData.level + 1}
               </h2>
-              <p className="italic">Coming soon</p>
+              <div className="border p-2 rounded-md dark:bg-dark-4">
+                <div className="font-bold italic">Benefits</div>
+                <p>
+                  Quizzes per day:{' '}
+                  {localLevelData[localClientData.level]?.maxquizzesperday ||
+                    'N/A'}
+                </p>
+                <p>
+                  Games per day:{' '}
+                  {localLevelData[localClientData.level]?.maxgamesperday ||
+                    'N/A'}
+                </p>
+                <p>
+                  {4 + localClientData.level + 1} <b>feathers</b> per quiz
+                  completed
+                </p>
+                <p>
+                  {10 + localClientData.level + 1} <b>feathers</b> per game
+                  completed
+                </p>
+              </div>
             </div>
-          </>
-        )}
-      </div>
+          </div>
 
-      <ConfirmModal
-        isOpen={showClaimModal} // Controlado por el nuevo estado `showClaimModal`
-        onClose={closeClaimModal} // Función para cerrar el modal
-        onConfirm={handleConfirmClaim} // Función que se ejecuta al confirmar
-        title={modalTitle} // Título dinámico
-        message={modalMessage} // Mensaje dinámico
-      />
-    </>
+          <div className="mb-6 p-4 bg-gray-50 dark:bg-dark-2 rounded-md shadow-inner mt-4 dark:bg-dark-2 ">
+            <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
+              <span className="text-yellow-500 inline-flex items-center mr-2">
+                <FontAwesomeIcon icon={facal} />
+              </span>{' '}
+              Dailies
+            </h2>
+            <p className="italic">Coming soon</p>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

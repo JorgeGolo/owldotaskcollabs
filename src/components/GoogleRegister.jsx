@@ -1,71 +1,73 @@
-import React, { useContext, useEffect } from 'react';
+// src/components/GoogleRegister.jsx
+import React, { useContext, useEffect, useState } from 'react'; // Added useState
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithCredential,
-} from 'firebase/auth'; // CAMBIO: Importamos signInWithCredential
+} from 'firebase/auth';
 import { app } from '../firebase';
 import { useRouter } from 'next/router';
 import { AppClientContext } from '../context/ClientDataProvider';
 
-import useJwtToken from "./useJwtToken"; // Importar el hook que creamos
-
-// CAMBIO: Importamos el plugin de Capacitor
-import { FirebaseAuthentication } from "@capacitor-firebase/authentication";
-
+import useJwtToken from './useJwtToken';
 import useOnlineStatus from './useOnlineStatus';
+import { FirebaseAuthentication } from '@capacitor-firebase/authentication';
 
 const GoogleRegister = ({ acceptedTerms }) => {
-  const { isReliablyOnline } = useOnlineStatus(); // Estado de conectividad de la red
+  const { isReliablyOnline } = useOnlineStatus();
+  const [localErrorMessage, setLocalErrorMessage] = useState(null); // Nuevo estado para errores locales
+  const [localSuccessMessage, setLocalSuccessMessage] = useState(null); // Nuevo estado para éxitos locales
 
   const auth = getAuth(app);
   const router = useRouter();
 
   const { initializeToken, fetchWithToken } = useJwtToken();
 
-  // Inicializar el token cuando se monta el componente
   useEffect(() => {
     initializeToken();
   }, [initializeToken]);
 
   const { setUser, setClientData } = useContext(AppClientContext);
 
+  // Función para limpiar los mensajes
+  const resetMessages = () => {
+    setLocalErrorMessage(null);
+    setLocalSuccessMessage(null);
+  };
+
   const handleGoogleAuth = async () => {
+    resetMessages(); // Limpia los mensajes anteriores
+
     if (!acceptedTerms) {
-      alert(
+      setLocalErrorMessage(
         'You must accept the terms and conditions and confirm your age before registering.',
       );
       return;
     }
 
     try {
-      // CAMBIO PRINCIPAL AQUÍ:
-      // Ya no usamos signInWithPopup directamente.
-      // Primero, obtenemos la credencial de Google usando el plugin nativo de Capacitor.
+      // Obtiene la credencial de Google usando el plugin nativo de Capacitor
       const result = await FirebaseAuthentication.signInWithGoogle();
-
-      // El resultado del plugin contiene la credencial necesaria, como el idToken de Google.
       const idToken = result.credential?.idToken;
 
       if (!idToken) {
         console.error(
           '❌ No se pudo obtener el ID Token de Google desde el plugin.',
         );
-        // Aquí podrías añadir una lógica para manejar la cancelación por parte del usuario o un error específico del plugin.
         if (result.code === 'cancelled') {
-          alert('Registro cancelado por el usuario.');
+          setLocalErrorMessage('Registration cancelled by the user.');
         } else {
-          alert('Error al obtener credenciales de Google. Intenta de nuevo.');
+          setLocalErrorMessage(
+            'Error getting Google credentials. Please try again.',
+          );
         }
         return;
       }
 
-      // Una vez que tenemos el idToken de Google (obtenido de forma nativa),
-      // creamos una credencial de Firebase a partir de él.
+      // Crea una credencial de Firebase a partir del idToken de Google
       const credential = GoogleAuthProvider.credential(idToken);
 
-      // Y usamos signInWithCredential para iniciar sesión en Firebase con esta credencial.
-      // Esto NO requiere una redirección del navegador.
+      // Inicia sesión en Firebase con esta credencial
       const firebaseUserCredential = await signInWithCredential(
         auth,
         credential,
@@ -76,7 +78,7 @@ const GoogleRegister = ({ acceptedTerms }) => {
         console.error(
           '❌ No se pudo obtener la información del usuario de Firebase después de signInWithCredential.',
         );
-        alert('Error en el registro. Intenta de nuevo.');
+        setLocalErrorMessage('Registration error. Please try again.');
         return;
       }
 
@@ -86,11 +88,7 @@ const GoogleRegister = ({ acceptedTerms }) => {
         uid: user.uid,
       };
 
-      // ----------------------------------------------------------------------------------
-      // ¡TODO EL RESTO DE TU LÓGICA DE NEGOCIO SE MANTIENE EXACTAMENTE IGUAL!
-      // Ya que opera con el objeto 'user' de Firebase, que ya está autenticado.
-      // ----------------------------------------------------------------------------------
-
+      // Llama a tu API de registro en el backend
       const response = await fetchWithToken(
         'https://8txnxmkveg.us-east-1.awsapprunner.com/api/register',
         {
@@ -103,17 +101,14 @@ const GoogleRegister = ({ acceptedTerms }) => {
       const data = await response.json();
 
       if (response.status === 201) {
-        console.log(
-          '✅ Usuario registrado y guardado en la base de datos:',
-          data,
+        setLocalSuccessMessage(
+          'User registered and saved successfully! Redirecting...',
         );
         setUser(user);
         setClientData(data.client);
         router.push('/');
       } else if (response.status === 409) {
-        console.warn(
-          '⚠️ Usuario ya registrado. Iniciando sesión automáticamente...',
-        );
+        console.warn('⚠️ User already registered. Logging in automatically...');
 
         const loginResponse = await fetchWithToken(
           `https://8txnxmkveg.us-east-1.awsapprunner.com/api/getClientData?uid=${user.uid}`,
@@ -121,51 +116,56 @@ const GoogleRegister = ({ acceptedTerms }) => {
         const clientData = await loginResponse.json();
 
         if (loginResponse.ok) {
-          console.log(
-            '✅ Datos del cliente obtenidos al iniciar sesión:',
-            clientData,
-          );
+          setLocalSuccessMessage('Account already exists. Logging in...');
           setUser(user);
           setClientData(clientData);
           router.push('/');
         } else {
-          console.error('❌ Error al obtener los datos del cliente.');
-          alert('Error al obtener tus datos. Intenta de nuevo.');
+          setLocalErrorMessage('Error getting client data.');
         }
       } else {
-        console.error('❌ Error en el registro:', data);
-        alert(
-          'Error en el registro. Verifica tu conexión e intenta nuevamente.',
+        console.error('❌ Registration error:', data);
+        setLocalErrorMessage(
+          'Registration error. Check your connection and try again.',
         );
       }
     } catch (error) {
-      console.error('❌ Error al registrarse con Google:', error);
-      // Aquí puedes manejar errores específicos del plugin o de Firebase Authentication
-      // Por ejemplo, error si el usuario cancela la autenticación nativa
-      if (error.code === "cancelled") {
-        // No hacer nada, el usuario canceló
-        console.log('Registro de Google cancelado por el usuario.');
+      console.error('❌ Error registering with Google:', error);
+      if (error.code === 'cancelled') {
+        setLocalErrorMessage('Google registration cancelled by the user.');
       } else if (error.code === 'auth/popup-closed-by-user') {
-        // Para el caso web/PWA
-        console.log('El popup de autenticación fue cerrado por el usuario.');
+        setLocalErrorMessage('Authentication popup was closed by the user.');
       } else {
-        alert(
-          'Error en la conexión con el servidor o autenticación fallida. Intenta de nuevo.',
+        setLocalErrorMessage(
+          'Connection error or authentication failed. Please try again.',
         );
       }
     }
   };
 
   return (
-    <button
-      className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition
-      disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
-      "
-      onClick={handleGoogleAuth}
-      disabled={!isReliablyOnline} // El botón debería estar deshabilitado si los términos no son aceptados
-    >
-      Register
-    </button>
+    <>
+      {localErrorMessage && (
+        <p style={{ color: 'red', fontWeight: 'bold' }} className="mb-4">
+          {localErrorMessage}
+        </p>
+      )}
+      {localSuccessMessage && (
+        <p style={{ color: 'green', fontWeight: 'bold' }} className="mb-4">
+          {localSuccessMessage}
+        </p>
+      )}
+      <button
+        className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-700 transition
+        disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
+        "
+        onClick={handleGoogleAuth}
+        // El botón se deshabilita si no hay conexión o si los términos no son aceptados
+        disabled={!isReliablyOnline || !acceptedTerms}
+      >
+        Register with Google
+      </button>
+    </>
   );
 };
 
