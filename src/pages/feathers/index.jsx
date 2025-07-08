@@ -54,6 +54,10 @@ const Feathers = () => {
 
   const [claimAvailable, setclaimAvailable] = useState(true);
 
+  // Tipo de reclamación seleccionado
+  // En este caso, solo hay un tipo de reclamación: "wallet"
+  const selectedClaimType = 'wallet';
+
   useEffect(() => {
     //setLocalUser(user);
     setLocalClientData(clientData);
@@ -121,6 +125,7 @@ const Feathers = () => {
         mail: clientMail,
         wallet: clientWallet,
         points: localClientData.points,
+        type: selectedClaimType, // Siempre 'wallet' en este caso
       };
 
       const response = await fetchWithToken(
@@ -157,6 +162,11 @@ const Feathers = () => {
     } finally {
       setclaimAvailable(true);
     }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); // Prevenir el envío del formulario
+    claimFeathers(); // Ejecutar la función
   };
 
   const breadcrumbSegments = [
@@ -202,24 +212,34 @@ const Feathers = () => {
 
             {message && <p className="my-2">{message}</p>}
 
-            <button
-              onClick={claimFeathers}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-2
-              disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400
-              "
-              disabled={
-                !claimAvailable ||
-                !isReliablyOnline ||
-                localClientData.points <
-                  localLevelData[localClientData.level - 1]
-                    .feathers_needed_to_claim
-              }
-            >
-              Claim
-              {!claimAvailable && (
-                <FaSpinner className="ml-2 inline animate-spin" />
-              )}
-            </button>
+            <form onSubmit={handleSubmit}>
+              <input
+                type="radio"
+                className="form-radio h-5 w-5 text-blue-600"
+                name="claimType"
+                value={selectedClaimType} // El valor es 'wallet'
+                checked={true} // Siempre seleccionado
+                readOnly // Deshabilita la edición, ya que es la única opción
+                // Nota: No se necesita 'onChange' aquí porque no hay otras opciones
+                // Ni 'disabled' específico para el radio, ya que el control es del botón principal
+              />
+              <button
+                type="submit"
+                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-2
+                disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400 flex items-center
+                "
+                disabled={
+                  !claimAvailable ||
+                  !isReliablyOnline ||
+                  localClientData.points <
+                    localLevelData[localClientData.level - 1]
+                      .feathers_needed_to_claim
+                }
+              >
+                <span>Claim</span>
+                {!claimAvailable && <FaSpinner className="ml-2 animate-spin" />}
+              </button>
+            </form>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
@@ -355,30 +375,3 @@ const Feathers = () => {
 };
 
 export default Feathers;
-
-{
-  /*
-            <hr className="border-gray-300" />
-
-          Sección de estadísticas de juegos y quizzes 
-            <div className="p-4 bg-gray-50 rounded-md shadow-inner mb-6">
-              <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
-                <span className="text-yellow-500 inline-flex items-center mr-2">
-                  <FontAwesomeIcon icon={faIconsQuizz} />
-              </span>Total Quizzes</h2>
-              <p>Correct answers: {localClientData.questionsright}</p>
-              <p>Quizzes 100% completed: {localClientData.quizzesdone}</p>
-            </div>
-
-            <hr className="my-4 border-gray-300" />
-
-            <div className="p-4 bg-gray-50 rounded-md shadow-inner mb-6">
-              <h2 className="flex text-2xl font-bold mb-2 lg:mb-4">
-                <span className="text-yellow-500 inline-flex items-center mr-2">
-                  <FontAwesomeIcon icon={faGame} />
-              </span>Total Games Completed</h2>
-              <p>Mini tasks: </p>
-              <p>Games completed: </p>
-            </div>
-            */
-}
