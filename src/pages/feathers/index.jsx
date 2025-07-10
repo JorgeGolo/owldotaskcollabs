@@ -212,22 +212,52 @@ const Feathers = () => {
 
             {message && <p className="my-2">{message}</p>}
 
-            <form onSubmit={handleSubmit}>
-              <input
-                type="radio"
-                className="form-radio h-5 w-5 text-blue-600"
-                name="claimType"
-                value={selectedClaimType} // El valor es 'wallet'
-                checked={true} // Siempre seleccionado
-                readOnly // Deshabilita la edición, ya que es la única opción
-                // Nota: No se necesita 'onChange' aquí porque no hay otras opciones
-                // Ni 'disabled' específico para el radio, ya que el control es del botón principal
-              />
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col items-center justify-center space-y-4"
+            >
+              {/* Contenedor para los radio buttons y sus etiquetas, alineado horizontalmente y centrado */}
+              <div className="flex items-center justify-center space-x-6">
+                {' '}
+                {/* Ajusta space-x-6 para el espacio entre ellos */}
+                {/* Radio Button para 'Wallet' */}
+                <label htmlFor="claimTypeWallet" className="flex items-center">
+                  <input
+                    type="radio"
+                    id="claimTypeWallet"
+                    className="form-radio h-5 w-5 text-blue-600"
+                    name="claimType"
+                    value="wallet"
+                    checked={selectedClaimType === 'wallet'} // Controla si está seleccionado
+                    onChange={() => setSelectedClaimType('wallet')} // Actualiza el estado al seleccionar
+                  />
+                  <span className="ml-2">Wallet</span>
+                </label>
+                {/* Radio Button para 'PayPal' (deshabilitado) */}
+                <label
+                  htmlFor="claimTypePaypal"
+                  className="flex items-center opacity-50 cursor-not-allowed"
+                >
+                  <input
+                    type="radio"
+                    id="claimTypePaypal"
+                    className="form-radio h-5 w-5 text-blue-600"
+                    name="claimType"
+                    value="paypal"
+                    checked={selectedClaimType === 'paypal'} // Aunque deshabilitado, podemos controlar su estado
+                    //onChange={() => setSelectedClaimType('paypal')} // Aunque deshabilitado, es buena práctica tenerlo
+                    disabled // **IMPORTANTE: Deshabilita este radio button**
+                  />
+                  <span className="ml-2">PayPal</span>
+                </label>
+              </div>
+
+              {/* El botón de submit (ya lo tenías, ahora centrado por el flex-col del form) */}
               <button
                 type="submit"
                 className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 transition mb-2
-                disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400 flex items-center
-                "
+                   disabled:opacity-50 disabled:cursor-not-allowed disabled:bg-gray-400 flex items-center
+        "
                 disabled={
                   !claimAvailable ||
                   !isReliablyOnline ||
